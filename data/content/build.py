@@ -1,6 +1,6 @@
 from core import ROOT,subjects
 import mathematics,digital_architecture,programming_algorithms,theory_compilers,systems_databases,networks_aptitude
-import focused,deepen,concept_checks
+import focused,deepen,concept_checks,example_placement
 import json
 subjects[2]['name']='Computer Organization & Architecture'
 for l in subjects[0]['lessons']:

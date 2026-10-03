@@ -42,7 +42,8 @@
               "Choose P=false and Q=true.",
               "P→Q is true because its antecedent is false.",
               "Q→P is false because its antecedent is true and consequent false. A single counterexample disproves equivalence."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Test: P→Q, Q→R, therefore P→R",
@@ -50,7 +51,8 @@
               "Assume all premises true and try to make P→R false: P=true, R=false.",
               "P→Q forces Q=true.",
               "Q→R then forces R=true, a contradiction. No counterexample exists; the argument is valid."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -137,7 +139,8 @@
               "Formalize as ∀s∃e Passed(s,e).",
               "Move the negation inward: ∃s∀e ¬Passed(s,e).",
               "Meaning: there is a student who passed no exams, not merely a student who failed one."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Compare quantifiers for x+y=0 over integers",
@@ -145,7 +148,8 @@
               "For ∀x∃y, choose y=−x. This works for every x.",
               "For ∃y∀x, a single fixed y would need to equal −x for all integers.",
               "Taking x=0 and x=1 demands y=0 and y=−1 simultaneously; the second statement is false."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -230,7 +234,8 @@
               "aRb iff 3 divides a−b. a−a=0 establishes reflexivity.",
               "Reversing a−b changes its sign, preserving divisibility; adding two divisible differences establishes transitivity.",
               "The classes are residues 0,1,2, so the relation is an equivalence relation."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Count functions from a 3-element set to a 2-element set",
@@ -238,7 +243,8 @@
               "Each input independently selects one of two outputs: 2³=8 total functions.",
               "A nonsurjective function uses only one output; there are two constant functions.",
               "Thus 8−2=6 functions are surjective. None is injective, by the pigeonhole principle."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -322,7 +328,8 @@
               "Common divisors are 1 and 2; the greatest under divisibility is 2.",
               "Common multiples inside the set include 12; lcm(4,6)=12.",
               "Thus meet=2 and join=12. Numerical minimum and maximum would have given the wrong answer."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Identify minimal versus least in {2,3,6}, ordered by divisibility",
@@ -330,7 +337,8 @@
               "2 and 3 have no smaller element in the set, so both are minimal.",
               "Neither divides the other, so neither is below every element.",
               "There is no least element; 6 is greatest because both 2 and 3 divide it."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -376,7 +384,7 @@
         "concept": "An order need not compare every pair. A dependency graph of tasks can say one task comes before another while leaving independent tasks incomparable. A lattice adds a reliable way to combine any two elements using their closest common upper and lower bounds.",
         "method": "A partial order is reflexive, antisymmetric and transitive. If every pair is comparable, it is a total order. A Hasse diagram omits loops and edges implied by transitivity; lower-to-higher paths imply the order. An edge represents a cover relation: no element lies strictly between its endpoints. A least element is below every element and is unique if it exists; a minimal element has no strictly smaller element and several may exist. Greatest and maximal are dual. An upper bound of a pair lies above both; the least upper bound is the smallest among those bounds, not just any convenient upper bound. A lattice requires every pair to have a unique least upper bound (join) and greatest lower bound (meet). In a power-set lattice ordered by inclusion, join is union and meet is intersection. For positive divisors of an integer ordered by divisibility, join is lcm and meet is gcd. A finite lattice has top and bottom elements. To find an upper bound of a,b in an arbitrary poset, list elements x for which a≤x and b≤x according to the defined relation. Among these candidates, a least upper bound must be below every other upper bound. A merely minimal upper bound might fail that requirement; two incomparable minimal upper bounds mean there is no join. For a Hasse diagram, follow upward paths from both elements and intersect their reachable sets. Repeat downward for lower bounds. In a finite poset, having a top and bottom alone does not make it a lattice: the pairwise meet and join requirement still needs checking. In subset inclusion, these constructions reduce to union and intersection because those sets satisfy the universal bound definitions.",
         "example": "Find meet and join of 4 and 6 among divisors of 12",
-        "minutes": 18
+        "minutes": 19
       },
       {
         "id": "0-algebraic-structures",
@@ -415,7 +423,8 @@
               "Products of nonzero residues remain nonzero modulo prime 5; associativity is inherited.",
               "Identity is 1; inverses are 1↔1, 2↔3, 4↔4.",
               "All axioms hold, and multiplication is commutative, so it is an abelian group."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Find the additive inverse of 5 modulo 8",
@@ -423,7 +432,8 @@
               "We need 5+x ≡ 0 mod 8.",
               "x=3 gives 5+3=8 ≡ 0.",
               "The identity is 0, not 1, because the operation is addition."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -508,7 +518,8 @@
               "Five vertices each have degree 2, so the degree sum is 10 and there are 5 edges.",
               "The largest matching has floor(5/2)=2 edges because each edge consumes two vertices; such a matching exists.",
               "An odd cycle is not bipartite and needs 3 colours; alternating two colours fails at the closing edge."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Use Hall’s condition",
@@ -516,7 +527,8 @@
               "Let X={a,b,c}, Y={1,2,3}; a and b connect only to 1, while c connects to 2 and 3.",
               "For S={a,b}, the neighbour set has only one element.",
               "|N(S)|=1<2 proves there is no matching saturating X, even though every vertex of X has a neighbour."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -563,7 +575,7 @@
         "concept": "Graphs model pairwise connections. Connectivity is about reachability, matching allocates disjoint pairs, and colouring separates conflicting neighbours. A question can involve the same drawing but demand a completely different invariant, so identify the task before computing.",
         "method": "For an undirected graph, the sum of vertex degrees is 2E because every edge has two endpoints. A path joins vertices; connected components are maximal connected regions. A connected acyclic undirected graph is a tree with V−1 edges. Removing a bridge increases component count; removing an articulation vertex can disconnect the graph. A matching is a set of edges sharing no endpoints. A maximum matching has the largest cardinality; a maximal matching merely cannot be enlarged by adding an edge. In a bipartite graph with parts X,Y, Hall’s theorem gives a matching saturating X iff every subset S of X satisfies |N(S)|≥|S|. Check deficient subsets rather than just individual degrees. A proper vertex colouring assigns different colours to adjacent vertices. The minimum number is the chromatic number. A complete graph Kₙ needs n colours. A graph is bipartite iff it has no odd cycle; any nonempty bipartite graph with an edge needs two colours. Colouring disconnected components can reuse colours. A clique of size k forces at least k vertex colours because every pair in it is adjacent. Conversely a greedy colouring uses at most Δ+1 colours, where Δ is maximum degree: when colouring a vertex, at most Δ neighbour colours can be forbidden. These are bounds, not generally equal values. For a path with at least one edge, alternating two colours proves χ=2. A matching can be improved along an augmenting path whose edges alternate unmatched and matched, beginning and ending at unmatched vertices. Flipping membership along that path increases matching size by one. An absent augmenting path certifies maximum matching under the standard matching theorem; merely being unable to add a single isolated edge certifies only maximality.",
         "example": "Analyse the cycle C₅",
-        "minutes": 18
+        "minutes": 19
       },
       {
         "id": "0-counting",
@@ -603,7 +615,8 @@
               "Committee order is irrelevant and nobody is repeated.",
               "Ordered selection counts 8×7×6=336, but each committee appears 3!=6 times.",
               "Divide to get 336/6=56 committees."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Count length-4 binary strings containing at least one 1",
@@ -611,7 +624,8 @@
               "There are 2⁴=16 total strings.",
               "The forbidden case has no 1, so every position must be zero; exactly one string.",
               "Subtract to obtain 15. Choosing a position for the first 1 without case care can double-count."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -695,7 +709,8 @@
               "Expand: aₙ=2(2aₙ₋₂+1)+1=4aₙ₋₂+3.",
               "Continuing gives aₙ=2ⁿa₀+Σᵢ₌₀ⁿ⁻¹2ⁱ.",
               "The geometric sum is 2ⁿ−1, so aₙ=2ⁿ−1; check a₁=1 and a₂=3."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Find the generating function of aₙ=2n+3",
@@ -703,7 +718,8 @@
               "Split the sum into 2Σnxⁿ+3Σxⁿ.",
               "Substitute identities: 2x/(1−x)²+3/(1−x).",
               "Use a common denominator to obtain (3−x)/(1−x)²."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -788,7 +804,8 @@
               "The second equation is twice the first, so elimination creates a zero row.",
               "Rank(A)=rank([A|b])=1 with two unknowns.",
               "Let y=t; x=3−t. There are infinitely many solutions, not two independent equations."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Determine invertibility of [[1,2],[3,4]]",
@@ -796,7 +813,8 @@
               "Compute det=1×4−2×3=−2.",
               "Nonzero determinant gives full rank 2 and a unique solution for every right-hand side.",
               "The inverse is (−1/2)[[4,−2],[−3,1]]; multiplying verifies identity."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -880,7 +898,8 @@
               "The characteristic determinant is (2−λ)(3−λ).",
               "Roots are 2 and 3, matching the diagonal entries.",
               "For λ=2, v₂=0; for λ=3, v₂=v₁. Directions (1,0) and (1,1) are independent."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Factor [[2,1],[4,3]]",
@@ -888,7 +907,8 @@
               "Eliminate the 4 using multiplier 4/2=2: second row minus twice first gives [0,1].",
               "U=[[2,1],[0,1]], and L=[[1,0],[2,1]].",
               "Multiplying LU gives [[2,1],[4,3]], confirming the factorization."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -973,7 +993,8 @@
               "Direct substitution gives 0/0, so factor x²−4=(x−2)(x+2).",
               "For x≠2 the quotient equals x+2.",
               "Its limit is 4. The original function remains undefined at 2 unless explicitly extended."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Check differentiability of |x| at 0",
@@ -981,7 +1002,8 @@
               "The function approaches zero from both sides and equals zero, so it is continuous.",
               "For h>0, |h|/h=1; for h<0, it equals −1.",
               "The derivative does not exist because the slopes disagree."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -1065,7 +1087,8 @@
               "Derivative 2x−4 vanishes at x=2, which lies inside the interval.",
               "Evaluate f(0)=1, f(2)=−3, f(5)=6.",
               "Minimum is −3 at 2 and maximum is 6 at 5; checking only the critical point misses the maximum."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Apply MVT to x² on [1,3]",
@@ -1073,7 +1096,8 @@
               "The polynomial is continuous and differentiable, so assumptions hold.",
               "Average slope=(9−1)/(3−1)=4.",
               "Set f′(c)=2c=4, obtaining c=2 inside the interval."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -1158,7 +1182,8 @@
               "An antiderivative is x³.",
               "Evaluate 2³−0³=8.",
               "The integrand is nonnegative, so the signed integral also equals geometric area."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Compute ∫₀¹ 2x e^(x²) dx",
@@ -1166,7 +1191,8 @@
               "Choose u=x², so du=2x dx.",
               "Transform the limits: x=0 gives u=0; x=1 gives u=1.",
               "The integral becomes ∫₀¹eᵘdu=e−1. No stray x remains after substitution."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -1251,7 +1277,8 @@
               "Imagine 10000 people: 100 have the condition, and 90 of them test positive.",
               "Of 9900 without it, 990 test positive.",
               "Positive tests total 1080; the posterior is 90/1080=1/12≈8.33%, not 90%."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Draw two cards without replacement; find probability both are aces",
@@ -1259,7 +1286,8 @@
               "First draw is an ace with probability 4/52.",
               "Given that, only 3 aces among 51 cards remain.",
               "Multiply (4/52)(3/51)=1/221. Treating the draws as independent would use the wrong second factor."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -1345,7 +1373,8 @@
               "E[X]=0(1/2)+2(1/2)=1.",
               "E[X²]=0+4(1/2)=2.",
               "Variance=2−1²=1 and standard deviation=1."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Summarize the data 1,2,2,3,12",
@@ -1353,7 +1382,8 @@
               "Sum=20 and count=5, so mean=4.",
               "Sorted middle value is 2, so median=2; 2 also occurs most often, so mode=2.",
               "The large observation shifts the mean away from the typical central values."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -1437,7 +1467,8 @@
               "Use n=4,p=1/2,k=2.",
               "Choose the head positions in C(4,2)=6 ways.",
               "Each ordering has probability (1/2)⁴=1/16, so the probability is 6/16=3/8."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Calls arrive with rate 2 per minute. Find mean and zero-call probability in 3 minutes",
@@ -1445,7 +1476,8 @@
               "The window mean is λ=2×3=6.",
               "Expected count is 6 and variance is 6.",
               "P(X=0)=e⁻⁶6⁰/0!=e⁻⁶; the duration must be included before using the formula."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -1529,7 +1561,8 @@
               "Total interval length is 8−2=6.",
               "Desired interval length is 5−3=2.",
               "Probability=2/6=1/3; the density 1/6 alone is not the answer."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Standardize X~Normal(10,4) at X=14",
@@ -1537,7 +1570,8 @@
               "The second parameter is variance 4, so standard deviation is 2.",
               "Z=(14−10)/2=2.",
               "Thus P(X≤14)=Φ(2), rather than Φ(1)."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -1626,7 +1660,8 @@
               "Factor the first two terms: A(B+¬B)=A.",
               "Now F=A+AC.",
               "Absorption removes AC, leaving F=A for all inputs."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Build SOP for a 2-variable function true on 01 and 11",
@@ -1634,7 +1669,8 @@
               "The corresponding minterms are ¬AB and AB.",
               "F=¬AB+AB=B(¬A+A).",
               "The simplified expression is B, so the output ignores A."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -1715,7 +1751,8 @@
               "The minterms are 000,001,010,011.",
               "Across the four-cell group B and C take both values but A stays 0.",
               "Eliminate B,C to get F=¬A."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Combine minterms 1010 and 1011 tabularly",
@@ -1723,7 +1760,8 @@
               "They differ only in the final bit.",
               "Replace that position by a dash: 101−.",
               "For variables A,B,C,D the product is A¬BC; D is eliminated."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -1803,7 +1841,8 @@
               "Sum=1⊕1⊕0=0.",
               "Carry=AB+ACin+BCin=1+0+0=1.",
               "The pair Cout,S represents binary 10, correctly summing decimal 2."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Implement XOR using a 2:1 mux",
@@ -1811,7 +1850,8 @@
               "Select S=A.",
               "If A=0, output should equal B, so I₀=B.",
               "If A=1, output should equal ¬B, so I₁=¬B. The mux equation ¬AI₀+AI₁ yields XOR."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -1892,7 +1932,8 @@
               "Need 10 distinct states.",
               "Three bits encode only 8; four encode 16.",
               "Use 4 flip-flops and define transitions for the 6 unused codes, typically returning to a legal state."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Track a T flip-flop starting at Q=0 for inputs 1,0,1",
@@ -1900,7 +1941,8 @@
               "First edge toggles Q to 1.",
               "Second edge with T=0 retains 1.",
               "Third edge toggles to 0; the final stored state is 0."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -1980,7 +2022,8 @@
               "Write +5 as 00000101.",
               "Invert: 11111010; add 1: 11111011.",
               "Decode with negative MSB weight: −128+64+32+16+8+2+1=−5."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Interpret a fixed-point stored value 24 with 4 fractional bits",
@@ -1988,7 +2031,8 @@
               "The scale is 2⁴=16.",
               "Actual value=24/16=1.5.",
               "A one-unit change in stored value changes the real value by 1/16, not by 1."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -2077,7 +2121,8 @@
               "The byte displacement is 3×4=12.",
               "EA=1000+12=1012.",
               "Using raw index 3 as a byte offset would fetch the wrong location."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Compute time for 2 million instructions, CPI 3, clock 1 GHz",
@@ -2085,7 +2130,8 @@
               "Total cycles=2×10⁶×3=6×10⁶.",
               "Cycle time is 1/10⁹ seconds.",
               "CPU time=0.006 s=6 ms."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2158,7 +2204,8 @@
               "Represent 5=0101 and 3=0011.",
               "Invert 3 to 1100 and add carry-in 1: 0101+1100+1=10010.",
               "Discard the carry beyond 4 bits; result 0010 is 2. The carry flag and signed-overflow flag are interpreted separately."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Estimate control-store capacity",
@@ -2166,7 +2213,8 @@
               "Suppose there are 128 microinstructions, each 40 bits wide.",
               "Storage is 128×40=5120 bits.",
               "Divide by 8 to obtain 640 bytes; sequencing circuitry is additional hardware."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2239,7 +2287,8 @@
               "Total lines=16384/64=256; sets=256/4=64.",
               "Offset bits=log₂64=6; index bits=log₂64=6.",
               "Tag bits=32−6−6=20. Capacity alone does not determine index bits without associativity."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Compute AMAT for hit time 2 ns, miss rate 4%, penalty 50 ns",
@@ -2247,7 +2296,8 @@
               "Miss contribution is 0.04×50=2 ns.",
               "Add the baseline hit time 2 ns.",
               "AMAT=4 ns; do not multiply the hit time by hit rate in this penalty-based convention."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2327,7 +2377,8 @@
               "Width expansion requires 16/8=2 chips in parallel per bank.",
               "Depth expansion requires 4K/1K=4 banks.",
               "Total=2×4=8 chips; two extra address bits select the bank, while ten bits select a location inside a chip."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Compare one-byte interrupts with DMA for 4096 bytes",
@@ -2335,7 +2386,8 @@
               "An interrupt per byte produces 4096 service events.",
               "A DMA block can use one setup and a completion interrupt under the simple model.",
               "The CPU saves many handler invocations, although memory-bus transfer time remains."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2415,7 +2467,8 @@
               "Ideal cycles=5+12−1=16.",
               "Add the specified actual stalls: 16+3=19.",
               "At 2 ns per cycle total elapsed time is 38 ns, not 12×5×2."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "A branch frequency is 20%, misprediction rate 10%, penalty 3 cycles",
@@ -2423,7 +2476,8 @@
               "Mispredictions per instruction=0.2×0.1=0.02.",
               "Expected additional CPI=0.02×3=0.06.",
               "If baseline CPI is 1 and there are no other stalls, effective CPI=1.06."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2517,7 +2571,8 @@
               "For int a[5], sizeof(a)=5×4=20 bytes while a remains an array in scope.",
               "If p=&a[1], p+2 points to a[3], advancing 8 bytes.",
               "Inside a function f(int a[]), sizeof(a) is pointer size, not 20."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Evaluate 7/2 versus 7/2.0",
@@ -2525,7 +2580,8 @@
               "7 and 2 are integer operands, so 7/2 gives 3.",
               "2.0 is floating; 7 is converted and division gives 3.5.",
               "Assigning the first expression to double afterward produces 3.0; conversion does not restore the discarded fraction."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -2610,7 +2666,8 @@
               "Call f(2) prints 2, then calls f(1), which prints 1.",
               "f(0) immediately returns; f(1) then prints 1.",
               "f(2) resumes and prints 2, giving 2,1,1,2."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Count calls in factorial(4) with base factorial(0)",
@@ -2618,7 +2675,8 @@
               "The active call chain is 4→3→2→1→0.",
               "There are 5 calls and maximum stack depth 5 under this model.",
               "Unwinding returns 1,1,2,6,24. Do not count only the 4 multiplications as the number of calls."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2703,7 +2761,8 @@
               "Push 2 then 3; + pops both and pushes 5.",
               "Push 4; * pops 4 and 5 and pushes 20.",
               "The final stack contains 20. For subtraction preserve left/right operand order when popping."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "A queue has capacity 5 and next-free tail index 4. Enqueue twice",
@@ -2711,7 +2770,8 @@
               "The first insertion uses slot 4 and advances tail to (4+1)%5=0.",
               "The second uses slot 0 and advances tail to 1.",
               "The wrap is arithmetic modulo capacity; valid insertion also requires checking available space."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2795,7 +2855,8 @@
               "4 becomes root; 2 goes left; 6 goes right.",
               "1 goes left of 2 and 3 right of 2.",
               "Inorder is 1,2,3,4,6; preorder is 4,2,1,3,6. Trace the visit rule rather than memorizing a shape."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Delete root 4 from that tree using its successor",
@@ -2803,7 +2864,8 @@
               "The smallest key in the right subtree is 6.",
               "Replace 4 by 6 and delete the old leaf containing 6.",
               "The remaining root 6 has the original left subtree and no right child; the BST invariant remains true."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -2888,7 +2950,8 @@
               "Append to get [3,5,4,2].",
               "Parent of index 3 is 1; swap 2 with 5 to obtain [3,2,4,5].",
               "Parent of index 1 is 0; swap 2 with 3 to obtain [2,3,4,5]. Heap order is restored."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Compare storage for V=1000,E=2000",
@@ -2896,7 +2959,8 @@
               "A full adjacency matrix allocates 1000000 cells.",
               "Adjacency-list edge entries are 2000 directed or 4000 undirected, plus vertex headers.",
               "Sparse connectivity strongly favours list space, though a matrix provides constant-time edge membership tests."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -2989,7 +3053,8 @@
               "The inner count depends on i, so total is 1+2+…+n.",
               "The sum is n(n+1)/2.",
               "Leading growth is n², hence Θ(n²), not Θ(n) merely because each body is constant-time."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Solve T(n)=2T(n/2)+n",
@@ -2997,7 +3062,8 @@
               "Each recursion level performs total n combining work.",
               "There are log₂n levels before constant-size leaves.",
               "Total is Θ(n log n); a balanced recursion uses Θ(log n) stack depth with constant-size frames."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -3084,7 +3150,8 @@
               "Midpoint index 2 contains 5; discard indices 0–2.",
               "In remaining range 3–4, midpoint 3 contains 7.",
               "Return index 3. The invariant held because the array was sorted."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Merge [1,4,8] and [2,3,9]",
@@ -3092,7 +3159,8 @@
               "Compare front elements and take 1, then 2, then 3.",
               "Take 4, then 8; one input is exhausted.",
               "Append remaining 9. Each element is moved once, so merging six elements is linear."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -3170,7 +3238,8 @@
               "12 maps to slot 2 and occupies it.",
               "22 also maps to 2, so it probes to 3.",
               "32 probes occupied 2 and 3, landing at 4. All three are searchable only if the probe chain remains intact."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Delete 22 from that table",
@@ -3178,7 +3247,8 @@
               "Replacing slot 3 by a never-used empty marker would make a search for 32 stop too soon.",
               "Mark slot 3 as a tombstone instead.",
               "Search continues through the tombstone to slot 4, while a later insertion may reuse the tombstone."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -3251,7 +3321,8 @@
               "Sort by finish time: [1,3],[3,4],[2,5],[4,7].",
               "Choose [1,3], then [3,4]; reject [2,5] because it starts before the current finish.",
               "Choose [4,7], giving three compatible activities under the endpoint-sharing convention."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Show ratio greedy fails for capacity 50 with (weight,value)=(10,60),(20,100),(30,120)",
@@ -3259,7 +3330,8 @@
               "Ratios are 6,5,4, so greedy takes the first two for value 160 and leaves 20 capacity.",
               "Items of weights 20 and 30 together fill capacity and give 220.",
               "That better feasible solution disproves ratio greedy for 0/1 choices."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -3344,7 +3416,8 @@
               "After the first item, capacities 2,3,4 can achieve value 3.",
               "For the second item at capacity 4, skipping gives 3; including gives 4+dp[1,1]=4.",
               "Optimal value is 4. Both items do not fit because their total weight is 5."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Compute Fibonacci with bottom-up DP",
@@ -3352,7 +3425,8 @@
               "Use F₀=0 and F₁=1.",
               "Compute F₂=1,F₃=2,F₄=3,F₅=5 once each.",
               "Only the last two values are needed for the next, so this sequence can use O(1) extra storage instead of a full table."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -3437,7 +3511,8 @@
               "Kruskal takes AB and BC, connecting all vertices for total 3.",
               "The A-to-C path through B costs 1+2=3.",
               "Direct AC costs 5, so the shortest path is 3. The objectives agree here, but that agreement is not a general theorem."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "One Dijkstra relaxation",
@@ -3445,7 +3520,8 @@
               "Suppose dist[A]=4, dist[B]=10 and edge A→B has weight 3.",
               "Candidate via A is 4+3=7.",
               "Set dist[B]=7 and predecessor[B]=A; no update would occur if the candidate were at least 10."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -3520,7 +3596,8 @@
               "Enqueue A at distance 0; discover B,C at distance 1.",
               "Processing B discovers D at distance 2; mark it immediately.",
               "Processing C does not reenqueue D. A shortest A-to-D route uses 2 edges."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Topological order for A→C,B→C,C→D",
@@ -3528,7 +3605,8 @@
               "A and B initially have indegree zero.",
               "Remove them in either order; only then does C become available.",
               "Remove C, then D. A,B,C,D and B,A,C,D are both valid."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -3603,7 +3681,8 @@
               "Take AB then BC, connecting A,B,C.",
               "Reject AC because it closes a cycle within that component.",
               "Take CD to attach D. Three selected edges total 1+2+4=7."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Use the cycle property in a triangle weighted 2,4,9",
@@ -3611,7 +3690,8 @@
               "The 9 edge is uniquely heaviest on the cycle.",
               "Removing it still leaves the triangle vertices connectable.",
               "An MST uses edges 2 and 4 for total 6, so 9 cannot be in an MST."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -3685,7 +3765,8 @@
               "After processing A, tentative B=2,C=7.",
               "Finalize B next and relax BC to obtain C=3.",
               "Finalize C at 3; predecessor route is A,B,C."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "A negative edge defeating naive Dijkstra",
@@ -3693,7 +3774,8 @@
               "Edges A→B=1,A→C=2,C→B=−3.",
               "Finalizing B at 1 before C would appear safe under the nonnegative proof.",
               "But A→C→B costs −1. Bellman–Ford can discover that improvement; usual Dijkstra assumptions fail."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -3776,7 +3858,8 @@
               "Use E and O to remember parity; start in E and accept E.",
               "On 0, stay in the same state because parity does not change.",
               "On 1, toggle E↔O. The empty string is accepted because zero is even."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Interpret (0|1)*01",
@@ -3784,7 +3867,8 @@
               "The starred prefix permits any binary string, including empty.",
               "The final symbols are specifically 0 then 1.",
               "The expression accepts exactly strings ending in 01, including 01 itself, but not 010."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -3863,7 +3947,8 @@
               "Assume pumping length p and choose w=0ᵖ1ᵖ.",
               "Because |xy|≤p and |y|>0, y consists of at least one zero and no ones.",
               "Pump i=0: zeros are fewer than p while ones remain p, so the string leaves L. This works for every permitted split."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Use a product DFA for two parity conditions",
@@ -3871,7 +3956,8 @@
               "One machine remembers parity of zeros; the other parity of ones.",
               "Pair their states to remember both parities, giving up to 2×2=4 states.",
               "Accept only (even,even) to recognize the intersection."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -3951,7 +4037,8 @@
               "Start S and apply 0S1 to get 0S1.",
               "Apply again to get 00S11.",
               "Use S→ε to obtain 0011; each recursive expansion adds a matching outer zero and one."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Why E→E+E | E*E | id is ambiguous for id+id*id",
@@ -3959,7 +4046,8 @@
               "One parse makes + the root and groups id+(id*id).",
               "Another makes * the root and groups (id+id)*id.",
               "Both follow the same productions but give different structures. Add precedence levels such as E,T,F to distinguish the intended grouping."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -4037,7 +4125,8 @@
               "Choose aᵖbᵖcᵖ after the supposed pumping length p.",
               "The window vxy has length at most p, so it cannot span all three symbol blocks; pumping changes at most two block counts.",
               "Because |vy|>0, i=0 removes some symbols while one block remains unchanged, or disrupts block order. Either way equal counts/order fail."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Check the lemma conditions",
@@ -4045,7 +4134,8 @@
               "A proposed split with both v=ε and y=ε has |vy|=0.",
               "It cannot be used, regardless of x.",
               "A split with v empty and y nonempty can be valid if the window bound holds."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -4119,7 +4209,8 @@
               "Run one recognizer for L and one for its complement in alternating steps on the same input.",
               "If the first accepts, answer yes; if the second accepts, answer no.",
               "Every input belongs to exactly one side, so some recognizer eventually accepts. Running one to completion first could loop forever."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Reason about a reduction A≤B",
@@ -4127,7 +4218,8 @@
               "Assume a computable transform maps x∈A iff f(x)∈B.",
               "If B had a decider, first compute f(x), then call it and return the same answer.",
               "That would decide A. If A is undecidable, B cannot have such a decider."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -4216,7 +4308,8 @@
               "sum is an identifier, = an assignment operator, and a another identifier.",
               "+ is an arithmetic operator, 12 a numeric literal, and ; punctuation.",
               "There are 6 tokens if whitespace is ignored; lexemes differ from their category names."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Apply longest match to a>=10",
@@ -4224,7 +4317,8 @@
               "Read a as an identifier.",
               "At >, the two-character >= match is longer than the one-character > match.",
               "Return identifier, >=, number: three tokens."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -4299,7 +4393,8 @@
               "A can begin with a or vanish.",
               "If it vanishes, b is the first terminal of S.",
               "FIRST(S)={a,b}; ε is absent because b cannot vanish."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Build entries for A in that grammar",
@@ -4307,7 +4402,8 @@
               "FIRST(a)={a}, so select A→a on lookahead a.",
               "A→ε uses FOLLOW(A), which includes b from S→Ab.",
               "Select A→ε on b. The entries are distinct and have no conflict."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -4387,7 +4483,8 @@
               "The multiplication node synthesizes 3×4=12.",
               "The addition node receives child values 2 and 12.",
               "It synthesizes 14; using a different parse tree could produce a different arithmetic order."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Track calls main→f→f in recursion",
@@ -4395,7 +4492,8 @@
               "main owns one frame; first f creates another.",
               "Recursive f creates a third frame with its own locals.",
               "Returning from inner f releases only its frame and restores the caller f’s state."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -4470,7 +4568,8 @@
               "Emit t1=c*d because multiplication occurs first.",
               "Emit t2=b+t1.",
               "Emit a=t2. The temporaries make dependencies explicit for later analysis."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Find live-in when USE={a}, DEF={b}, OUT={b,c}",
@@ -4478,7 +4577,8 @@
               "Remove definitions from OUT: {b,c}−{b}={c}.",
               "Union with USE: {a}∪{c}={a,c}.",
               "Thus b’s old value is not needed on entry, but a and c are."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -4566,7 +4666,8 @@
               "A process waiting for the scheduler after exhausting a time slice is ready.",
               "A process waiting for disk completion is blocked.",
               "When disk completion arrives, it usually becomes ready before the scheduler runs it again."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Two threads modify a shared global",
@@ -4574,7 +4675,8 @@
               "Both threads refer to the same process-global object.",
               "Each still has its own local stack variables and instruction pointer.",
               "Sharing the global creates a synchronization responsibility; having two stacks does not isolate global state."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -4649,7 +4751,8 @@
               "Thread A reads 0; thread B reads 0.",
               "A computes and stores 1; B also computes and stores 1.",
               "Two increments finish with x=1 rather than 2. Locking the whole read-modify-write operation prevents that interleaving."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Manage three identical devices",
@@ -4657,7 +4760,8 @@
               "Initialize semaphore count to 3.",
               "Three successful waits consume all permits, leaving 0.",
               "A fourth requester must block until some owner signals, restoring a permit."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -4730,7 +4834,8 @@
               "Needs are 1 and 2.",
               "P1 can finish using the available unit, releasing its allocation and making Work=2.",
               "P2 can then finish. Sequence P1,P2 certifies safety."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Impose lock order",
@@ -4738,7 +4843,8 @@
               "Every thread must acquire lock A before lock B.",
               "A thread holding B cannot wait for A because that acquisition order is disallowed.",
               "This removes a possible A↔B circular wait, though other correctness concerns still need analysis."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -4820,7 +4926,8 @@
               "Run P1 from 0 to 3 and P2 from 3 to 8.",
               "Waiting times are 0 and 3; mean=1.5.",
               "Turnaround times are 3 and 8; mean=5.5. The metrics differ despite the same schedule."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "SSTF head at 50 with requests 10,55,80",
@@ -4828,7 +4935,8 @@
               "Closest is 55, movement 5.",
               "From 55, closest remaining is 80, movement 25.",
               "Finish at 10, movement 70. Total movement=5+25+70=100 cylinders."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -4904,7 +5012,8 @@
               "Page size=4096; page number=floor(5000/4096)=1.",
               "Offset=5000−4096=904.",
               "If page 1 maps to frame 7, physical address=7×4096+904=29576."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "FIFO with 2 frames and references 1,2,1,3",
@@ -4912,7 +5021,8 @@
               "1 faults and loads; 2 faults and loads.",
               "The second reference to 1 hits but does not change FIFO age.",
               "3 faults and evicts 1, the oldest loaded page. Total faults=3; LRU would evict 2 instead."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -4994,7 +5104,8 @@
               "Use 1024-byte blocks and 4-byte addresses, so indirect capacity=1024/4=256 addresses.",
               "Total reachable data blocks=10+256=266.",
               "Maximum data capacity under this simplified structure=266×1024=272384 bytes, excluding metadata itself."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Random access under linked allocation",
@@ -5002,7 +5113,8 @@
               "To reach logical block 4, start at logical block 0.",
               "Follow four next-block links unless a separate cached index supplies the location.",
               "Contiguous allocation computes its address directly; the representation changes cost."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -5084,7 +5196,8 @@
               "Student has key student_id; Course has key course_id.",
               "Because many students take many courses, create Enrollment(student_id,course_id,grade).",
               "The pair can be its key if each student takes each course once, and both identifiers are foreign keys. Repeated offerings would need an additional term/attempt attribute."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Distinguish superkey from candidate key",
@@ -5092,7 +5205,8 @@
               "If student_id alone identifies a row, {student_id,name} also identifies it.",
               "The larger set is a superkey.",
               "It is not a candidate key because removing name still preserves uniqueness."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -5167,7 +5281,8 @@
               "Group Student rows by dept.",
               "Use SELECT dept, COUNT(*) FROM Student GROUP BY dept HAVING COUNT(*)>=3.",
               "The group filter belongs in HAVING; WHERE cannot directly filter by the completed aggregate count."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "COUNT semantics for values [7,NULL,9]",
@@ -5175,7 +5290,8 @@
               "There are three rows, so COUNT(*)=3.",
               "Only two have non-NULL column values, so COUNT(value)=2.",
               "AVG(value)=(7+9)/2=8, not 16/3."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -5257,7 +5373,8 @@
               "A⁺={A,B,C}, so A is a candidate key.",
               "B⁺={B,C}; B is not a superkey, and C is nonprime, so B→C violates 3NF and BCNF.",
               "Decompose into AB and BC. Shared B determines BC, so the binary decomposition is lossless and preserves the given dependencies."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Compute closure with A→B, BC→D and A→C",
@@ -5265,7 +5382,8 @@
               "Start A⁺={A}.",
               "Add B and C from the two A dependencies.",
               "Now BC is present, so add D. A⁺={A,B,C,D}."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -5345,7 +5463,8 @@
               "The root is level 1 and can point to 4 internal nodes.",
               "Each internal node can point to 4 leaves.",
               "Maximum leaves=4×4=16, excluding leaf entry capacity from this count."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Range query using a B+ index",
@@ -5353,7 +5472,8 @@
               "Search down to the leaf containing the first key at least the lower bound.",
               "Scan that leaf and follow next-leaf links.",
               "Stop once the upper bound is exceeded; do not restart root search for each successive key."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -5428,7 +5548,8 @@
               "W1(X) before R2(X) adds T1→T2.",
               "W2(Y) before R1(Y) adds T2→T1.",
               "The graph has a cycle, so the schedule is not conflict serializable."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Analyse R1(X),R2(X),W1(Y),R2(Y)",
@@ -5436,7 +5557,8 @@
               "The reads of X do not conflict.",
               "W1(Y) before R2(Y) creates only T1→T2.",
               "The graph is acyclic; serial order T1,T2 is conflict-equivalent."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -5525,7 +5647,8 @@
               "Convert to bits: 1500×8=12000.",
               "Transmission delay=12000/(12×10⁶)=0.001 s.",
               "That is 1 ms, excluding propagation and queueing."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "Two store-and-forward links at the same rate, no other delay",
@@ -5533,7 +5656,8 @@
               "The first packet needs one transmission time on each link, total 2t.",
               "For N packets, after the first link finishes one it can send the next while the next link forwards the previous.",
               "Completion is (N+1)t for two equal links under these assumptions, not 2Nt."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -5608,7 +5732,8 @@
               "Suppose data has an even number of 1s and parity bit 0.",
               "One flipped bit changes overall parity to odd.",
               "The receiver detects mismatch, but cannot locate the bad bit from parity alone."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "CRC using data 1001 and generator 1011",
@@ -5616,7 +5741,8 @@
               "Generator degree is 3, so divide appended data 1001000 by 1011 using XOR.",
               "First XOR gives 0010000; align again and XOR to get 0000110.",
               "Remainder is 110; transmit 1001110. Dividing this codeword by 1011 gives zero remainder."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -5695,7 +5821,8 @@
               "Neighbour A costs 2 and advertises distance 5; candidate cost is 7.",
               "Neighbour B costs 4 and advertises distance 1; candidate cost is 5.",
               "Choose B with total 5. The direct link price alone did not determine the best route."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Understand a stale estimate after failure",
@@ -5703,7 +5830,8 @@
               "A previously reaches D directly, while B’s route to D uses A.",
               "After A loses the destination link, B may still advertise its old route through A.",
               "If A trusts that advertisement, A and B can route toward each other while increasing metrics; stale dependencies create the loop."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -5777,7 +5905,8 @@
               "There are 6 host bits, so blocks contain 64 addresses.",
               "The last-octet ranges begin 0,64,128,192; 70 lies in 64–127.",
               "Network is 192.168.1.64, conventional broadcast .127, with hosts .65–.126."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Choose among /0,/16,/24 matching a destination",
@@ -5785,7 +5914,8 @@
               "All three cover the destination in this example.",
               "The /24 route has the longest prefix.",
               "Forward using its next hop; the fact that /16 covers more addresses does not give it priority."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -5858,7 +5988,8 @@
               "Original payload=4000−20=3980; nonfinal payload cap=1480, already divisible by 8.",
               "Payload pieces are 1480,1480,1020; total lengths are 1500,1500,1040.",
               "Offsets are 0,1480/8=185,(1480+1480)/8=370; MF values are 1,1,0."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Fragment a 1020-byte datagram with header 20 across MTU 620",
@@ -5866,7 +5997,8 @@
               "Original payload=1000; maximum nonfinal payload=600.",
               "Pieces are 600 and 400 bytes.",
               "Offsets are 0 and 75; total fragment lengths are 620 and 420."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -5941,7 +6073,8 @@
               "rwnd=16000 bytes, cwnd=10000 bytes and outstanding=4000.",
               "Limit=min(16000,10000)=10000.",
               "Additional permissible in-flight data is 10000−4000=6000 bytes in the simplified model."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Sequence and ACK numbers",
@@ -5949,7 +6082,8 @@
               "A segment starts at sequence 100 and carries 200 bytes.",
               "Those byte numbers are 100 through 299.",
               "If contiguous delivery succeeds, the cumulative ACK is 300, the next expected byte, not 299."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
@@ -6032,7 +6166,8 @@
               "Encode length 5 in the agreed prefix format.",
               "Transmit the prefix and five payload bytes, allowing for partial writes.",
               "The receiver first accumulates the complete prefix, then exactly five payload bytes, even if several recv calls are needed."
-            ]
+            ],
+            "afterSection": 2
           },
           {
             "prompt": "A recv returns 3 bytes while 8 remain in the protocol message",
@@ -6040,7 +6175,8 @@
               "Append the 3 bytes to the message buffer.",
               "The remaining expected payload decreases to 5.",
               "Call recv again as necessary; the short read alone is not a protocol failure."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -6121,7 +6257,8 @@
               "A client asks its recursive resolver.",
               "The resolver follows root and TLD referrals to a relevant authoritative server.",
               "It returns the answer and caches permitted records for their TTLs; future queries can skip steps if caches are valid."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "A cached record has TTL 120 seconds and was stored 45 seconds ago",
@@ -6129,7 +6266,8 @@
               "Assuming no refresh or eviction, remaining valid lifetime is 75 seconds.",
               "A query before expiry can use the cached record.",
               "After expiry, the resolver must obtain fresh information rather than trusting that TTL indefinitely."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -6169,7 +6307,7 @@
         "concept": "DNS distributes naming information across a hierarchy rather than storing every name in one central server. Resolution may require several queries, but caching avoids repeating most of that work until records expire.",
         "method": "A domain name is a sequence of labels. Root servers direct queries toward relevant top-level-domain servers, which direct them toward authoritative servers for delegated zones. An authoritative answer describes data in that zone; a recursive resolver acts for a client and obtains/caches answers. Delegation boundaries and host labels are not interchangeable concepts. In recursive resolution, the requester asks a resolver to return a final answer or failure. The resolver can use iterative queries, following referrals rather than asking each upstream server to do the whole lookup. Cached records have TTL lifetimes. Caching both answers and referrals can reduce later queries; a cached IP may expire before or after related delegation records. A records map names to IPv4 addresses; AAAA to IPv6; CNAME expresses aliases; MX identifies mail exchangers; NS identifies name servers. DNS commonly uses UDP port 53 for ordinary queries and can use TCP, including for larger/truncated responses and zone transfers under their relevant rules. DNS is not always UDP, and a domain can map to more than one address.",
         "example": "Resolve an uncached name conceptually",
-        "minutes": 15
+        "minutes": 16
       },
       {
         "id": "9-http",
@@ -6204,7 +6342,8 @@
               "The server produced a valid protocol response.",
               "Its status is in the 4xx category and indicates the requested resource was not found under the response semantics.",
               "This is not the same as a TCP connection refusal, where no HTTP exchange may have occurred."
-            ]
+            ],
+            "afterSection": 0
           },
           {
             "prompt": "Compare three requests with/without transport reuse",
@@ -6212,7 +6351,8 @@
               "If each new TCP connection costs one setup RTT, three separate connections pay three setup RTTs in this simplified model.",
               "One persistent connection pays one setup RTT.",
               "Two setup RTTs are saved; actual response delays and transfers must still be included."
-            ]
+            ],
+            "afterSection": 1
           }
         ],
         "pitfalls": [
@@ -6294,7 +6434,8 @@
               "After the rise, value=120.",
               "The reduction is 20% of 120, which is 24.",
               "Final value=96, a 4% overall decrease."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "A finishes in 6 days and B in 3 days",
@@ -6302,7 +6443,8 @@
               "Rates are 1/6 and 1/3 jobs/day.",
               "Combined rate=1/2 job/day.",
               "Time for one job=1/(1/2)=2 days under constant independent rates."
-            ]
+            ],
+            "afterSection": 2
           }
         ],
         "pitfalls": [
@@ -6375,7 +6517,8 @@
               "A,B must occupy adjacent positions in that order.",
               "C must lie to their right, so A,B cannot occupy positions 2,3.",
               "Only A,B,C remains. Replacing “immediately” with “somewhere” would weaken the adjacency requirement."
-            ]
+            ],
+            "afterSection": 1
           },
           {
             "prompt": "Interpret a sentence with “their books”",
@@ -6383,7 +6526,8 @@
               "The noun books needs a possessive determiner.",
               "Their means belonging to them; they’re expands to they are and cannot fill that noun-modifying role.",
               "There describes location. Choose using grammatical function, not sound."
-            ]
+            ],
+            "afterSection": 0
           }
         ],
         "pitfalls": [
