@@ -28,15 +28,18 @@ All 24 uploaded PDFs spanning 2007–2026 are retained in `papers/`. Some bundle
 
 Each PDF supports a labelled timed attempt, saved answer sheet, history, review and JSON export. The 2018 PDF has a fully matched included scoring key: 65 entries, 100 marks, original GA/CS numbering and NAT acceptance ranges. Other papers remain unscored until their exact session/code keys are verified. Nine individually checked 2018 MCQs have explanations and source labels. The remaining PDF questions have not all been converted into individually interactive questions or solved explanations.
 
-## Try the continuous-reader feature branch
+## Update to the continuous reader
+
+The continuous concept/example reader is available on `main`.
 
 ```powershell
 git fetch origin
-git switch --track origin/feature/interleaved-lessons
+git switch main
+git pull origin main
 py -3 run-local.py
 ```
 
-If you already have the branch locally, use `git switch feature/interleaved-lessons`, then `git pull`. Stop the server before switching and refresh your browser afterward. Retain any local edits before switching. Prior read/check progress and notes persist, and old tab-stage positions migrate to reading anchors. `main` retains the previous tabbed version.
+Stop the server before updating and refresh your browser afterward. Retain any local edits before switching. Prior read/check progress and notes persist, and old tab-stage positions migrate to reading anchors.
 
 ## Data and checks
 
