@@ -49,3 +49,14 @@ cd Gate2027Prepaertion
 ```
 
 Then run the Python launcher above.
+
+## Update an existing local clone
+
+Stop the running server with Ctrl+C, then run these commands inside your project folder:
+
+```powershell
+git pull origin main
+py -3 run-local.py
+```
+
+On macOS/Linux use `python3 run-local.py`. Refresh the browser after starting the updated server. If Git reports local changes, retain or commit those changes before pulling; do not discard your own edits. Browser notes and progress are separate from Git files. Old summary-completion marks are archived during the curriculum upgrade; expanded lessons start with their own reading/check status.

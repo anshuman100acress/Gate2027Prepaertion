@@ -1,19 +1,39 @@
 # Gatewise — GATE CS 2027
 
-Run `npm start` or `python -m http.server 3000` in this directory, then open http://localhost:3000. No package installation required. The app is static and can be hosted on any static web host.
+Clone this repository, then run `py -3 run-local.py` on Windows or `python3 run-local.py` on macOS/Linux. The launcher opens the app and serves all lessons and PDFs locally. Keep the terminal running. No Node.js, package installation, account, or API key is needed. See [LOCAL_SETUP.md](LOCAL_SETUP.md).
 
-Features: responsive dashboard; searchable subject library; 34 concise concept lessons covering the uploaded ten CS syllabus sections and an additional General Aptitude lesson; 132 original questions, including parameterized variations, in MCQ/MSQ/NAT formats; subject and format filters; explanations; local progress and personalization; adaptive session priorities; resumable timed mock; 65 questions, 180 minutes, 100 marks and MCQ-only negative marking.
+## Learning workflow
 
-Content is a starter study library rather than an exhaustive textbook. Questions are original and not official PYQs. Mock topic weights do not predict the actual examination. The uploaded past-year PDFs are integrated as described below. The CS syllabus is included as `syllabus.pdf`; General Aptitude was added separately. Official 2027 rules should be checked when available.
+The uploaded CS syllabus is mapped into 72 sequenced lessons: 70 across its ten sections and two additional General Aptitude lessons. The library is searchable by syllabus terms, lesson titles and explanation text, with a separate roadmap per subject. Each lesson contains:
 
-Progress lives in this browser's localStorage, without an account or cross-device synchronization. External Google Fonts are optional; system fonts work offline. Static assets otherwise have no service dependencies. Use `python data/build.py` and `python data/questions.py` to regenerate JSON content.
+- Prerequisites, an intuitive introduction and at least three explanatory sections; Engineering Mathematics has additional derivations and reasoning.
+- Two fully visible worked examples with three explicit steps each: 144 worked examples in total.
+- Common mistakes and a concise revision sheet.
+- Two optional topic-specific checks with hints and explained solutions: 144 checks, mixing conceptual MCQs and numerical applications.
+- Personal notes, bookmarking, scheduled reviews, and a saved reading stage.
+
+Theory is the first stage. Continuing leads to worked examples, not immediately to a quiz. Reading a solution does not record a passed check. Marking a lesson read is separate from passing its two checks, and neither locks or unlocks other lessons. Passing these short checks is not a claim of full GATE mastery. Five interactive teaching demonstrations cover truth tables, signed encoding, pipelines, binary search, and FIFO/LRU page replacement. Selected programming/algorithm lessons include code or pseudocode.
+
+Revision & notes collects saved topics, due dates and notes, and exports notes as Markdown. Study sessions focus on theory, worked examples and review. When upgrading from the old 34-summary version, old completion IDs are archived in browser storage rather than counting as reading the expanded curriculum. Existing names, practice history and mock results are retained.
+
+## Practice and mocks
+
+Practice separates topic learning checks, the 132 original subject-wide questions and nine checked 2018 PYQs. Exact topic selection only includes questions explicitly associated with that lesson; it does not silently substitute unrelated subject questions. The original bank includes parameterized variations. These and the learning checks are not official PYQs.
+
+A full-length original mock contains 65 questions, 180 minutes and 100 marks, including 10 GA questions / 15 marks. It uses the original bank, with MCQ-only negative marking, no MSQ partial credit, answer navigation, review flags, resumable timing and post-test explanations. Its topic weights do not predict the actual exam. Check official 2027 examination rules when published.
 
 ## Past-year papers
 
-24 user-uploaded PDFs spanning every year 2007–2026 are in `papers/` and the Past-year papers navigation. Several uploads bundle multiple sessions or paper codes, and older PDFs may contain scanned pages. Original PDFs preserve diagrams and mathematical notation. No OCR text is silently substituted for original questions.
+All 24 uploaded PDFs spanning 2007–2026 are retained in `papers/`. Some bundle multiple sessions/paper codes and some contain scanned pages. Original PDF viewing preserves equations and diagrams.
 
-Each PDF supports a labelled timed attempt and a persisted answer sheet, historical answer review, and JSON export. Only the 2018 upload currently has a fully matched scoring key: 65 entries, 100 marks, GA and CS numbering, NAT acceptance ranges, and MCQ negative marking. Other uploads remain unscored pending key verification. Included keys in other PDFs have not yet been matched to their specific session/code.
+Each PDF supports a labelled timed attempt, saved answer sheet, history, review and JSON export. The 2018 PDF has a fully matched included scoring key: 65 entries, 100 marks, original GA/CS numbering and NAT acceptance ranges. Other papers remain unscored until their exact session/code keys are verified. Nine individually checked 2018 MCQs have explanations and source labels. The remaining PDF questions have not all been converted into individually interactive questions or solved explanations.
 
-Nine manually checked 2018 MCQs with explanations are available through the Verified PYQs source filter in Practice arena. These are distinct from the 132 original questions. The remaining PYQs are available in their original PDFs and have not all been converted into individual interactive questions or detailed solutions. Original generated mocks continue to use only the original practice bank.
+## Data and checks
 
-Checks cover PDF accessibility, year/source filters, answer persistence after reload, 2018 scoring and negative marks, unscored paper attempts, and mobile layout.
+`python data/build.py` regenerates lessons and topic questions from authored modules under `data/content/`. `python data/questions.py` regenerates only the original practice bank. Neither operation needs network access.
+
+The app saves progress in localStorage, without cross-device synchronization. Keep the same browser and URL to retain progress. External Google Fonts are optional; system fonts work when unavailable. Everything required for the lessons and PDFs is local.
+
+`tests/learning_flow.py` checks the reading flow, all lesson rendering, worked steps, hints, independent read/check status, notes, revision, resume, topic filters, demonstrations, migration, mocks, paper links and mobile layout. It requires Playwright and a Chromium executable for development, not for running the app. Set `CHROMIUM_PATH` if Chromium is not at `/usr/bin/chromium`, start the server on port 3000, then run the script.
+
+Content is original instructional material organized against the supplied syllabus. It is not an official GATE course or a substitute for all reference-book exercises. See [SYLLABUS_COVERAGE.md](SYLLABUS_COVERAGE.md) for the topic-to-lesson map.
