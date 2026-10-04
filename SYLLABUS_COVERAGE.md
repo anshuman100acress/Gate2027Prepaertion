@@ -1,6 +1,6 @@
 # Mapping the uploaded CS syllabus to lessons
 
-Each syllabus item below has instructional content and worked examples. Related items sometimes share a lesson; focused graph/network/file-system lessons expand those groups. General Aptitude is an additional exam component rather than part of the attached CS syllabus.
+Each syllabus item below has instructional content and worked examples. See [TOPIC_TUTORIALS.md](TOPIC_TUTORIALS.md) for the 167 detailed concept tutorials and `data/topic-coverage.json` for the checked topic-to-chapter links. Gaussian elimination, rank and the three linear-system cases now have separate teaching units. Related items sometimes share a lesson; focused graph/network/file-system lessons expand those groups. General Aptitude is an additional exam component rather than part of the attached CS syllabus.
 
 ## Engineering Mathematics
 

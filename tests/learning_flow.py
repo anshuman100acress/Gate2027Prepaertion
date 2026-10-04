@@ -22,8 +22,8 @@ with sync_playwright() as p:
  page.locator('#lessonnotes').fill('I need to distinguish converse and contrapositive.')
  page.locator('#bookmarklesson').click()
  assert page.locator('[role=tablist]').count()==0
- assert page.locator('.workedexample').count()==2
- assert page.locator('.workedexample li').count()==sum(len(e['steps']) for e in lessons[0]['examples'])
+ assert page.locator('.workedexample').count()==len(lessons[0]['tutorials'])+len(lessons[0]['examples'])
+ assert page.locator('#supplementary-sequence .workedexample li').count()==sum(len(e['steps']) for e in lessons[0]['examples'])
  page.locator('#markread').click()
  state=page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1"))')
  assert '0-propositions' in state['completed']
@@ -70,11 +70,15 @@ with sync_playwright() as p:
   assert page.locator('[role=tablist]').count()==0
   assert l['title'] in page.locator('.lessonhero').inner_text()
   assert len(page.locator('#stagecontent').inner_text())>900,l['id']
-  assert page.locator('.workedexample').count()==2
+  assert page.locator('.workedexample').count()==len(l['tutorials'])+len(l['examples'])
   # Each example immediately follows the section selected by its content metadata.
   for i,e in enumerate(l['examples']):
    predecessor=page.locator(f'#worked-example-{i}').evaluate('(el)=>{let p=el.previousElementSibling;while(p && !p.classList.contains("teachingunit"))p=p.previousElementSibling;return p?.id;}')
    assert predecessor==f'section-{e["afterSection"]}',l['id']
+  # Every new tutorial is immediately followed by its own explained example.
+  assert page.locator('.concepttutorial').count()==len(l['tutorials'])
+  for topic in l['tutorials']:
+   assert page.locator('#topic-'+topic['id']).evaluate('(el)=>el.nextElementSibling?.classList.contains("workedexample")')
   assert page.locator('#lesson-practice').evaluate('(el)=>!!(document.querySelector("#teaching-sequence").compareDocumentPosition(el)&Node.DOCUMENT_POSITION_FOLLOWING)')
   if not page.locator('#practice-details').evaluate('(el)=>el.open'):page.locator('#practice-details > summary').click()
   assert page.locator('.learningcheck').count()==2

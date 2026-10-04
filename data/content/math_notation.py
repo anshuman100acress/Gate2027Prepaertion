@@ -2,6 +2,15 @@
 import re
 from core import subjects
 pairs=[
+ ('[[1,2],[0,1]]',r'\begin{bmatrix}1&2\\0&1\end{bmatrix}'),
+ ('[[3],[4]]',r'\begin{bmatrix}3\\4\end{bmatrix}'),
+ ('[[11],[4]]',r'\begin{bmatrix}11\\4\end{bmatrix}'),
+ ('[[1,2,3],[2,4,6],[1,1,1]]',r'\begin{bmatrix}1&2&3\\2&4&6\\1&1&1\end{bmatrix}'),
+ ('[[1,2,0],[2,5,1],[0,1,3]]',r'\begin{bmatrix}1&2&0\\2&5&1\\0&1&3\end{bmatrix}'),
+ ('[[2,0],[0,5]]',r'\begin{bmatrix}2&0\\0&5\end{bmatrix}'),
+ ('[A|b]',r'[A\mid b]'),
+ ('x+y+z=6',r'x+y+z=6'),('2x+3y+z=11',r'2x+3y+z=11'),('x+2y+3z=14',r'x+2y+3z=14'),
+ ('f(x)=x²eˣ',r'f(x)=x^2e^x'),
  ('¬∀x∃y R = ∃x¬∃y R = ∃x∀y¬R',r'\neg\forall x\exists y\,R=\exists x\neg\exists y\,R=\exists x\forall y\neg R'),
  ('∀x∀y ¬R(x,y)',r'\forall x\forall y\ \neg R(x,y)'),('∃x∃y ¬R(x,y)',r'\exists x\exists y\ \neg R(x,y)'),('∃x∀y ¬R(x,y)',r'\exists x\forall y\ \neg R(x,y)'),('∀x∃y ¬R(x,y)',r'\forall x\exists y\ \neg R(x,y)'),('∀x∃y R(x,y)',r'\forall x\exists y\ R(x,y)'),
  ('∀s∃e Passed(s,e)',r'\forall s\exists e\ Passed(s,e)'),('∃s∀e ¬Passed(s,e)',r'\exists s\forall e\ \neg Passed(s,e)'),
@@ -40,5 +49,5 @@ def walk(obj):
 for s in subjects:
  for l in s['lessons']:
   # Guides already contain explicit TeX; code and identifiers are deliberately preserved.
-  for key in ['intuition','prerequisite','sections','examples','pitfalls','revision','checks']:
+  for key in ['intuition','prerequisite','sections','examples','pitfalls','revision','checks','tutorials']:
    l[key]=walk(l[key])

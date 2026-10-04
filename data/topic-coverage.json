@@ -1,0 +1,2130 @@
+[
+  {
+    "lesson": "0-propositions",
+    "topic": "Propositional logic",
+    "targetLesson": "0-propositions",
+    "tutorial": "0-propositions-statements",
+    "anchor": "topic-0-propositions-statements"
+  },
+  {
+    "lesson": "0-propositions",
+    "topic": "Truth tables",
+    "targetLesson": "0-propositions",
+    "tutorial": "0-propositions-statements",
+    "anchor": "topic-0-propositions-statements"
+  },
+  {
+    "lesson": "0-propositions",
+    "topic": "Implication",
+    "targetLesson": "0-propositions",
+    "tutorial": "0-propositions-implication",
+    "anchor": "topic-0-propositions-implication"
+  },
+  {
+    "lesson": "0-propositions",
+    "topic": "Logical equivalence",
+    "targetLesson": "0-propositions",
+    "tutorial": "0-propositions-implication",
+    "anchor": "topic-0-propositions-implication"
+  },
+  {
+    "lesson": "0-quantifiers",
+    "topic": "First order logic",
+    "targetLesson": "0-quantifiers",
+    "tutorial": "0-quantifiers-scope",
+    "anchor": "topic-0-quantifiers-scope"
+  },
+  {
+    "lesson": "0-quantifiers",
+    "topic": "Predicates",
+    "targetLesson": "0-quantifiers",
+    "tutorial": "0-quantifiers-scope",
+    "anchor": "topic-0-quantifiers-scope"
+  },
+  {
+    "lesson": "0-quantifiers",
+    "topic": "Universal quantifier",
+    "targetLesson": "0-quantifiers",
+    "tutorial": "0-quantifiers-scope",
+    "anchor": "topic-0-quantifiers-scope"
+  },
+  {
+    "lesson": "0-quantifiers",
+    "topic": "Existential quantifier",
+    "targetLesson": "0-quantifiers",
+    "tutorial": "0-quantifiers-scope",
+    "anchor": "topic-0-quantifiers-scope"
+  },
+  {
+    "lesson": "0-sets-functions",
+    "topic": "Sets",
+    "targetLesson": "0-sets-functions",
+    "tutorial": "0-sets-functions-sets",
+    "anchor": "topic-0-sets-functions-sets"
+  },
+  {
+    "lesson": "0-sets-functions",
+    "topic": "Relations",
+    "targetLesson": "0-sets-functions",
+    "tutorial": "0-sets-functions-relations",
+    "anchor": "topic-0-sets-functions-relations"
+  },
+  {
+    "lesson": "0-sets-functions",
+    "topic": "Functions",
+    "targetLesson": "0-sets-functions",
+    "tutorial": "0-sets-functions-functions",
+    "anchor": "topic-0-sets-functions-functions"
+  },
+  {
+    "lesson": "0-sets-functions",
+    "topic": "Equivalence relations",
+    "targetLesson": "0-sets-functions",
+    "tutorial": "0-sets-functions-relations",
+    "anchor": "topic-0-sets-functions-relations"
+  },
+  {
+    "lesson": "0-orders-lattices",
+    "topic": "Partial orders",
+    "targetLesson": "0-orders-lattices",
+    "tutorial": "0-orders-lattices-posets",
+    "anchor": "topic-0-orders-lattices-posets"
+  },
+  {
+    "lesson": "0-orders-lattices",
+    "topic": "Hasse diagrams",
+    "targetLesson": "0-orders-lattices",
+    "tutorial": "0-orders-lattices-posets",
+    "anchor": "topic-0-orders-lattices-posets"
+  },
+  {
+    "lesson": "0-orders-lattices",
+    "topic": "Lattices",
+    "targetLesson": "0-orders-lattices",
+    "tutorial": "0-orders-lattices-lattices",
+    "anchor": "topic-0-orders-lattices-lattices"
+  },
+  {
+    "lesson": "0-algebraic-structures",
+    "topic": "Monoids",
+    "targetLesson": "0-algebraic-structures",
+    "tutorial": "0-algebraic-structures-groups",
+    "anchor": "topic-0-algebraic-structures-groups"
+  },
+  {
+    "lesson": "0-algebraic-structures",
+    "topic": "Groups",
+    "targetLesson": "0-algebraic-structures",
+    "tutorial": "0-algebraic-structures-groups",
+    "anchor": "topic-0-algebraic-structures-groups"
+  },
+  {
+    "lesson": "0-algebraic-structures",
+    "topic": "Identity",
+    "targetLesson": "0-algebraic-structures",
+    "tutorial": "0-algebraic-structures-groups",
+    "anchor": "topic-0-algebraic-structures-groups"
+  },
+  {
+    "lesson": "0-algebraic-structures",
+    "topic": "Inverses",
+    "targetLesson": "0-algebraic-structures",
+    "tutorial": "0-algebraic-structures-groups",
+    "anchor": "topic-0-algebraic-structures-groups"
+  },
+  {
+    "lesson": "0-graphs-matching",
+    "topic": "Graphs",
+    "targetLesson": "0-graphs-matching",
+    "tutorial": "0-graphs-matching-connectivity",
+    "anchor": "topic-0-graphs-matching-connectivity"
+  },
+  {
+    "lesson": "0-graphs-matching",
+    "topic": "Connectivity",
+    "targetLesson": "0-graphs-matching",
+    "tutorial": "0-graphs-matching-connectivity",
+    "anchor": "topic-0-graphs-matching-connectivity"
+  },
+  {
+    "lesson": "0-graphs-matching",
+    "topic": "Matching",
+    "targetLesson": "0-graphs-matching",
+    "tutorial": "0-graphs-matching-matching",
+    "anchor": "topic-0-graphs-matching-matching"
+  },
+  {
+    "lesson": "0-graphs-matching",
+    "topic": "Colouring",
+    "targetLesson": "0-graphs-matching",
+    "tutorial": "0-graphs-matching-colouring",
+    "anchor": "topic-0-graphs-matching-colouring"
+  },
+  {
+    "lesson": "0-counting",
+    "topic": "Counting",
+    "targetLesson": "0-counting",
+    "tutorial": "0-counting-choices",
+    "anchor": "topic-0-counting-choices"
+  },
+  {
+    "lesson": "0-counting",
+    "topic": "Permutations",
+    "targetLesson": "0-counting",
+    "tutorial": "0-counting-choices",
+    "anchor": "topic-0-counting-choices"
+  },
+  {
+    "lesson": "0-counting",
+    "topic": "Combinations",
+    "targetLesson": "0-counting",
+    "tutorial": "0-counting-choices",
+    "anchor": "topic-0-counting-choices"
+  },
+  {
+    "lesson": "0-counting",
+    "topic": "Inclusion–exclusion",
+    "targetLesson": "0-counting",
+    "tutorial": "0-counting-overlap",
+    "anchor": "topic-0-counting-overlap"
+  },
+  {
+    "lesson": "0-recurrences",
+    "topic": "Recurrence relations",
+    "targetLesson": "0-recurrences",
+    "tutorial": "0-recurrences-recurrences",
+    "anchor": "topic-0-recurrences-recurrences"
+  },
+  {
+    "lesson": "0-recurrences",
+    "topic": "Generating functions",
+    "targetLesson": "0-recurrences",
+    "tutorial": "0-recurrences-series",
+    "anchor": "topic-0-recurrences-series"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "Matrices",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-matrix-basics",
+    "anchor": "topic-0-matrices-rank-matrix-basics"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "Determinants",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-determinants",
+    "anchor": "topic-0-matrices-rank-determinants"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "System of linear equations",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-systems",
+    "anchor": "topic-0-matrices-rank-systems"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "Rank",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-independence-rank",
+    "anchor": "topic-0-matrices-rank-independence-rank"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "Linear independence",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-independence-rank",
+    "anchor": "topic-0-matrices-rank-independence-rank"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "Gaussian elimination",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-gaussian",
+    "anchor": "topic-0-matrices-rank-gaussian"
+  },
+  {
+    "lesson": "0-matrices-rank",
+    "topic": "Row echelon form",
+    "targetLesson": "0-matrices-rank",
+    "tutorial": "0-matrices-rank-gaussian",
+    "anchor": "topic-0-matrices-rank-gaussian"
+  },
+  {
+    "lesson": "0-eigen-lu",
+    "topic": "Eigenvalues",
+    "targetLesson": "0-eigen-lu",
+    "tutorial": "0-eigen-lu-eigen",
+    "anchor": "topic-0-eigen-lu-eigen"
+  },
+  {
+    "lesson": "0-eigen-lu",
+    "topic": "Eigenvectors",
+    "targetLesson": "0-eigen-lu",
+    "tutorial": "0-eigen-lu-eigen",
+    "anchor": "topic-0-eigen-lu-eigen"
+  },
+  {
+    "lesson": "0-eigen-lu",
+    "topic": "LU decomposition",
+    "targetLesson": "0-eigen-lu",
+    "tutorial": "0-eigen-lu-lu",
+    "anchor": "topic-0-eigen-lu-lu"
+  },
+  {
+    "lesson": "0-limits-continuity",
+    "topic": "Limits",
+    "targetLesson": "0-limits-continuity",
+    "tutorial": "0-limits-continuity-limits",
+    "anchor": "topic-0-limits-continuity-limits"
+  },
+  {
+    "lesson": "0-limits-continuity",
+    "topic": "Continuity",
+    "targetLesson": "0-limits-continuity",
+    "tutorial": "0-limits-continuity-continuity",
+    "anchor": "topic-0-limits-continuity-continuity"
+  },
+  {
+    "lesson": "0-limits-continuity",
+    "topic": "Differentiability",
+    "targetLesson": "0-limits-continuity",
+    "tutorial": "0-limits-continuity-derivative",
+    "anchor": "topic-0-limits-continuity-derivative"
+  },
+  {
+    "lesson": "0-limits-continuity",
+    "topic": "Differentiation",
+    "targetLesson": "0-limits-continuity",
+    "tutorial": "0-limits-continuity-derivative",
+    "anchor": "topic-0-limits-continuity-derivative"
+  },
+  {
+    "lesson": "0-extrema-mvt",
+    "topic": "Maxima and minima",
+    "targetLesson": "0-extrema-mvt",
+    "tutorial": "0-extrema-mvt-extrema",
+    "anchor": "topic-0-extrema-mvt-extrema"
+  },
+  {
+    "lesson": "0-extrema-mvt",
+    "topic": "Mean value theorem",
+    "targetLesson": "0-extrema-mvt",
+    "tutorial": "0-extrema-mvt-mvt",
+    "anchor": "topic-0-extrema-mvt-mvt"
+  },
+  {
+    "lesson": "0-extrema-mvt",
+    "topic": "Differentiation",
+    "targetLesson": "0-limits-continuity",
+    "tutorial": "0-limits-continuity-derivative",
+    "anchor": "topic-0-limits-continuity-derivative"
+  },
+  {
+    "lesson": "0-integration",
+    "topic": "Integration",
+    "targetLesson": "0-integration",
+    "tutorial": "0-integration-integrals",
+    "anchor": "topic-0-integration-integrals"
+  },
+  {
+    "lesson": "0-integration",
+    "topic": "Definite integrals",
+    "targetLesson": "0-integration",
+    "tutorial": "0-integration-integrals",
+    "anchor": "topic-0-integration-integrals"
+  },
+  {
+    "lesson": "0-integration",
+    "topic": "Substitution",
+    "targetLesson": "0-integration",
+    "tutorial": "0-integration-techniques",
+    "anchor": "topic-0-integration-techniques"
+  },
+  {
+    "lesson": "0-integration",
+    "topic": "Integration by parts",
+    "targetLesson": "0-integration",
+    "tutorial": "0-integration-techniques",
+    "anchor": "topic-0-integration-techniques"
+  },
+  {
+    "lesson": "0-conditional-bayes",
+    "topic": "Conditional probability",
+    "targetLesson": "0-conditional-bayes",
+    "tutorial": "0-conditional-bayes-conditioning",
+    "anchor": "topic-0-conditional-bayes-conditioning"
+  },
+  {
+    "lesson": "0-conditional-bayes",
+    "topic": "Bayes theorem",
+    "targetLesson": "0-conditional-bayes",
+    "tutorial": "0-conditional-bayes-bayes",
+    "anchor": "topic-0-conditional-bayes-bayes"
+  },
+  {
+    "lesson": "0-conditional-bayes",
+    "topic": "Independence",
+    "targetLesson": "0-conditional-bayes",
+    "tutorial": "0-conditional-bayes-conditioning",
+    "anchor": "topic-0-conditional-bayes-conditioning"
+  },
+  {
+    "lesson": "0-random-statistics",
+    "topic": "Random variables",
+    "targetLesson": "0-random-statistics",
+    "tutorial": "0-random-statistics-variables",
+    "anchor": "topic-0-random-statistics-variables"
+  },
+  {
+    "lesson": "0-random-statistics",
+    "topic": "Mean",
+    "targetLesson": "0-random-statistics",
+    "tutorial": "0-random-statistics-variables",
+    "anchor": "topic-0-random-statistics-variables"
+  },
+  {
+    "lesson": "0-random-statistics",
+    "topic": "Median",
+    "targetLesson": "0-random-statistics",
+    "tutorial": "0-random-statistics-central",
+    "anchor": "topic-0-random-statistics-central"
+  },
+  {
+    "lesson": "0-random-statistics",
+    "topic": "Mode",
+    "targetLesson": "0-random-statistics",
+    "tutorial": "0-random-statistics-central",
+    "anchor": "topic-0-random-statistics-central"
+  },
+  {
+    "lesson": "0-random-statistics",
+    "topic": "Standard deviation",
+    "targetLesson": "0-random-statistics",
+    "tutorial": "0-random-statistics-variables",
+    "anchor": "topic-0-random-statistics-variables"
+  },
+  {
+    "lesson": "0-binomial-poisson",
+    "topic": "Binomial distribution",
+    "targetLesson": "0-binomial-poisson",
+    "tutorial": "0-binomial-poisson-binomial",
+    "anchor": "topic-0-binomial-poisson-binomial"
+  },
+  {
+    "lesson": "0-binomial-poisson",
+    "topic": "Poisson distribution",
+    "targetLesson": "0-binomial-poisson",
+    "tutorial": "0-binomial-poisson-poisson",
+    "anchor": "topic-0-binomial-poisson-poisson"
+  },
+  {
+    "lesson": "0-continuous-distributions",
+    "topic": "Uniform distribution",
+    "targetLesson": "0-continuous-distributions",
+    "tutorial": "0-continuous-distributions-uniform",
+    "anchor": "topic-0-continuous-distributions-uniform"
+  },
+  {
+    "lesson": "0-continuous-distributions",
+    "topic": "Normal distribution",
+    "targetLesson": "0-continuous-distributions",
+    "tutorial": "0-continuous-distributions-normal",
+    "anchor": "topic-0-continuous-distributions-normal"
+  },
+  {
+    "lesson": "0-continuous-distributions",
+    "topic": "Exponential distribution",
+    "targetLesson": "0-continuous-distributions",
+    "tutorial": "0-continuous-distributions-exponential",
+    "anchor": "topic-0-continuous-distributions-exponential"
+  },
+  {
+    "lesson": "1-boolean",
+    "topic": "Boolean algebra",
+    "targetLesson": "1-boolean",
+    "tutorial": "1-boolean-algebra",
+    "anchor": "topic-1-boolean-algebra"
+  },
+  {
+    "lesson": "1-boolean",
+    "topic": "Algebraic technique",
+    "targetLesson": "1-boolean",
+    "tutorial": "1-boolean-algebra",
+    "anchor": "topic-1-boolean-algebra"
+  },
+  {
+    "lesson": "1-boolean",
+    "topic": "SOP",
+    "targetLesson": "1-boolean",
+    "tutorial": "1-boolean-forms",
+    "anchor": "topic-1-boolean-forms"
+  },
+  {
+    "lesson": "1-boolean",
+    "topic": "POS",
+    "targetLesson": "1-boolean",
+    "tutorial": "1-boolean-forms",
+    "anchor": "topic-1-boolean-forms"
+  },
+  {
+    "lesson": "1-kmap-tabular",
+    "topic": "Karnaugh map",
+    "targetLesson": "1-kmap-tabular",
+    "tutorial": "1-kmap-tabular-maps",
+    "anchor": "topic-1-kmap-tabular-maps"
+  },
+  {
+    "lesson": "1-kmap-tabular",
+    "topic": "Tabular method",
+    "targetLesson": "1-kmap-tabular",
+    "tutorial": "1-kmap-tabular-tabular",
+    "anchor": "topic-1-kmap-tabular-tabular"
+  },
+  {
+    "lesson": "1-kmap-tabular",
+    "topic": "Prime implicants",
+    "targetLesson": "1-kmap-tabular",
+    "tutorial": "1-kmap-tabular-tabular",
+    "anchor": "topic-1-kmap-tabular-tabular"
+  },
+  {
+    "lesson": "1-kmap-tabular",
+    "topic": "Dont cares",
+    "targetLesson": "1-kmap-tabular",
+    "tutorial": "1-kmap-tabular-maps",
+    "anchor": "topic-1-kmap-tabular-maps"
+  },
+  {
+    "lesson": "1-combinational",
+    "topic": "Combinational circuits",
+    "targetLesson": "1-combinational",
+    "tutorial": "1-combinational-adders",
+    "anchor": "topic-1-combinational-adders"
+  },
+  {
+    "lesson": "1-combinational",
+    "topic": "Adders",
+    "targetLesson": "1-combinational",
+    "tutorial": "1-combinational-adders",
+    "anchor": "topic-1-combinational-adders"
+  },
+  {
+    "lesson": "1-combinational",
+    "topic": "Multiplexers",
+    "targetLesson": "1-combinational",
+    "tutorial": "1-combinational-selection",
+    "anchor": "topic-1-combinational-selection"
+  },
+  {
+    "lesson": "1-combinational",
+    "topic": "Decoders",
+    "targetLesson": "1-combinational",
+    "tutorial": "1-combinational-selection",
+    "anchor": "topic-1-combinational-selection"
+  },
+  {
+    "lesson": "1-sequential",
+    "topic": "Sequential circuits",
+    "targetLesson": "1-sequential",
+    "tutorial": "1-sequential-state",
+    "anchor": "topic-1-sequential-state"
+  },
+  {
+    "lesson": "1-sequential",
+    "topic": "Flip flops",
+    "targetLesson": "1-sequential",
+    "tutorial": "1-sequential-storage",
+    "anchor": "topic-1-sequential-storage"
+  },
+  {
+    "lesson": "1-sequential",
+    "topic": "Counters",
+    "targetLesson": "1-sequential",
+    "tutorial": "1-sequential-storage",
+    "anchor": "topic-1-sequential-storage"
+  },
+  {
+    "lesson": "1-sequential",
+    "topic": "Moore",
+    "targetLesson": "1-sequential",
+    "tutorial": "1-sequential-state",
+    "anchor": "topic-1-sequential-state"
+  },
+  {
+    "lesson": "1-sequential",
+    "topic": "Mealy",
+    "targetLesson": "1-sequential",
+    "tutorial": "1-sequential-state",
+    "anchor": "topic-1-sequential-state"
+  },
+  {
+    "lesson": "1-representation",
+    "topic": "Number representation",
+    "targetLesson": "1-representation",
+    "tutorial": "1-representation-fixed",
+    "anchor": "topic-1-representation-fixed"
+  },
+  {
+    "lesson": "1-representation",
+    "topic": "Fixed point",
+    "targetLesson": "1-representation",
+    "tutorial": "1-representation-fixed",
+    "anchor": "topic-1-representation-fixed"
+  },
+  {
+    "lesson": "1-representation",
+    "topic": "Floating point",
+    "targetLesson": "1-representation",
+    "tutorial": "1-representation-floating",
+    "anchor": "topic-1-representation-floating"
+  },
+  {
+    "lesson": "1-representation",
+    "topic": "Arithmetic",
+    "targetLesson": "1-representation",
+    "tutorial": "1-representation-fixed",
+    "anchor": "topic-1-representation-fixed"
+  },
+  {
+    "lesson": "2-instructions",
+    "topic": "Instruction set",
+    "targetLesson": "2-instructions",
+    "tutorial": "2-instructions-isa",
+    "anchor": "topic-2-instructions-isa"
+  },
+  {
+    "lesson": "2-instructions",
+    "topic": "Addressing modes",
+    "targetLesson": "2-instructions",
+    "tutorial": "2-instructions-isa",
+    "anchor": "topic-2-instructions-isa"
+  },
+  {
+    "lesson": "2-instructions",
+    "topic": "CPU performance",
+    "targetLesson": "2-instructions",
+    "tutorial": "2-instructions-performance",
+    "anchor": "topic-2-instructions-performance"
+  },
+  {
+    "lesson": "2-alu-control",
+    "topic": "Design of ALU",
+    "targetLesson": "2-alu-control",
+    "tutorial": "2-alu-control-alu",
+    "anchor": "topic-2-alu-control-alu"
+  },
+  {
+    "lesson": "2-alu-control",
+    "topic": "Hardwired control",
+    "targetLesson": "2-alu-control",
+    "tutorial": "2-alu-control-control",
+    "anchor": "topic-2-alu-control-control"
+  },
+  {
+    "lesson": "2-alu-control",
+    "topic": "Microprogrammed control",
+    "targetLesson": "2-alu-control",
+    "tutorial": "2-alu-control-control",
+    "anchor": "topic-2-alu-control-control"
+  },
+  {
+    "lesson": "2-cache",
+    "topic": "Memory hierarchy",
+    "targetLesson": "2-cache",
+    "tutorial": "2-cache-hierarchy",
+    "anchor": "topic-2-cache-hierarchy"
+  },
+  {
+    "lesson": "2-cache",
+    "topic": "Cache mapping",
+    "targetLesson": "2-cache",
+    "tutorial": "2-cache-mapping",
+    "anchor": "topic-2-cache-mapping"
+  },
+  {
+    "lesson": "2-cache",
+    "topic": "Cache performance",
+    "targetLesson": "2-cache",
+    "tutorial": "2-cache-hierarchy",
+    "anchor": "topic-2-cache-hierarchy"
+  },
+  {
+    "lesson": "2-memory-io",
+    "topic": "Memory interfacing",
+    "targetLesson": "2-memory-io",
+    "tutorial": "2-memory-io-chips",
+    "anchor": "topic-2-memory-io-chips"
+  },
+  {
+    "lesson": "2-memory-io",
+    "topic": "I/O interface",
+    "targetLesson": "2-memory-io",
+    "tutorial": "2-memory-io-io",
+    "anchor": "topic-2-memory-io-io"
+  },
+  {
+    "lesson": "2-memory-io",
+    "topic": "Interrupt",
+    "targetLesson": "2-memory-io",
+    "tutorial": "2-memory-io-io",
+    "anchor": "topic-2-memory-io-io"
+  },
+  {
+    "lesson": "2-memory-io",
+    "topic": "DMA",
+    "targetLesson": "2-memory-io",
+    "tutorial": "2-memory-io-io",
+    "anchor": "topic-2-memory-io-io"
+  },
+  {
+    "lesson": "2-pipeline",
+    "topic": "Instruction pipelining",
+    "targetLesson": "2-pipeline",
+    "tutorial": "2-pipeline-overlap",
+    "anchor": "topic-2-pipeline-overlap"
+  },
+  {
+    "lesson": "2-pipeline",
+    "topic": "Pipeline hazards",
+    "targetLesson": "2-pipeline",
+    "tutorial": "2-pipeline-hazards",
+    "anchor": "topic-2-pipeline-hazards"
+  },
+  {
+    "lesson": "2-pipeline",
+    "topic": "Forwarding",
+    "targetLesson": "2-pipeline",
+    "tutorial": "2-pipeline-hazards",
+    "anchor": "topic-2-pipeline-hazards"
+  },
+  {
+    "lesson": "2-pipeline",
+    "topic": "Branches",
+    "targetLesson": "2-pipeline",
+    "tutorial": "2-pipeline-hazards",
+    "anchor": "topic-2-pipeline-hazards"
+  },
+  {
+    "lesson": "3-c-memory",
+    "topic": "Programming in C",
+    "targetLesson": "3-c-memory",
+    "tutorial": "3-c-memory-c-expressions",
+    "anchor": "topic-3-c-memory-c-expressions"
+  },
+  {
+    "lesson": "3-c-memory",
+    "topic": "Pointers",
+    "targetLesson": "3-c-memory",
+    "tutorial": "3-c-memory-pointers",
+    "anchor": "topic-3-c-memory-pointers"
+  },
+  {
+    "lesson": "3-c-memory",
+    "topic": "Arrays",
+    "targetLesson": "3-c-memory",
+    "tutorial": "3-c-memory-pointers",
+    "anchor": "topic-3-c-memory-pointers"
+  },
+  {
+    "lesson": "3-c-memory",
+    "topic": "Storage",
+    "targetLesson": "3-c-memory",
+    "tutorial": "3-c-memory-storage",
+    "anchor": "topic-3-c-memory-storage"
+  },
+  {
+    "lesson": "3-c-memory",
+    "topic": "Expressions",
+    "targetLesson": "3-c-memory",
+    "tutorial": "3-c-memory-c-expressions",
+    "anchor": "topic-3-c-memory-c-expressions"
+  },
+  {
+    "lesson": "3-recursion",
+    "topic": "Recursion",
+    "targetLesson": "3-recursion",
+    "tutorial": "3-recursion-calls",
+    "anchor": "topic-3-recursion-calls"
+  },
+  {
+    "lesson": "3-recursion",
+    "topic": "Call stack",
+    "targetLesson": "3-recursion",
+    "tutorial": "3-recursion-calls",
+    "anchor": "topic-3-recursion-calls"
+  },
+  {
+    "lesson": "3-recursion",
+    "topic": "Recursive complexity",
+    "targetLesson": "3-recursion",
+    "tutorial": "3-recursion-cost",
+    "anchor": "topic-3-recursion-cost"
+  },
+  {
+    "lesson": "3-linear-structures",
+    "topic": "Arrays",
+    "targetLesson": "3-c-memory",
+    "tutorial": "3-c-memory-pointers",
+    "anchor": "topic-3-c-memory-pointers"
+  },
+  {
+    "lesson": "3-linear-structures",
+    "topic": "Linked lists",
+    "targetLesson": "3-linear-structures",
+    "tutorial": "3-linear-structures-lists",
+    "anchor": "topic-3-linear-structures-lists"
+  },
+  {
+    "lesson": "3-linear-structures",
+    "topic": "Stacks",
+    "targetLesson": "3-linear-structures",
+    "tutorial": "3-linear-structures-stacks",
+    "anchor": "topic-3-linear-structures-stacks"
+  },
+  {
+    "lesson": "3-linear-structures",
+    "topic": "Queues",
+    "targetLesson": "3-linear-structures",
+    "tutorial": "3-linear-structures-queues",
+    "anchor": "topic-3-linear-structures-queues"
+  },
+  {
+    "lesson": "3-linear-structures",
+    "topic": "Circular queue",
+    "targetLesson": "3-linear-structures",
+    "tutorial": "3-linear-structures-queues",
+    "anchor": "topic-3-linear-structures-queues"
+  },
+  {
+    "lesson": "3-trees-bst",
+    "topic": "Trees",
+    "targetLesson": "3-trees-bst",
+    "tutorial": "3-trees-bst-trees",
+    "anchor": "topic-3-trees-bst-trees"
+  },
+  {
+    "lesson": "3-trees-bst",
+    "topic": "Binary search trees",
+    "targetLesson": "3-trees-bst",
+    "tutorial": "3-trees-bst-bst",
+    "anchor": "topic-3-trees-bst-bst"
+  },
+  {
+    "lesson": "3-trees-bst",
+    "topic": "Tree traversals",
+    "targetLesson": "3-trees-bst",
+    "tutorial": "3-trees-bst-trees",
+    "anchor": "topic-3-trees-bst-trees"
+  },
+  {
+    "lesson": "3-heaps-graphs",
+    "topic": "Binary heaps",
+    "targetLesson": "3-heaps-graphs",
+    "tutorial": "3-heaps-graphs-heaps",
+    "anchor": "topic-3-heaps-graphs-heaps"
+  },
+  {
+    "lesson": "3-heaps-graphs",
+    "topic": "Graphs",
+    "targetLesson": "0-graphs-matching",
+    "tutorial": "0-graphs-matching-connectivity",
+    "anchor": "topic-0-graphs-matching-connectivity"
+  },
+  {
+    "lesson": "3-heaps-graphs",
+    "topic": "Adjacency list",
+    "targetLesson": "3-heaps-graphs",
+    "tutorial": "3-heaps-graphs-representations",
+    "anchor": "topic-3-heaps-graphs-representations"
+  },
+  {
+    "lesson": "3-heaps-graphs",
+    "topic": "Adjacency matrix",
+    "targetLesson": "3-heaps-graphs",
+    "tutorial": "3-heaps-graphs-representations",
+    "anchor": "topic-3-heaps-graphs-representations"
+  },
+  {
+    "lesson": "4-analysis",
+    "topic": "Asymptotic worst case time",
+    "targetLesson": "4-analysis",
+    "tutorial": "4-analysis-bounds",
+    "anchor": "topic-4-analysis-bounds"
+  },
+  {
+    "lesson": "4-analysis",
+    "topic": "Space complexity",
+    "targetLesson": "4-analysis",
+    "tutorial": "4-analysis-space",
+    "anchor": "topic-4-analysis-space"
+  },
+  {
+    "lesson": "4-analysis",
+    "topic": "Big O",
+    "targetLesson": "4-analysis",
+    "tutorial": "4-analysis-bounds",
+    "anchor": "topic-4-analysis-bounds"
+  },
+  {
+    "lesson": "4-analysis",
+    "topic": "Theta",
+    "targetLesson": "4-analysis",
+    "tutorial": "4-analysis-bounds",
+    "anchor": "topic-4-analysis-bounds"
+  },
+  {
+    "lesson": "4-analysis",
+    "topic": "Omega",
+    "targetLesson": "4-analysis",
+    "tutorial": "4-analysis-bounds",
+    "anchor": "topic-4-analysis-bounds"
+  },
+  {
+    "lesson": "4-search-sort",
+    "topic": "Searching",
+    "targetLesson": "4-search-sort",
+    "tutorial": "4-search-sort-search",
+    "anchor": "topic-4-search-sort-search"
+  },
+  {
+    "lesson": "4-search-sort",
+    "topic": "Sorting",
+    "targetLesson": "4-search-sort",
+    "tutorial": "4-search-sort-merge",
+    "anchor": "topic-4-search-sort-merge"
+  },
+  {
+    "lesson": "4-search-sort",
+    "topic": "Binary search",
+    "targetLesson": "4-search-sort",
+    "tutorial": "4-search-sort-search",
+    "anchor": "topic-4-search-sort-search"
+  },
+  {
+    "lesson": "4-search-sort",
+    "topic": "Merge sort",
+    "targetLesson": "4-search-sort",
+    "tutorial": "4-search-sort-merge",
+    "anchor": "topic-4-search-sort-merge"
+  },
+  {
+    "lesson": "4-search-sort",
+    "topic": "Quicksort",
+    "targetLesson": "4-search-sort",
+    "tutorial": "4-search-sort-quick",
+    "anchor": "topic-4-search-sort-quick"
+  },
+  {
+    "lesson": "4-search-sort",
+    "topic": "Heapsort",
+    "targetLesson": "4-search-sort",
+    "tutorial": "4-search-sort-heapsort",
+    "anchor": "topic-4-search-sort-heapsort"
+  },
+  {
+    "lesson": "4-hashing",
+    "topic": "Hashing",
+    "targetLesson": "4-hashing",
+    "tutorial": "4-hashing-chaining",
+    "anchor": "topic-4-hashing-chaining"
+  },
+  {
+    "lesson": "4-hashing",
+    "topic": "Chaining",
+    "targetLesson": "4-hashing",
+    "tutorial": "4-hashing-chaining",
+    "anchor": "topic-4-hashing-chaining"
+  },
+  {
+    "lesson": "4-hashing",
+    "topic": "Open addressing",
+    "targetLesson": "4-hashing",
+    "tutorial": "4-hashing-probing",
+    "anchor": "topic-4-hashing-probing"
+  },
+  {
+    "lesson": "4-hashing",
+    "topic": "Load factor",
+    "targetLesson": "4-hashing",
+    "tutorial": "4-hashing-chaining",
+    "anchor": "topic-4-hashing-chaining"
+  },
+  {
+    "lesson": "4-greedy-divide",
+    "topic": "Greedy",
+    "targetLesson": "4-greedy-divide",
+    "tutorial": "4-greedy-divide-greedy",
+    "anchor": "topic-4-greedy-divide-greedy"
+  },
+  {
+    "lesson": "4-greedy-divide",
+    "topic": "Divide and conquer",
+    "targetLesson": "4-greedy-divide",
+    "tutorial": "4-greedy-divide-divide",
+    "anchor": "topic-4-greedy-divide-divide"
+  },
+  {
+    "lesson": "4-greedy-divide",
+    "topic": "Exchange argument",
+    "targetLesson": "4-greedy-divide",
+    "tutorial": "4-greedy-divide-greedy",
+    "anchor": "topic-4-greedy-divide-greedy"
+  },
+  {
+    "lesson": "4-dynamic",
+    "topic": "Dynamic programming",
+    "targetLesson": "4-dynamic",
+    "tutorial": "4-dynamic-states",
+    "anchor": "topic-4-dynamic-states"
+  },
+  {
+    "lesson": "4-dynamic",
+    "topic": "Optimal substructure",
+    "targetLesson": "4-dynamic",
+    "tutorial": "4-dynamic-states",
+    "anchor": "topic-4-dynamic-states"
+  },
+  {
+    "lesson": "4-dynamic",
+    "topic": "Memoization",
+    "targetLesson": "4-dynamic",
+    "tutorial": "4-dynamic-states",
+    "anchor": "topic-4-dynamic-states"
+  },
+  {
+    "lesson": "4-dynamic",
+    "topic": "Knapsack",
+    "targetLesson": "4-dynamic",
+    "tutorial": "4-dynamic-knapsack",
+    "anchor": "topic-4-dynamic-knapsack"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Graph traversals",
+    "targetLesson": "4-graph-algorithms",
+    "tutorial": "4-graph-algorithms-objectives",
+    "anchor": "topic-4-graph-algorithms-objectives"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Minimum spanning trees",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-cuts",
+    "anchor": "topic-4-minimum-spanning-cuts"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Shortest paths",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-dijkstra",
+    "anchor": "topic-4-shortest-paths-dijkstra"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "BFS",
+    "targetLesson": "4-bfs-dfs",
+    "tutorial": "4-bfs-dfs-bfs",
+    "anchor": "topic-4-bfs-dfs-bfs"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "DFS",
+    "targetLesson": "4-bfs-dfs",
+    "tutorial": "4-bfs-dfs-dfs",
+    "anchor": "topic-4-bfs-dfs-dfs"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Kruskal",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-kruskal",
+    "anchor": "topic-4-minimum-spanning-kruskal"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Prim",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-prim",
+    "anchor": "topic-4-minimum-spanning-prim"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Dijkstra",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-dijkstra",
+    "anchor": "topic-4-shortest-paths-dijkstra"
+  },
+  {
+    "lesson": "4-graph-algorithms",
+    "topic": "Bellman Ford",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-bellman",
+    "anchor": "topic-4-shortest-paths-bellman"
+  },
+  {
+    "lesson": "4-bfs-dfs",
+    "topic": "BFS",
+    "targetLesson": "4-bfs-dfs",
+    "tutorial": "4-bfs-dfs-bfs",
+    "anchor": "topic-4-bfs-dfs-bfs"
+  },
+  {
+    "lesson": "4-bfs-dfs",
+    "topic": "DFS",
+    "targetLesson": "4-bfs-dfs",
+    "tutorial": "4-bfs-dfs-dfs",
+    "anchor": "topic-4-bfs-dfs-dfs"
+  },
+  {
+    "lesson": "4-bfs-dfs",
+    "topic": "Graph traversals",
+    "targetLesson": "4-graph-algorithms",
+    "tutorial": "4-graph-algorithms-objectives",
+    "anchor": "topic-4-graph-algorithms-objectives"
+  },
+  {
+    "lesson": "4-bfs-dfs",
+    "topic": "Topological order",
+    "targetLesson": "4-bfs-dfs",
+    "tutorial": "4-bfs-dfs-dfs",
+    "anchor": "topic-4-bfs-dfs-dfs"
+  },
+  {
+    "lesson": "4-minimum-spanning",
+    "topic": "Minimum spanning trees",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-cuts",
+    "anchor": "topic-4-minimum-spanning-cuts"
+  },
+  {
+    "lesson": "4-minimum-spanning",
+    "topic": "Kruskal",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-kruskal",
+    "anchor": "topic-4-minimum-spanning-kruskal"
+  },
+  {
+    "lesson": "4-minimum-spanning",
+    "topic": "Prim",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-prim",
+    "anchor": "topic-4-minimum-spanning-prim"
+  },
+  {
+    "lesson": "4-minimum-spanning",
+    "topic": "Cut property",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-cuts",
+    "anchor": "topic-4-minimum-spanning-cuts"
+  },
+  {
+    "lesson": "4-minimum-spanning",
+    "topic": "Disjoint sets",
+    "targetLesson": "4-minimum-spanning",
+    "tutorial": "4-minimum-spanning-kruskal",
+    "anchor": "topic-4-minimum-spanning-kruskal"
+  },
+  {
+    "lesson": "4-shortest-paths",
+    "topic": "Shortest paths",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-dijkstra",
+    "anchor": "topic-4-shortest-paths-dijkstra"
+  },
+  {
+    "lesson": "4-shortest-paths",
+    "topic": "Dijkstra",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-dijkstra",
+    "anchor": "topic-4-shortest-paths-dijkstra"
+  },
+  {
+    "lesson": "4-shortest-paths",
+    "topic": "Bellman Ford",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-bellman",
+    "anchor": "topic-4-shortest-paths-bellman"
+  },
+  {
+    "lesson": "4-shortest-paths",
+    "topic": "Floyd Warshall",
+    "targetLesson": "4-shortest-paths",
+    "tutorial": "4-shortest-paths-floyd",
+    "anchor": "topic-4-shortest-paths-floyd"
+  },
+  {
+    "lesson": "5-automata",
+    "topic": "Finite automata",
+    "targetLesson": "5-automata",
+    "tutorial": "5-automata-dfa",
+    "anchor": "topic-5-automata-dfa"
+  },
+  {
+    "lesson": "5-automata",
+    "topic": "DFA",
+    "targetLesson": "5-automata",
+    "tutorial": "5-automata-dfa",
+    "anchor": "topic-5-automata-dfa"
+  },
+  {
+    "lesson": "5-automata",
+    "topic": "NFA",
+    "targetLesson": "5-automata",
+    "tutorial": "5-automata-nfa",
+    "anchor": "topic-5-automata-nfa"
+  },
+  {
+    "lesson": "5-automata",
+    "topic": "Regular expressions",
+    "targetLesson": "5-automata",
+    "tutorial": "5-automata-regex",
+    "anchor": "topic-5-automata-regex"
+  },
+  {
+    "lesson": "5-regular-pumping",
+    "topic": "Regular languages",
+    "targetLesson": "5-regular-pumping",
+    "tutorial": "5-regular-pumping-closure",
+    "anchor": "topic-5-regular-pumping-closure"
+  },
+  {
+    "lesson": "5-regular-pumping",
+    "topic": "Regular pumping lemma",
+    "targetLesson": "5-regular-pumping",
+    "tutorial": "5-regular-pumping-pumping",
+    "anchor": "topic-5-regular-pumping-pumping"
+  },
+  {
+    "lesson": "5-regular-pumping",
+    "topic": "Closure properties",
+    "targetLesson": "5-regular-pumping",
+    "tutorial": "5-regular-pumping-closure",
+    "anchor": "topic-5-regular-pumping-closure"
+  },
+  {
+    "lesson": "5-cfg-pda",
+    "topic": "Context-free grammars",
+    "targetLesson": "5-cfg-pda",
+    "tutorial": "5-cfg-pda-grammar",
+    "anchor": "topic-5-cfg-pda-grammar"
+  },
+  {
+    "lesson": "5-cfg-pda",
+    "topic": "Push-down automata",
+    "targetLesson": "5-cfg-pda",
+    "tutorial": "5-cfg-pda-pda",
+    "anchor": "topic-5-cfg-pda-pda"
+  },
+  {
+    "lesson": "5-cfg-pda",
+    "topic": "Context-free languages",
+    "targetLesson": "5-cfg-pda",
+    "tutorial": "5-cfg-pda-grammar",
+    "anchor": "topic-5-cfg-pda-grammar"
+  },
+  {
+    "lesson": "5-cfg-pda",
+    "topic": "Ambiguity",
+    "targetLesson": "5-cfg-pda",
+    "tutorial": "5-cfg-pda-grammar",
+    "anchor": "topic-5-cfg-pda-grammar"
+  },
+  {
+    "lesson": "5-cfl-pumping",
+    "topic": "Context-free pumping lemma",
+    "targetLesson": "5-cfl-pumping",
+    "tutorial": "5-cfl-pumping-cfl-proof",
+    "anchor": "topic-5-cfl-pumping-cfl-proof"
+  },
+  {
+    "lesson": "5-cfl-pumping",
+    "topic": "Non context-free languages",
+    "targetLesson": "5-cfl-pumping",
+    "tutorial": "5-cfl-pumping-cfl-proof",
+    "anchor": "topic-5-cfl-pumping-cfl-proof"
+  },
+  {
+    "lesson": "5-decidability",
+    "topic": "Turing machines",
+    "targetLesson": "5-decidability",
+    "tutorial": "5-decidability-machines",
+    "anchor": "topic-5-decidability-machines"
+  },
+  {
+    "lesson": "5-decidability",
+    "topic": "Undecidability",
+    "targetLesson": "5-decidability",
+    "tutorial": "5-decidability-reductions",
+    "anchor": "topic-5-decidability-reductions"
+  },
+  {
+    "lesson": "5-decidability",
+    "topic": "Halting problem",
+    "targetLesson": "5-decidability",
+    "tutorial": "5-decidability-reductions",
+    "anchor": "topic-5-decidability-reductions"
+  },
+  {
+    "lesson": "5-decidability",
+    "topic": "Reductions",
+    "targetLesson": "5-decidability",
+    "tutorial": "5-decidability-reductions",
+    "anchor": "topic-5-decidability-reductions"
+  },
+  {
+    "lesson": "6-lexical",
+    "topic": "Lexical analysis",
+    "targetLesson": "6-lexical",
+    "tutorial": "6-lexical-tokens",
+    "anchor": "topic-6-lexical-tokens"
+  },
+  {
+    "lesson": "6-lexical",
+    "topic": "Tokens",
+    "targetLesson": "6-lexical",
+    "tutorial": "6-lexical-tokens",
+    "anchor": "topic-6-lexical-tokens"
+  },
+  {
+    "lesson": "6-lexical",
+    "topic": "Regular expressions",
+    "targetLesson": "5-automata",
+    "tutorial": "5-automata-regex",
+    "anchor": "topic-5-automata-regex"
+  },
+  {
+    "lesson": "6-lexical",
+    "topic": "Longest match",
+    "targetLesson": "6-lexical",
+    "tutorial": "6-lexical-tokens",
+    "anchor": "topic-6-lexical-tokens"
+  },
+  {
+    "lesson": "6-parsing",
+    "topic": "Parsing",
+    "targetLesson": "6-parsing",
+    "tutorial": "6-parsing-first-follow",
+    "anchor": "topic-6-parsing-first-follow"
+  },
+  {
+    "lesson": "6-parsing",
+    "topic": "FIRST",
+    "targetLesson": "6-parsing",
+    "tutorial": "6-parsing-first-follow",
+    "anchor": "topic-6-parsing-first-follow"
+  },
+  {
+    "lesson": "6-parsing",
+    "topic": "FOLLOW",
+    "targetLesson": "6-parsing",
+    "tutorial": "6-parsing-first-follow",
+    "anchor": "topic-6-parsing-first-follow"
+  },
+  {
+    "lesson": "6-parsing",
+    "topic": "LL",
+    "targetLesson": "6-parsing",
+    "tutorial": "6-parsing-first-follow",
+    "anchor": "topic-6-parsing-first-follow"
+  },
+  {
+    "lesson": "6-parsing",
+    "topic": "LR",
+    "targetLesson": "6-parsing",
+    "tutorial": "6-parsing-lr",
+    "anchor": "topic-6-parsing-lr"
+  },
+  {
+    "lesson": "6-translation-runtime",
+    "topic": "Syntax-directed translation",
+    "targetLesson": "6-translation-runtime",
+    "tutorial": "6-translation-runtime-attributes",
+    "anchor": "topic-6-translation-runtime-attributes"
+  },
+  {
+    "lesson": "6-translation-runtime",
+    "topic": "Runtime environments",
+    "targetLesson": "6-translation-runtime",
+    "tutorial": "6-translation-runtime-frames",
+    "anchor": "topic-6-translation-runtime-frames"
+  },
+  {
+    "lesson": "6-translation-runtime",
+    "topic": "Attributes",
+    "targetLesson": "6-translation-runtime",
+    "tutorial": "6-translation-runtime-attributes",
+    "anchor": "topic-6-translation-runtime-attributes"
+  },
+  {
+    "lesson": "6-translation-runtime",
+    "topic": "Activation records",
+    "targetLesson": "6-translation-runtime",
+    "tutorial": "6-translation-runtime-frames",
+    "anchor": "topic-6-translation-runtime-frames"
+  },
+  {
+    "lesson": "6-ir-dataflow",
+    "topic": "Intermediate code generation",
+    "targetLesson": "6-ir-dataflow",
+    "tutorial": "6-ir-dataflow-ir",
+    "anchor": "topic-6-ir-dataflow-ir"
+  },
+  {
+    "lesson": "6-ir-dataflow",
+    "topic": "Local optimisation",
+    "targetLesson": "6-ir-dataflow",
+    "tutorial": "6-ir-dataflow-ir",
+    "anchor": "topic-6-ir-dataflow-ir"
+  },
+  {
+    "lesson": "6-ir-dataflow",
+    "topic": "Constant propagation",
+    "targetLesson": "6-ir-dataflow",
+    "tutorial": "6-ir-dataflow-constants",
+    "anchor": "topic-6-ir-dataflow-constants"
+  },
+  {
+    "lesson": "6-ir-dataflow",
+    "topic": "Liveness analysis",
+    "targetLesson": "6-ir-dataflow",
+    "tutorial": "6-ir-dataflow-liveness",
+    "anchor": "topic-6-ir-dataflow-liveness"
+  },
+  {
+    "lesson": "6-ir-dataflow",
+    "topic": "Common sub expression elimination",
+    "targetLesson": "6-ir-dataflow",
+    "tutorial": "6-ir-dataflow-cse",
+    "anchor": "topic-6-ir-dataflow-cse"
+  },
+  {
+    "lesson": "7-processes",
+    "topic": "System calls",
+    "targetLesson": "7-processes",
+    "tutorial": "7-processes-syscalls",
+    "anchor": "topic-7-processes-syscalls"
+  },
+  {
+    "lesson": "7-processes",
+    "topic": "Processes",
+    "targetLesson": "7-processes",
+    "tutorial": "7-processes-process",
+    "anchor": "topic-7-processes-process"
+  },
+  {
+    "lesson": "7-processes",
+    "topic": "Threads",
+    "targetLesson": "7-processes",
+    "tutorial": "7-processes-threads",
+    "anchor": "topic-7-processes-threads"
+  },
+  {
+    "lesson": "7-processes",
+    "topic": "Inter-process communication",
+    "targetLesson": "7-processes",
+    "tutorial": "7-processes-ipc",
+    "anchor": "topic-7-processes-ipc"
+  },
+  {
+    "lesson": "7-synchronization",
+    "topic": "Concurrency",
+    "targetLesson": "7-synchronization",
+    "tutorial": "7-synchronization-interleavings",
+    "anchor": "topic-7-synchronization-interleavings"
+  },
+  {
+    "lesson": "7-synchronization",
+    "topic": "Synchronization",
+    "targetLesson": "7-synchronization",
+    "tutorial": "7-synchronization-locks",
+    "anchor": "topic-7-synchronization-locks"
+  },
+  {
+    "lesson": "7-synchronization",
+    "topic": "Critical section",
+    "targetLesson": "7-synchronization",
+    "tutorial": "7-synchronization-interleavings",
+    "anchor": "topic-7-synchronization-interleavings"
+  },
+  {
+    "lesson": "7-synchronization",
+    "topic": "Semaphore",
+    "targetLesson": "7-synchronization",
+    "tutorial": "7-synchronization-semaphores",
+    "anchor": "topic-7-synchronization-semaphores"
+  },
+  {
+    "lesson": "7-synchronization",
+    "topic": "Mutex",
+    "targetLesson": "7-synchronization",
+    "tutorial": "7-synchronization-locks",
+    "anchor": "topic-7-synchronization-locks"
+  },
+  {
+    "lesson": "7-deadlock",
+    "topic": "Deadlock",
+    "targetLesson": "7-deadlock",
+    "tutorial": "7-deadlock-conditions",
+    "anchor": "topic-7-deadlock-conditions"
+  },
+  {
+    "lesson": "7-deadlock",
+    "topic": "Coffman conditions",
+    "targetLesson": "7-deadlock",
+    "tutorial": "7-deadlock-conditions",
+    "anchor": "topic-7-deadlock-conditions"
+  },
+  {
+    "lesson": "7-deadlock",
+    "topic": "Bankers algorithm",
+    "targetLesson": "7-deadlock",
+    "tutorial": "7-deadlock-banker",
+    "anchor": "topic-7-deadlock-banker"
+  },
+  {
+    "lesson": "7-scheduling",
+    "topic": "CPU scheduling",
+    "targetLesson": "7-scheduling",
+    "tutorial": "7-scheduling-cpu",
+    "anchor": "topic-7-scheduling-cpu"
+  },
+  {
+    "lesson": "7-scheduling",
+    "topic": "I/O scheduling",
+    "targetLesson": "7-scheduling",
+    "tutorial": "7-scheduling-disk",
+    "anchor": "topic-7-scheduling-disk"
+  },
+  {
+    "lesson": "7-scheduling",
+    "topic": "FCFS",
+    "targetLesson": "7-scheduling",
+    "tutorial": "7-scheduling-cpu",
+    "anchor": "topic-7-scheduling-cpu"
+  },
+  {
+    "lesson": "7-scheduling",
+    "topic": "SJF",
+    "targetLesson": "7-scheduling",
+    "tutorial": "7-scheduling-cpu",
+    "anchor": "topic-7-scheduling-cpu"
+  },
+  {
+    "lesson": "7-scheduling",
+    "topic": "Round robin",
+    "targetLesson": "7-scheduling",
+    "tutorial": "7-scheduling-cpu",
+    "anchor": "topic-7-scheduling-cpu"
+  },
+  {
+    "lesson": "7-scheduling",
+    "topic": "SCAN",
+    "targetLesson": "7-scheduling",
+    "tutorial": "7-scheduling-disk",
+    "anchor": "topic-7-scheduling-disk"
+  },
+  {
+    "lesson": "7-virtual-files",
+    "topic": "Memory management",
+    "targetLesson": "7-virtual-files",
+    "tutorial": "7-virtual-files-management",
+    "anchor": "topic-7-virtual-files-management"
+  },
+  {
+    "lesson": "7-virtual-files",
+    "topic": "Virtual memory",
+    "targetLesson": "7-virtual-files",
+    "tutorial": "7-virtual-files-vm",
+    "anchor": "topic-7-virtual-files-vm"
+  },
+  {
+    "lesson": "7-virtual-files",
+    "topic": "Paging",
+    "targetLesson": "7-virtual-files",
+    "tutorial": "7-virtual-files-management",
+    "anchor": "topic-7-virtual-files-management"
+  },
+  {
+    "lesson": "7-virtual-files",
+    "topic": "TLB",
+    "targetLesson": "7-virtual-files",
+    "tutorial": "7-virtual-files-vm",
+    "anchor": "topic-7-virtual-files-vm"
+  },
+  {
+    "lesson": "7-virtual-files",
+    "topic": "Page replacement",
+    "targetLesson": "7-virtual-files",
+    "tutorial": "7-virtual-files-replacement",
+    "anchor": "topic-7-virtual-files-replacement"
+  },
+  {
+    "lesson": "7-virtual-files",
+    "topic": "File systems",
+    "targetLesson": "7-files",
+    "tutorial": "7-files-allocation",
+    "anchor": "topic-7-files-allocation"
+  },
+  {
+    "lesson": "7-files",
+    "topic": "File systems",
+    "targetLesson": "7-files",
+    "tutorial": "7-files-allocation",
+    "anchor": "topic-7-files-allocation"
+  },
+  {
+    "lesson": "7-files",
+    "topic": "Contiguous allocation",
+    "targetLesson": "7-files",
+    "tutorial": "7-files-allocation",
+    "anchor": "topic-7-files-allocation"
+  },
+  {
+    "lesson": "7-files",
+    "topic": "Linked allocation",
+    "targetLesson": "7-files",
+    "tutorial": "7-files-allocation",
+    "anchor": "topic-7-files-allocation"
+  },
+  {
+    "lesson": "7-files",
+    "topic": "Indexed allocation",
+    "targetLesson": "7-files",
+    "tutorial": "7-files-allocation",
+    "anchor": "topic-7-files-allocation"
+  },
+  {
+    "lesson": "7-files",
+    "topic": "Inodes",
+    "targetLesson": "7-files",
+    "tutorial": "7-files-inodes",
+    "anchor": "topic-7-files-inodes"
+  },
+  {
+    "lesson": "8-er-relations",
+    "topic": "ER-model",
+    "targetLesson": "8-er-relations",
+    "tutorial": "8-er-relations-er",
+    "anchor": "topic-8-er-relations-er"
+  },
+  {
+    "lesson": "8-er-relations",
+    "topic": "Relational model",
+    "targetLesson": "8-er-relations",
+    "tutorial": "8-er-relations-relations",
+    "anchor": "topic-8-er-relations-relations"
+  },
+  {
+    "lesson": "8-er-relations",
+    "topic": "Integrity constraints",
+    "targetLesson": "8-er-relations",
+    "tutorial": "8-er-relations-relations",
+    "anchor": "topic-8-er-relations-relations"
+  },
+  {
+    "lesson": "8-er-relations",
+    "topic": "Keys",
+    "targetLesson": "8-er-relations",
+    "tutorial": "8-er-relations-relations",
+    "anchor": "topic-8-er-relations-relations"
+  },
+  {
+    "lesson": "8-queries",
+    "topic": "Relational algebra",
+    "targetLesson": "8-queries",
+    "tutorial": "8-queries-algebra",
+    "anchor": "topic-8-queries-algebra"
+  },
+  {
+    "lesson": "8-queries",
+    "topic": "Tuple calculus",
+    "targetLesson": "8-queries",
+    "tutorial": "8-queries-calculus",
+    "anchor": "topic-8-queries-calculus"
+  },
+  {
+    "lesson": "8-queries",
+    "topic": "SQL",
+    "targetLesson": "8-queries",
+    "tutorial": "8-queries-sql",
+    "anchor": "topic-8-queries-sql"
+  },
+  {
+    "lesson": "8-queries",
+    "topic": "Joins",
+    "targetLesson": "8-queries",
+    "tutorial": "8-queries-joins",
+    "anchor": "topic-8-queries-joins"
+  },
+  {
+    "lesson": "8-queries",
+    "topic": "Grouping",
+    "targetLesson": "8-queries",
+    "tutorial": "8-queries-sql",
+    "anchor": "topic-8-queries-sql"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "Normal forms",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-normalforms",
+    "anchor": "topic-8-normalization-normalforms"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "Functional dependencies",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-fds",
+    "anchor": "topic-8-normalization-fds"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "Closure",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-fds",
+    "anchor": "topic-8-normalization-fds"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "2NF",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-normalforms",
+    "anchor": "topic-8-normalization-normalforms"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "3NF",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-normalforms",
+    "anchor": "topic-8-normalization-normalforms"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "BCNF",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-normalforms",
+    "anchor": "topic-8-normalization-normalforms"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "Lossless decomposition",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-decomposition",
+    "anchor": "topic-8-normalization-decomposition"
+  },
+  {
+    "lesson": "8-normalization",
+    "topic": "Dependency preservation",
+    "targetLesson": "8-normalization",
+    "tutorial": "8-normalization-decomposition",
+    "anchor": "topic-8-normalization-decomposition"
+  },
+  {
+    "lesson": "8-storage-index",
+    "topic": "File organization",
+    "targetLesson": "8-storage-index",
+    "tutorial": "8-storage-index-files",
+    "anchor": "topic-8-storage-index-files"
+  },
+  {
+    "lesson": "8-storage-index",
+    "topic": "Indexing",
+    "targetLesson": "8-storage-index",
+    "tutorial": "8-storage-index-files",
+    "anchor": "topic-8-storage-index-files"
+  },
+  {
+    "lesson": "8-storage-index",
+    "topic": "B trees",
+    "targetLesson": "8-storage-index",
+    "tutorial": "8-storage-index-trees",
+    "anchor": "topic-8-storage-index-trees"
+  },
+  {
+    "lesson": "8-storage-index",
+    "topic": "B+ trees",
+    "targetLesson": "8-storage-index",
+    "tutorial": "8-storage-index-trees",
+    "anchor": "topic-8-storage-index-trees"
+  },
+  {
+    "lesson": "8-transactions",
+    "topic": "Transactions",
+    "targetLesson": "8-transactions",
+    "tutorial": "8-transactions-acid",
+    "anchor": "topic-8-transactions-acid"
+  },
+  {
+    "lesson": "8-transactions",
+    "topic": "Concurrency control",
+    "targetLesson": "8-transactions",
+    "tutorial": "8-transactions-locking",
+    "anchor": "topic-8-transactions-locking"
+  },
+  {
+    "lesson": "8-transactions",
+    "topic": "ACID",
+    "targetLesson": "8-transactions",
+    "tutorial": "8-transactions-acid",
+    "anchor": "topic-8-transactions-acid"
+  },
+  {
+    "lesson": "8-transactions",
+    "topic": "Serializability",
+    "targetLesson": "8-transactions",
+    "tutorial": "8-transactions-schedules",
+    "anchor": "topic-8-transactions-schedules"
+  },
+  {
+    "lesson": "8-transactions",
+    "topic": "Two phase locking",
+    "targetLesson": "8-transactions",
+    "tutorial": "8-transactions-locking",
+    "anchor": "topic-8-transactions-locking"
+  },
+  {
+    "lesson": "9-layers-switching",
+    "topic": "Principles of Layering",
+    "targetLesson": "9-layers-switching",
+    "tutorial": "9-layers-switching-layers",
+    "anchor": "topic-9-layers-switching-layers"
+  },
+  {
+    "lesson": "9-layers-switching",
+    "topic": "Circuit switching",
+    "targetLesson": "9-layers-switching",
+    "tutorial": "9-layers-switching-switching",
+    "anchor": "topic-9-layers-switching-switching"
+  },
+  {
+    "lesson": "9-layers-switching",
+    "topic": "Packet switching",
+    "targetLesson": "9-layers-switching",
+    "tutorial": "9-layers-switching-switching",
+    "anchor": "topic-9-layers-switching-switching"
+  },
+  {
+    "lesson": "9-layers-switching",
+    "topic": "Virtual circuit",
+    "targetLesson": "9-layers-switching",
+    "tutorial": "9-layers-switching-switching",
+    "anchor": "topic-9-layers-switching-switching"
+  },
+  {
+    "lesson": "9-layers-switching",
+    "topic": "Performance metrics",
+    "targetLesson": "9-layers-switching",
+    "tutorial": "9-layers-switching-delays",
+    "anchor": "topic-9-layers-switching-delays"
+  },
+  {
+    "lesson": "9-link-layer",
+    "topic": "Data link layer",
+    "targetLesson": "9-link-layer",
+    "tutorial": "9-link-layer-framing",
+    "anchor": "topic-9-link-layer-framing"
+  },
+  {
+    "lesson": "9-link-layer",
+    "topic": "Error detection",
+    "targetLesson": "9-link-layer",
+    "tutorial": "9-link-layer-framing",
+    "anchor": "topic-9-link-layer-framing"
+  },
+  {
+    "lesson": "9-link-layer",
+    "topic": "Medium Access Control",
+    "targetLesson": "9-link-layer",
+    "tutorial": "9-link-layer-ethernet",
+    "anchor": "topic-9-link-layer-ethernet"
+  },
+  {
+    "lesson": "9-link-layer",
+    "topic": "Ethernet",
+    "targetLesson": "9-link-layer",
+    "tutorial": "9-link-layer-ethernet",
+    "anchor": "topic-9-link-layer-ethernet"
+  },
+  {
+    "lesson": "9-link-layer",
+    "topic": "CRC",
+    "targetLesson": "9-link-layer",
+    "tutorial": "9-link-layer-crc",
+    "anchor": "topic-9-link-layer-crc"
+  },
+  {
+    "lesson": "9-routing",
+    "topic": "Distance vector routing",
+    "targetLesson": "9-routing",
+    "tutorial": "9-routing-dv",
+    "anchor": "topic-9-routing-dv"
+  },
+  {
+    "lesson": "9-routing",
+    "topic": "Link state routing",
+    "targetLesson": "9-routing",
+    "tutorial": "9-routing-ls",
+    "anchor": "topic-9-routing-ls"
+  },
+  {
+    "lesson": "9-routing",
+    "topic": "Count to infinity",
+    "targetLesson": "9-routing",
+    "tutorial": "9-routing-dv",
+    "anchor": "topic-9-routing-dv"
+  },
+  {
+    "lesson": "9-ipv4",
+    "topic": "IPv4",
+    "targetLesson": "9-ipv4",
+    "tutorial": "9-ipv4-cidr",
+    "anchor": "topic-9-ipv4-cidr"
+  },
+  {
+    "lesson": "9-ipv4",
+    "topic": "CIDR Notation",
+    "targetLesson": "9-ipv4",
+    "tutorial": "9-ipv4-cidr",
+    "anchor": "topic-9-ipv4-cidr"
+  },
+  {
+    "lesson": "9-ipv4",
+    "topic": "Network Address Translation",
+    "targetLesson": "9-ipv4",
+    "tutorial": "9-ipv4-nat",
+    "anchor": "topic-9-ipv4-nat"
+  },
+  {
+    "lesson": "9-ipv4",
+    "topic": "Longest prefix",
+    "targetLesson": "9-ipv4",
+    "tutorial": "9-ipv4-prefix",
+    "anchor": "topic-9-ipv4-prefix"
+  },
+  {
+    "lesson": "9-fragmentation",
+    "topic": "IPv4 Fragmentation",
+    "targetLesson": "9-fragmentation",
+    "tutorial": "9-fragmentation-fragments",
+    "anchor": "topic-9-fragmentation-fragments"
+  },
+  {
+    "lesson": "9-fragmentation",
+    "topic": "MTU",
+    "targetLesson": "9-fragmentation",
+    "tutorial": "9-fragmentation-fragments",
+    "anchor": "topic-9-fragmentation-fragments"
+  },
+  {
+    "lesson": "9-fragmentation",
+    "topic": "Fragment offsets",
+    "targetLesson": "9-fragmentation",
+    "tutorial": "9-fragmentation-fragments",
+    "anchor": "topic-9-fragmentation-fragments"
+  },
+  {
+    "lesson": "9-tcp-web",
+    "topic": "TCP flow control",
+    "targetLesson": "9-tcp-web",
+    "tutorial": "9-tcp-web-flow",
+    "anchor": "topic-9-tcp-web-flow"
+  },
+  {
+    "lesson": "9-tcp-web",
+    "topic": "TCP congestion control",
+    "targetLesson": "9-tcp-web",
+    "tutorial": "9-tcp-web-congestion",
+    "anchor": "topic-9-tcp-web-congestion"
+  },
+  {
+    "lesson": "9-tcp-web",
+    "topic": "Socket API",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-connection",
+    "anchor": "topic-9-sockets-connection"
+  },
+  {
+    "lesson": "9-tcp-web",
+    "topic": "DNS",
+    "targetLesson": "9-dns",
+    "tutorial": "9-dns-resolution",
+    "anchor": "topic-9-dns-resolution"
+  },
+  {
+    "lesson": "9-tcp-web",
+    "topic": "HTTP",
+    "targetLesson": "9-http",
+    "tutorial": "9-http-semantics",
+    "anchor": "topic-9-http-semantics"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "Socket API",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-connection",
+    "anchor": "topic-9-sockets-connection"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "bind",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-connection",
+    "anchor": "topic-9-sockets-connection"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "listen",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-connection",
+    "anchor": "topic-9-sockets-connection"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "accept",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-connection",
+    "anchor": "topic-9-sockets-connection"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "connect",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-connection",
+    "anchor": "topic-9-sockets-connection"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "send",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-stream",
+    "anchor": "topic-9-sockets-stream"
+  },
+  {
+    "lesson": "9-sockets",
+    "topic": "recv",
+    "targetLesson": "9-sockets",
+    "tutorial": "9-sockets-stream",
+    "anchor": "topic-9-sockets-stream"
+  },
+  {
+    "lesson": "9-dns",
+    "topic": "DNS",
+    "targetLesson": "9-dns",
+    "tutorial": "9-dns-resolution",
+    "anchor": "topic-9-dns-resolution"
+  },
+  {
+    "lesson": "9-dns",
+    "topic": "Recursive resolution",
+    "targetLesson": "9-dns",
+    "tutorial": "9-dns-resolution",
+    "anchor": "topic-9-dns-resolution"
+  },
+  {
+    "lesson": "9-dns",
+    "topic": "Iterative resolution",
+    "targetLesson": "9-dns",
+    "tutorial": "9-dns-resolution",
+    "anchor": "topic-9-dns-resolution"
+  },
+  {
+    "lesson": "9-dns",
+    "topic": "TTL",
+    "targetLesson": "9-dns",
+    "tutorial": "9-dns-records",
+    "anchor": "topic-9-dns-records"
+  },
+  {
+    "lesson": "9-dns",
+    "topic": "Resource records",
+    "targetLesson": "9-dns",
+    "tutorial": "9-dns-records",
+    "anchor": "topic-9-dns-records"
+  },
+  {
+    "lesson": "9-http",
+    "topic": "HTTP",
+    "targetLesson": "9-http",
+    "tutorial": "9-http-semantics",
+    "anchor": "topic-9-http-semantics"
+  },
+  {
+    "lesson": "9-http",
+    "topic": "Methods",
+    "targetLesson": "9-http",
+    "tutorial": "9-http-semantics",
+    "anchor": "topic-9-http-semantics"
+  },
+  {
+    "lesson": "9-http",
+    "topic": "Status codes",
+    "targetLesson": "9-http",
+    "tutorial": "9-http-semantics",
+    "anchor": "topic-9-http-semantics"
+  },
+  {
+    "lesson": "9-http",
+    "topic": "Persistence",
+    "targetLesson": "9-http",
+    "tutorial": "9-http-reuse",
+    "anchor": "topic-9-http-reuse"
+  },
+  {
+    "lesson": "9-http",
+    "topic": "Caching",
+    "targetLesson": "9-http",
+    "tutorial": "9-http-reuse",
+    "anchor": "topic-9-http-reuse"
+  },
+  {
+    "lesson": "10-quantitative",
+    "topic": "Quantitative aptitude",
+    "targetLesson": "10-quantitative",
+    "tutorial": "10-quantitative-percent",
+    "anchor": "topic-10-quantitative-percent"
+  },
+  {
+    "lesson": "10-quantitative",
+    "topic": "Percentages",
+    "targetLesson": "10-quantitative",
+    "tutorial": "10-quantitative-percent",
+    "anchor": "topic-10-quantitative-percent"
+  },
+  {
+    "lesson": "10-quantitative",
+    "topic": "Ratios",
+    "targetLesson": "10-quantitative",
+    "tutorial": "10-quantitative-ratios",
+    "anchor": "topic-10-quantitative-ratios"
+  },
+  {
+    "lesson": "10-quantitative",
+    "topic": "Work rates",
+    "targetLesson": "10-quantitative",
+    "tutorial": "10-quantitative-rates",
+    "anchor": "topic-10-quantitative-rates"
+  },
+  {
+    "lesson": "10-verbal-reasoning",
+    "topic": "Verbal aptitude",
+    "targetLesson": "10-verbal-reasoning",
+    "tutorial": "10-verbal-reasoning-verbal",
+    "anchor": "topic-10-verbal-reasoning-verbal"
+  },
+  {
+    "lesson": "10-verbal-reasoning",
+    "topic": "Analytical aptitude",
+    "targetLesson": "10-verbal-reasoning",
+    "tutorial": "10-verbal-reasoning-analytical",
+    "anchor": "topic-10-verbal-reasoning-analytical"
+  },
+  {
+    "lesson": "10-verbal-reasoning",
+    "topic": "Spatial aptitude",
+    "targetLesson": "10-verbal-reasoning",
+    "tutorial": "10-verbal-reasoning-spatial",
+    "anchor": "topic-10-verbal-reasoning-spatial"
+  }
+]
