@@ -253,7 +253,7 @@
     "options": [
       "\\(\\operatorname{rank}(A)=\\operatorname{rank}([A\\mid b])\\)",
       "rank(A)<number of unknowns",
-      "rank(A) differs from rank([A|b])",
+      "rank(A) differs from rank(\\([A\\mid b]\\))",
       "A is rectangular"
     ]
   },
