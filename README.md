@@ -16,6 +16,18 @@ Lessons are continuous pages: an explanation is followed by the worked examples 
 
 Revision & notes collects saved topics, due dates and notes, and exports notes as Markdown. Study sessions focus on theory, worked examples and review. When upgrading from the old 34-summary version, old completion IDs are archived in browser storage rather than counting as reading the expanded curriculum. Existing names, practice history and mock results are retained.
 
+## Study timer and session journal
+
+Use the **Timer** button in the header, **Time this lesson** in a lesson, or **Study tools** in the navigation. Start a stopwatch, a 25/5 or 50/10 Pomodoro, or a custom 1–180-minute focus block with a 1–30-minute break. Optionally choose a topic, activity and one achievable session goal. A compact timer stays visible while moving between lessons and practice; pause/resume works there as well as in the timer dialog. A running timer continues across navigation, background tabs and refreshes on this browser. Pause before stepping away. Changing topics does not silently relabel an existing session; finish it and start another for the new topic.
+
+Finish a stopwatch to save its time. Pomodoro focus blocks save automatically at the focus deadline, start their break, and wait for you to start the next block. Pauses and breaks never count as study time. Delayed browser callbacks do not extend the focus allocation or automatically create more blocks. Sessions crossing midnight split their time between dates in India time.
+
+The overview and Study tools show progress toward your existing daily hours target, totals for the last seven days and all tracked time, an interactive day chart, activity totals and the latest 50 session records. Completed time and optional session reflections sync with your account and combine records from different devices without duplication. Daily/weekly/all-time totals count overlapping intervals only once if two devices accidentally run timers together; activity entries show the time logged for each activity. The active timer stays on its current browser. Signing out pauses the unfinished timer and keeps its draft under its owner's account; it is restored when that account signs in on the same browser. Guest sessions can be imported into an account using the existing guest import action. A timer measures the intervals you explicitly start; it does not detect attention or retroactively time past study.
+
+After a session, optionally explain one concept from memory, record a mistake/confusion, and write your next action. If the session is attached to a lesson, **Review this topic tomorrow** adds it to Revision & notes, retaining an earlier existing due date. Time and reflection never mark a lesson read or a learning check passed.
+
+`npm run test:study` checks timer arithmetic, midnight allocation and cloud merge semantics. With the local server on port 3000, `python tests/study_tools.py` checks stopwatch controls, pause, navigation/refresh, topic context, reflection, scheduled review, Pomodoro recovery, multi-tab behavior and mobile layout using a simulated clock. Cloud account tests also cover synced time, journal entries and account isolation for unfinished drafts.
+
 ## Practice and mocks
 
 Practice separates topic learning checks, the 132 original subject-wide questions and nine checked 2018 PYQs. Exact topic selection only includes questions explicitly associated with that lesson; it does not silently substitute unrelated subject questions. The original bank includes parameterized variations; their solutions show the substituted values and explain the calculation and common interpretation errors. These and the learning checks are not official PYQs.

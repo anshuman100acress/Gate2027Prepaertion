@@ -1,0 +1,22 @@
+#studytimer{padding:9px 12px;font-size:12px;white-space:nowrap}
+#studytimer.timerrunning{border-color:var(--green);background:#eaf3df}
+.studyoverview{display:flex;align-items:center;justify-content:space-between;gap:28px;margin:0 0 28px;background:#f0f6e8}
+.studyoverview h2{margin:8px 0}.studyoverview p{margin:9px 0}.studyoverview>div:first-child{flex:1}
+.studyoverviewactions{display:grid;gap:14px;justify-items:start}.studyoverview small{display:block;line-height:1.6}
+.studygoalbar{height:7px;margin:14px 0;max-width:600px}.studystats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.studystats strong{display:block;font-size:26px;margin-top:12px}.studytoolsgrid{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}
+.weekchart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:22px}
+.weekday{display:flex;flex-direction:column;align-items:center;gap:8px;background:transparent;border:1px solid transparent;border-radius:8px;padding:8px 2px;color:var(--ink);min-width:0}
+.weekday:hover,.weekday.selected{background:#edf3e5;border-color:#aac28f}.weekamount{font-size:10px;white-space:nowrap}.weekbar{height:108px;width:30px;max-width:80%;background:#f0f2ec;border-radius:5px;display:flex;align-items:flex-end;overflow:hidden}.weekbarfill{display:block;background:#86ab63;width:100%;border-radius:5px 5px 0 0}.weekday small{color:var(--muted)}
+.studyactivity{display:flex;justify-content:space-between;gap:15px;padding:12px 0;border-bottom:1px solid var(--line)}
+.recalltip{background:#f5f7ef;padding:16px;border-radius:8px;margin-top:20px}.recalltip p{font-size:13px;line-height:1.7;margin-bottom:0}
+.studyjournal{margin-top:24px}.studyhistoryrow{display:flex;gap:20px;justify-content:space-between;padding:22px 0;border-top:1px solid var(--line)}
+.studyhistoryrow>div:first-child{min-width:0}.studyhistoryrow h3{margin:8px 0}.studyhistoryrow p{line-height:1.7;color:var(--muted);overflow-wrap:anywhere}.studyhistoryactions{display:grid;align-content:start;gap:12px;min-width:135px}.studyhistoryactions strong{font-size:19px}
+#focusdialog{width:min(520px,calc(100vw - 30px));max-height:calc(100dvh - 40px);overflow-y:auto}.focusclock{font-size:52px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:2px;margin:22px 0;text-align:center;color:var(--green)}
+#focusdialog h2{font-size:22px;overflow-wrap:anywhere}#focusdialog p{line-height:1.7}#focusdialog label{font-size:13px}#focusdialog select,#focusdialog textarea,#focusdialog input{width:100%;margin-top:8px;box-sizing:border-box}#focusdialog textarea{font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:12px;resize:vertical}
+.focuscustom{display:grid;grid-template-columns:1fr 1fr;gap:16px}.focuscustom[hidden]{display:none}.focusgoal{background:#f0f5e8;border-radius:8px;padding:16px;overflow-wrap:anywhere}.focusgoal p{margin-bottom:0}.focushelp{font-size:12px;margin-top:24px}
+#focusdock{position:fixed;right:22px;bottom:20px;z-index:4;display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #c5d4b6;border-radius:12px;padding:10px 14px;box-shadow:0 4px 24px #24372e18}
+#focusdock[hidden]{display:none}#focusdockopen{border:0;background:transparent;color:var(--ink);text-align:left;padding:0}#focusdockopen strong{display:block;font-size:20px;font-variant-numeric:tabular-nums;margin-top:4px}#focusdockopen small{font-size:10px;color:var(--muted)}#focusquickpause{padding:8px 12px;font-size:12px}
+body:has(#focusdock:not([hidden])) footer{padding-bottom:105px}
+@media(max-width:1050px){.studytoolsgrid{grid-template-columns:1fr}.studyoverview{align-items:flex-start;flex-direction:column;gap:20px}}
+@media(max-width:700px){.accountcontrols{grid-template-columns:auto auto 32px}#studytimer{grid-column:1;grid-row:1;padding:8px;font-size:10px}#account{grid-column:2}.accountcontrols .profilebutton{grid-column:3}#cloudstatus{grid-column:1/4;max-width:none;font-size:9px}.studyoverview{padding:20px;margin-bottom:22px}.studystats{gap:7px}.studystats .panel{padding:14px 10px}.studystats .eyebrow{font-size:8px}.studystats strong{font-size:19px}.studytoolsgrid .panel,.studyjournal{padding:20px}.weekchart{gap:2px}.weekamount{font-size:9px}.studyhistoryrow{flex-direction:column;gap:5px}.studyhistoryactions{display:flex;flex-wrap:wrap;align-items:center;gap:15px;min-width:0}.focusclock{font-size:42px;letter-spacing:1px}#focusdock{right:12px;bottom:12px;max-width:calc(100vw - 24px);gap:12px;padding:10px 12px}}

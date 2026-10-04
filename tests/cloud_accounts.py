@@ -25,7 +25,7 @@ def token_for(email):
     encode = lambda value: base64.urlsafe_b64encode(json.dumps(value).encode()).decode().rstrip('=')
     token = encode({'alg': 'HS256', 'typ': 'JWT'}) + '.' + encode(payload) + '.test-signature'
     tokens[token] = uid
-    return {'access_token': token, 'refresh_token': 'refresh-' + uid, 'expires_in': 3600, 'expires_at': payload['exp'], 'token_type': 'bearer', 'user': {'id': uid, 'email': email, 'aud': 'authenticated', 'role': 'authenticated', 'app_metadata': {'provider': 'email', 'providers': ['email']}, 'user_metadata': {}, 'created_at': '2026-10-propositions4T00:00:00Z', 'identities': []}}
+    return {'access_token': token, 'refresh_token': 'refresh-' + uid, 'expires_in': 3600, 'expires_at': payload['exp'], 'token_type': 'bearer', 'user': {'id': uid, 'email': email, 'aud': 'authenticated', 'role': 'authenticated', 'app_metadata': {'provider': 'email', 'providers': ['email']}, 'user_metadata': {}, 'created_at': '2026-10-04T00:00:00Z', 'identities': []}}
 
 
 def handle(route):
@@ -132,13 +132,24 @@ with sync_playwright() as p:
     change(a, "state.notes['guest-topic']='Guest only'; state.completed=['0-propositions']")
     signin(a, 'a@example.test')
     assert a.evaluate('state.notes["guest-topic"]') is None, 'Guest data leaked into account without import'
-    change(a, "state.notes['matrix']='Rank equals pivot count';state.completed=['0-propositions'];state.bookmarks=['0-propositions'];state.reviewDates['0-propositions']='2026-10-propositions6';state.hours=3;state.attempts.push({eventId:crypto.randomUUID(),qid:'test',correct:true,subject:0,date:today()})")
+    change(a, "state.notes['matrix']='Rank equals pivot count';state.completed=['0-propositions'];state.bookmarks=['0-propositions'];state.reviewDates['0-propositions']='2026-10-06';state.hours=3;state.attempts.push({eventId:crypto.randomUUID(),qid:'test',correct:true,subject:0,date:today()})")
     sync(a)
     open_app(b)
     signin(b, 'a@example.test')
     assert b.evaluate('state.notes.matrix') == 'Rank equals pivot count'
     assert b.evaluate('state.completed') == ['0-propositions']
     assert b.evaluate('state.hours') == 3
+    # Finished study sessions and journal entries merge across devices like question history.
+    change(a, "const now=Date.now();const run=GatewiseTime.create({sessionId:'device-a-focus',mode:'stopwatch',context:{kind:'learning',lesson:'0-matrices-rank',subject:0,label:'Matrices'},goal:'Identify pivots'},now-60000);state.focusSessions.push(GatewiseTime.record(run,now));state.focusReflections['device-a-focus']={recall:'Rank is the pivot count',nextAction:'Redo one rank problem'}")
+    sync(a)
+    sync(b)
+    assert b.evaluate('state.focusSessions[0].durationMs') == 60000
+    assert b.evaluate('state.focusReflections["device-a-focus"].recall') == 'Rank is the pivot count'
+    change(b, "const now=Date.now();const run=GatewiseTime.create({sessionId:'device-b-focus',mode:'stopwatch',context:{kind:'revision',lesson:'0-matrices-rank',subject:0,label:'Matrices'},goal:'Check row operations'},now-30000);state.focusSessions.push(GatewiseTime.record(run,now));state.focusReflections['device-b-focus']={mistake:'Forgot the row swap sign'}")
+    sync(b)
+    sync(a)
+    assert a.evaluate('state.focusSessions.length') == 2
+    assert a.evaluate('state.focusReflections["device-b-focus"].mistake') == 'Forgot the row swap sign'
     # Two devices passing different checks derive the same lesson status after merging.
     change(a, "state.lessonChecks['check-0-propositions-0']={correct:true,date:today()}")
     change(b, "state.lessonChecks['check-0-propositions-1']={correct:true,date:today()}")
@@ -223,6 +234,8 @@ with sync_playwright() as p:
     signin(a, 'b@example.test')
     assert a.evaluate('state.notes') == {}
     assert a.evaluate('state.mockResults') == []
+    assert a.evaluate('state.focusSessions') == []
+    assert a.evaluate('GatewiseStudy.timer') is None
     change(a, "state.notes['private']='User B only'")
     sync(a)
     sync(b)
@@ -244,16 +257,25 @@ with sync_playwright() as p:
     tab.close()
 
     # Sign-out retains pending changes under A's ID, never in the guest or B workspace.
+    b.locator('#studytimer').click()
+    b.locator('#focusgoal').fill('Private unfinished timer for user A')
+    b.locator('#focusform button[type=submit]').click()
+    b.locator('button[data-closefocus]').click()
+    assert b.evaluate('GatewiseStudy.timer.status') == 'running'
     fail_saves = True
     change(b, "state.notes['pending-signout']='Keep this until the next sign-in'")
     b.locator('#account').click()
     b.locator('#signout').click()
     b.wait_for_function('GatewiseCloud.user === null && !GatewiseProgress.locked')
     assert b.evaluate('state.notes["pending-signout"]') is None
+    assert b.evaluate('GatewiseStudy.timer') is None
+    assert b.evaluate('JSON.parse(localStorage.getItem("gatewise-focus-draft:"+' + json.dumps(USERS['a@example.test']) + ')).timer.status') == 'paused'
     assert b.evaluate('localStorage.getItem("gatewise-account:"+' + json.dumps(USERS['a@example.test']) + ')') is not None
     fail_saves = False
     signin(b, 'a@example.test')
     sync(b)
+    b.wait_for_function('GatewiseStudy.timer?.status === "paused"')
+    assert b.evaluate('GatewiseStudy.timer.goal') == 'Private unfinished timer for user A'
     assert records[USERS['a@example.test']]['data']['progress']['notes']['pending-signout'] == 'Keep this until the next sign-in'
 
     # Confirmation and reset UX use the actual SDK endpoints (no real email sent).

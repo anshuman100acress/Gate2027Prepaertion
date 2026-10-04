@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "python -m http.server 3000",
-    "check": "node --check app.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js",
+    "check": "node --check app.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js && node --check study-time.js && node --check study-tools.js",
     "build": "node scripts/build.mjs",
     "vendor:cloud": "node scripts/build.mjs --vendor",
-    "test:cloud": "node tests/cloud_merge.js && node tests/cloud_rls.mjs && node tests/cloud_build.mjs"
+    "test:cloud": "node tests/cloud_merge.js && node tests/cloud_rls.mjs && node tests/cloud_build.mjs",
+    "test:study": "node tests/study_time.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2"

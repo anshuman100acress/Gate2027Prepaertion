@@ -9,8 +9,8 @@
     return keys.length === Object.keys(b).length && keys.every(key => Object.hasOwn(b, key) && equal(a[key], b[key]));
   }
   const sets = new Set(['completed', 'understood', 'bookmarks', 'tasks', 'sessions', 'legacyCompleted']);
-  const histories = new Set(['attempts', 'mockResults', 'paperResults']);
-  const maps = new Set(['notes', 'reading', 'reviewDates', 'lessonChecks']);
+  const histories = new Set(['attempts', 'mockResults', 'paperResults', 'focusSessions']);
+  const maps = new Set(['notes', 'reading', 'reviewDates', 'lessonChecks', 'focusReflections']);
   function mergeSet(base = [], local = [], remote = []) {
     const removed = new Set(base.filter(x => !local.includes(x)));
     return [...new Set([...remote.filter(x => !removed.has(x)), ...local.filter(x => !base.includes(x))])];
