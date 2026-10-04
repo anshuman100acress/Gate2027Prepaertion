@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { readFile, access } from 'node:fs/promises';
+const build = (url, key) => spawnSync(process.execPath, ['scripts/build.mjs'], { encoding: 'utf8', env: { ...process.env, GATEWISE_SUPABASE_URL: url, GATEWISE_SUPABASE_PUBLISHABLE_KEY: key } });
+const url = 'https://gatewise-test.supabase.co';
+assert.equal(build(url, '').status, 1, 'partial configuration must fail');
+assert.equal(build(url, 'sb_secret_do-not-publish').status, 1, 'secret keys must be rejected');
+const jwt = role => ['test', Buffer.from(JSON.stringify({ role })).toString('base64url'), 'signature'].join('.');
+assert.equal(build(url, jwt('service_role')).status, 1, 'privileged legacy keys must be rejected');
+assert.equal(build(url, jwt('anon')).status, 0, 'legacy anon key is supported');
+assert.equal(build(url, 'sb_publishable_test').status, 0, 'publishable key is supported');
+assert.match(await readFile('dist/cloud-config.js', 'utf8'), /sb_publishable_test/);
+for (const file of ['dist/vendor/supabase/supabase.js', 'dist/vendor/katex/katex.min.js', 'dist/data/syllabus.json', 'dist/papers/2018_CS.pdf']) await access(file);
+for (const file of ['dist/.env', 'dist/tests', 'dist/supabase', 'dist/data/build.py', 'dist/node_modules']) await assert.rejects(() => access(file), 'development/private files must stay out of deployment');
+assert.equal(build('', '').status, 0, 'guest deployment is supported');
+assert.match(await readFile('dist/cloud-config.js', 'utf8'), /"url":""/);
+console.log('Cloud build checks passed: public configuration, key rejection, runtime assets and guest fallback.');

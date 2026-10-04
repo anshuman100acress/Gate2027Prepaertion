@@ -1,1 +1,22 @@
-{"name":"gatewise","version":"1.0.0","private":true,"scripts":{"start":"python -m http.server 3000","check":"node --check app.js"}}
+{
+  "name": "gatewise",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "python -m http.server 3000",
+    "check": "node --check app.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js",
+    "build": "node scripts/build.mjs",
+    "vendor:cloud": "node scripts/build.mjs --vendor",
+    "test:cloud": "node tests/cloud_merge.js && node tests/cloud_rls.mjs && node tests/cloud_build.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.2"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "esbuild": "0.28.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
