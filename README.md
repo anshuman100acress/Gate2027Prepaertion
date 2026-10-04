@@ -6,9 +6,9 @@ Clone this repository, then run `py -3 run-local.py` on Windows or `python3 run-
 
 The uploaded CS syllabus is mapped into 72 sequenced lessons: 70 across its ten sections and two additional General Aptitude lessons. The library is searchable by syllabus terms, lesson titles and explanation text, with a separate roadmap per subject. Each lesson contains:
 
-- Prerequisites, an intuitive introduction and at least three explanatory sections; Engineering Mathematics has additional derivations and reasoning.
-- Two fully visible worked examples with three explicit steps each: 144 worked examples in total.
-- Common mistakes and a concise revision sheet.
+- Prerequisites, intuition and detailed explanations of definitions, derivations and algorithm invariants (275 teaching sections).
+- Two interleaved worked examples per lesson (144 total). 89 examples have expanded solutions explaining why their steps work and how to verify the answer, including at least one in every lesson; both Mathematics examples have these explanations. Selected derivations also state givens, goal and explicit calculation equations.
+- A topic-specific GATE solving method, equation references with assumptions, two explained traps/counterexamples, and revision reminders in every lesson.
 - Two optional topic-specific checks with hints and explained solutions: 144 checks, mixing conceptual MCQs and numerical applications.
 - Personal notes, bookmarking, scheduled reviews, and a saved reading position.
 
@@ -18,7 +18,7 @@ Revision & notes collects saved topics, due dates and notes, and exports notes a
 
 ## Practice and mocks
 
-Practice separates topic learning checks, the 132 original subject-wide questions and nine checked 2018 PYQs. Exact topic selection only includes questions explicitly associated with that lesson; it does not silently substitute unrelated subject questions. The original bank includes parameterized variations. These and the learning checks are not official PYQs.
+Practice separates topic learning checks, the 132 original subject-wide questions and nine checked 2018 PYQs. Exact topic selection only includes questions explicitly associated with that lesson; it does not silently substitute unrelated subject questions. The original bank includes parameterized variations; their solutions show the substituted values and explain the calculation and common interpretation errors. These and the learning checks are not official PYQs.
 
 A full-length original mock contains 65 questions, 180 minutes and 100 marks, including 10 GA questions / 15 marks. It uses the original bank, with MCQ-only negative marking, no MSQ partial credit, answer navigation, review flags, resumable timing and post-test explanations. Its topic weights do not predict the actual exam. Check official 2027 examination rules when published.
 
@@ -45,8 +45,10 @@ Stop the server before updating and refresh your browser afterward. Retain any l
 
 `python data/build.py` regenerates lessons and topic questions from authored modules under `data/content/`. `python data/questions.py` regenerates only the original practice bank. Neither operation needs network access.
 
+Mathematical notation uses local KaTeX 0.16.22 (MIT) with bundled fonts and accessible MathML. It renders LaTeX in lessons, worked examples, dynamically inserted practice feedback and mock review; code and personal notes stay literal. No CDN or package installation is needed. See `vendor/katex/LICENSE` and `VERSION.txt`.
+
 The app saves progress in localStorage, without cross-device synchronization. Keep the same browser and URL to retain progress. External Google Fonts are optional; system fonts work when unavailable. Everything required for the lessons and PDFs is local.
 
-`tests/learning_flow.py` checks the continuous reading flow, section/example pairing, all lesson rendering, worked steps, hints, independent read/check status, notes, revision, resume, topic filters, demonstrations, migration, mocks, paper links and mobile layout. It requires Playwright and a Chromium executable for development, not for running the app. Set `CHROMIUM_PATH` if Chromium is not at `/usr/bin/chromium`, start the server on port 3000, then run the script.
+`tests/learning_flow.py` checks the continuous reading flow, section/example pairing, all lesson rendering, worked steps, hints, independent read/check status, notes, revision, resume, topic filters, demonstrations, migration, mocks, paper links and mobile layout. `tests/math_rendering.py` additionally checks all 72 lessons with external requests blocked, MathML, dynamic solutions, matrices, literal notes and phone-width formula overflow. `node tests/validate_math.js` strictly validates every authored LaTeX expression using the bundled renderer. The browser scripts require Playwright and a Chromium executable for development, not for running the app. Set `CHROMIUM_PATH` if Chromium is not at `/usr/bin/chromium`, start the server on port 3000, then run the script.
 
 Content is original instructional material organized against the supplied syllabus. It is not an official GATE course or a substitute for all reference-book exercises. See [SYLLABUS_COVERAGE.md](SYLLABUS_COVERAGE.md) for the topic-to-lesson map.

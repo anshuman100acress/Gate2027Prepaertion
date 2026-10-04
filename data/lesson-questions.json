@@ -2,25 +2,25 @@
   {
     "id": "check-0-propositions-0",
     "type": "MCQ",
-    "prompt": "Which statement is equivalent to P→Q?",
+    "prompt": "Which statement is equivalent to \\(P\\to Q\\)?",
     "answer": 1,
     "hint": "Think about the contrapositive.",
-    "explanation": "The contrapositive preserves the implication: ¬Q→¬P is equivalent to P→Q. Reversing alone gives the converse, which is not equivalent.",
+    "explanation": "The contrapositive preserves the implication: \\(\\neg Q\\to\\neg P\\) is equivalent to \\(P\\to Q\\). Reversing alone gives the converse, which is not equivalent.",
     "subject": 0,
     "lesson": "0-propositions",
     "marks": 1,
     "level": "Foundation",
     "options": [
-      "Q→P",
-      "¬Q→¬P",
-      "¬P→¬Q",
-      "P∧Q"
+      "\\(Q\\to P\\)",
+      "\\(\\neg Q\\to\\neg P\\)",
+      "\\(\\neg P\\to\\neg Q\\)",
+      "\\(P\\land Q\\)"
     ]
   },
   {
     "id": "check-0-propositions-1",
     "type": "NAT",
-    "prompt": "For how many assignments to P,Q is P→Q true?",
+    "prompt": "For how many assignments to P,Q is \\(P\\to Q\\) true?",
     "answer": 3,
     "hint": "Identify its sole false case.",
     "explanation": "TT, FT and FF make the implication true. TF makes it false, so 3 assignments work.",
@@ -32,19 +32,19 @@
   {
     "id": "check-0-quantifiers-0",
     "type": "MCQ",
-    "prompt": "What is the negation of ∀x∃y R(x,y)?",
+    "prompt": "What is the negation of \\(\\forall x\\exists y\\ R(x,y)\\)?",
     "answer": 2,
     "hint": "Swap each quantifier while moving negation inward.",
-    "explanation": "¬∀x∃y R = ∃x¬∃y R = ∃x∀y¬R. One x defeats every candidate y.",
+    "explanation": "\\(\\neg\\forall x\\exists y\\,R=\\exists x\\neg\\exists y\\,R=\\exists x\\forall y\\neg R\\). One x defeats every candidate y.",
     "subject": 0,
     "lesson": "0-quantifiers",
     "marks": 1,
     "level": "Foundation",
     "options": [
-      "∀x∀y ¬R(x,y)",
-      "∃x∃y ¬R(x,y)",
-      "∃x∀y ¬R(x,y)",
-      "∀x∃y ¬R(x,y)"
+      "\\(\\forall x\\forall y\\ \\neg R(x,y)\\)",
+      "\\(\\exists x\\exists y\\ \\neg R(x,y)\\)",
+      "\\(\\exists x\\forall y\\ \\neg R(x,y)\\)",
+      "\\(\\forall x\\exists y\\ \\neg R(x,y)\\)"
     ]
   },
   {
@@ -113,7 +113,7 @@
     "prompt": "How many elements are in the power-set lattice of a 3-element set?",
     "answer": 8,
     "hint": "All subsets are nodes.",
-    "explanation": "There are 2³=8 subsets.",
+    "explanation": "There are \\(2^3=8\\) subsets.",
     "subject": 0,
     "lesson": "0-orders-lattices",
     "marks": 1,
@@ -185,15 +185,15 @@
     "prompt": "Choosing 3 people for an unordered committee from 8 people uses which expression?",
     "answer": 2,
     "hint": "Ordering the same three people does not create a different committee.",
-    "explanation": "Use combinations C(8,3). Ordered selections count each committee 3! times.",
+    "explanation": "Use combinations \\(\\binom83\\). Ordered selections count each committee 3! times.",
     "subject": 0,
     "lesson": "0-counting",
     "marks": 1,
     "level": "Foundation",
     "options": [
-      "8³",
-      "8!/(8−3)!",
-      "C(8,3)",
+      "\\(8^3\\)",
+      "\\(\\frac{8!}{(8-3)!}\\)",
+      "\\(\\binom83\\)",
       "3!"
     ]
   },
@@ -203,7 +203,7 @@
     "prompt": "How many nonnegative integer solutions satisfy x+y+z=4?",
     "answer": 15,
     "hint": "Apply stars and bars with n=4,k=3.",
-    "explanation": "C(4+3−1,3−1)=C(6,2)=15.",
+    "explanation": "C(4+3−1,3−1)=\\(\\binom62\\)=15.",
     "subject": 0,
     "lesson": "0-counting",
     "marks": 1,
@@ -215,14 +215,14 @@
     "prompt": "What extra factor is needed in an independent solution for a repeated characteristic root λ?",
     "answer": 1,
     "hint": "Repeated roots require a different-shaped basis solution.",
-    "explanation": "For a double root, independent solutions include λⁿ and nλⁿ. Two constant multiples of λⁿ are not independent.",
+    "explanation": "For a double root, independent solutions include \\(\\lambda^n\\) and \\(n\\lambda^n\\). Two constant multiples of \\(\\lambda^n\\) are not independent.",
     "subject": 0,
     "lesson": "0-recurrences",
     "marks": 1,
     "level": "Foundation",
     "options": [
       "Only another constant",
-      "A factor n multiplying λⁿ",
+      "A factor n multiplying \\(\\lambda^n\\)",
       "A factor 1/n in every solution",
       "No second independent solution can exist"
     ]
@@ -230,7 +230,7 @@
   {
     "id": "check-0-recurrences-1",
     "type": "NAT",
-    "prompt": "For a₀=0 and aₙ=2aₙ₋₁+1, what is a₅?",
+    "prompt": "For a₀=0 and \\(a_n=2a_{n-1}+1\\), what is a₅?",
     "answer": 31,
     "hint": "Use the derived geometric-sum result.",
     "explanation": "a₅=2⁵−1=31.",
@@ -242,7 +242,7 @@
   {
     "id": "check-0-matrices-rank-0",
     "type": "MCQ",
-    "prompt": "When is a real linear system Ax=b inconsistent?",
+    "prompt": "When is a real linear system \\(Ax=b\\) inconsistent?",
     "answer": 2,
     "hint": "A contradiction in an augmented row adds a rank not present in coefficients.",
     "explanation": "Consistency requires equal ranks. Lower rank than the unknown count instead gives free variables if the system is consistent.",
@@ -251,7 +251,7 @@
     "marks": 1,
     "level": "Foundation",
     "options": [
-      "rank(A)=rank([A|b])",
+      "\\(\\operatorname{rank}(A)=\\operatorname{rank}([A\\mid b])\\)",
       "rank(A)<number of unknowns",
       "rank(A) differs from rank([A|b])",
       "A is rectangular"
@@ -260,7 +260,7 @@
   {
     "id": "check-0-matrices-rank-1",
     "type": "NAT",
-    "prompt": "What is det([[2,1],[4,3]])?",
+    "prompt": "What is det(\\(\\begin{bmatrix}2&1\\\\4&3\\end{bmatrix}\\))?",
     "answer": 2,
     "hint": "Use ad−bc.",
     "explanation": "2×3−1×4=2.",
@@ -593,7 +593,7 @@
     "prompt": "How many output lines does a complete 3-to-8 decoder have?",
     "answer": 8,
     "hint": "One output per input combination.",
-    "explanation": "2³=8 outputs.",
+    "explanation": "\\(2^3=8\\) outputs.",
     "subject": 1,
     "lesson": "1-combinational",
     "marks": 1,
@@ -701,7 +701,7 @@
     "prompt": "How many bits are needed to select one of 8 ALU operations?",
     "answer": 3,
     "hint": "Use log₂ of the number of choices.",
-    "explanation": "2³=8, so 3 selection bits.",
+    "explanation": "\\(2^3=8\\), so 3 selection bits.",
     "subject": 2,
     "lesson": "2-alu-control",
     "marks": 1,
@@ -863,7 +863,7 @@
     "prompt": "To implement a singly linked queue efficiently with head/tail pointers, which ends are used?",
     "answer": 1,
     "hint": "Tail deletion needs finding its predecessor in a singly linked list.",
-    "explanation": "Tail insertion and head deletion take O(1) with maintained pointers. The reverse requires predecessor traversal for dequeue.",
+    "explanation": "Tail insertion and head deletion take \\(O(1)\\) with maintained pointers. The reverse requires predecessor traversal for dequeue.",
     "subject": 3,
     "lesson": "3-linear-structures",
     "marks": 1,
@@ -929,10 +929,10 @@
     "marks": 1,
     "level": "Foundation",
     "options": [
-      "Θ(n²)",
-      "Θ(n log n)",
-      "Θ(n)",
-      "Θ(log n)"
+      "\\(\\Theta(n^2)\\)",
+      "\\(\\Theta(n\\log n)\\)",
+      "\\(\\Theta(n)\\)",
+      "\\(\\Theta(\\log n)\\)"
     ]
   },
   {
@@ -950,7 +950,7 @@
   {
     "id": "check-4-analysis-0",
     "type": "MCQ",
-    "prompt": "A balanced recursion has Θ(log n) depth. Does that prove Θ(log n) running time?",
+    "prompt": "A balanced recursion has \\(\\Theta(\\log n)\\) depth. Does that prove \\(\\Theta(\\log n)\\) running time?",
     "answer": 1,
     "hint": "Compare binary search and merge sort.",
     "explanation": "Depth describes one active path. Branching and combine costs determine total running time; balanced merge sort has log depth but n log n work.",
@@ -1115,7 +1115,7 @@
     "prompt": "In the BFS example, what is the distance in edges from A to D?",
     "answer": 2,
     "hint": "D is discovered from a distance-1 neighbour.",
-    "explanation": "A→B→D or A→C→D uses two edges.",
+    "explanation": "\\(A\\to B\\)→D or \\(A\\to C\\)→D uses two edges.",
     "subject": 4,
     "lesson": "4-bfs-dfs",
     "marks": 1,
@@ -1124,7 +1124,7 @@
   {
     "id": "check-4-bfs-dfs-1",
     "type": "NAT",
-    "prompt": "For edges A→C,B→C,C→D, how many valid topological orders exist?",
+    "prompt": "For edges \\(A\\to C\\),\\(B\\to C\\),C→D, how many valid topological orders exist?",
     "answer": 2,
     "hint": "Only the relative order of A and B is free.",
     "explanation": "The orders are A,B,C,D and B,A,C,D, so 2.",
@@ -1172,7 +1172,7 @@
   {
     "id": "check-4-shortest-paths-1",
     "type": "NAT",
-    "prompt": "For A→C=2 and C→B=−3, what is that route’s total cost?",
+    "prompt": "For \\(A\\to C\\)=2 and C→B=−3, what is that route’s total cost?",
     "answer": -1,
     "hint": "Negative weights still add arithmetically.",
     "explanation": "2−3=−1.",
@@ -1205,7 +1205,7 @@
     "prompt": "A 4-state NFA has how many possible subsets in subset construction?",
     "answer": 16,
     "hint": "Count subsets of four states.",
-    "explanation": "2⁴=16 possible subsets, not necessarily reachable.",
+    "explanation": "\\(2^4=16\\) possible subsets, not necessarily reachable.",
     "subject": 5,
     "lesson": "5-automata",
     "marks": 1,
@@ -1370,7 +1370,7 @@
   {
     "id": "check-6-parsing-1",
     "type": "NAT",
-    "prompt": "For A→aA|ε, how many symbols are in FIRST(A), including ε?",
+    "prompt": "For \\(A\\to a\\)A|ε, how many symbols are in FIRST(A), including ε?",
     "answer": 2,
     "hint": "A starts with a or disappears.",
     "explanation": "FIRST(A)={a,ε}, size 2.",
@@ -1646,7 +1646,7 @@
   {
     "id": "check-8-normalization-0",
     "type": "MCQ",
-    "prompt": "What is the BCNF rule for a nontrivial functional dependency X→Y?",
+    "prompt": "What is the BCNF rule for a nontrivial functional dependency \\(X\\to Y\\)?",
     "answer": 0,
     "hint": "BCNF removes the prime-RHS exception from 3NF.",
     "explanation": "Every nontrivial determinant must be a superkey. A prime RHS can permit 3NF but does not by itself satisfy BCNF.",
@@ -1667,7 +1667,7 @@
     "prompt": "How many attributes are in B⁺ for the same dependencies?",
     "answer": 2,
     "hint": "A cannot be inferred from B.",
-    "explanation": "B⁺={B,C}, size 2.",
+    "explanation": "\\(B^+=\\{B,C\\}\\), size 2.",
     "subject": 8,
     "lesson": "8-normalization",
     "marks": 1,
@@ -1718,7 +1718,7 @@
   {
     "id": "check-8-transactions-1",
     "type": "NAT",
-    "prompt": "A precedence graph contains T1→T2 and T2→T1. How many vertices are in this directed cycle?",
+    "prompt": "A precedence graph contains \\(T_1\\to T_2\\) and \\(T_2\\to T_1\\). How many vertices are in this directed cycle?",
     "answer": 2,
     "hint": "Follow the two opposite edges.",
     "explanation": "The cycle involves the two transactions.",

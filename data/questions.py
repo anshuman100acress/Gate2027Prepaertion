@@ -1,19 +1,22 @@
-import json
+import json,sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent/"content"))
+from math_notation import typeset
 qs=[]
 def add(s,t,p,a,ex,opts=None):
- qs.append(dict(id=len(qs),subject=s,type=t,prompt=p,answer=a,explanation=ex,options=opts or [],marks=1 if len(qs)%2==0 else 2))
+ qs.append(dict(id=len(qs),subject=s,type=t,prompt=typeset(p),answer=a,explanation=typeset(ex),options=[typeset(o) for o in (opts or [])],marks=1 if len(qs)%2==0 else 2))
 for n in range(3,13):
- add(0,'NAT',f'How many distinct unordered pairs can be selected from {n} elements?',n*(n-1)//2,'Use n choose 2 = n(n−1)/2. Order does not matter.')
- add(1,'NAT',f'What is the maximum signed integer representable using {n}-bit two’s complement?',2**(n-1)-1,'The signed range is −2^(n−1) to 2^(n−1)−1.')
- add(2,'NAT',f'A {n}-stage pipeline executes 20 instructions without stalls. How many cycles are required?',n+19,'Ideal pipeline cycles = stages + instructions − 1.')
- add(3,'NAT',f'A complete binary tree has {2**n-1} nodes. Its root is at level 0. What is its height in edges?',n-1,'A perfect binary tree with height h has 2^(h+1)−1 nodes.')
- add(4,'NAT',f'A connected undirected graph has {n+8} vertices. How many edges does any spanning tree contain?',n+7,'Every spanning tree on V vertices has V−1 edges.')
- add(5,'NAT',f'A nondeterministic finite automaton has {n} states. What is the maximum number of subsets considered in subset construction?',2**n,'Each DFA state corresponds to a subset of the NFA states; there are 2^n subsets.')
- add(6,'NAT',f'A basic block computes t = {n}; u = t + {n+2}. After constant propagation and folding, what constant is assigned to u?',2*n+2,'Replace t by its known constant, then evaluate the addition.')
- add(7,'NAT',f'Two processes arrive at time 0 with CPU bursts {n} and {n+4} ms. FCFS runs the shorter first. What is mean waiting time in ms?',n/2,'The first waits zero, the second waits for the first burst. Mean = (0+n)/2.')
- add(8,'NAT',f'The relation R(A,B,C) has dependencies A→B and B→C. How many attributes are in the closure of {{A}}?',3,'Start with A, add B using A→B, then C using B→C.')
- add(9,'NAT',f'An IPv4 subnet uses prefix /{32-n}. How many total addresses does the subnet contain?',2**n,'There are 32−prefix host bits. Total addresses = 2^(host bits); this includes reserved addresses.')
- add(10,'NAT',f'A product costs ₹{n*100}. Its price increases by 10%. What is the new price in rupees?',n*110,'Multiply the original price by 1.10.')
+ add(0,'NAT',f'How many distinct unordered pairs can be selected from {n} elements?',n*(n-1)//2,fr'An unordered pair has no first/second role. Count ordered choices and divide by two: \(\binom{{{n}}}2=\frac{{{n}({n}-1)}}2={n*(n-1)//2}\). Division removes the two orders of each pair; repetition is not allowed.')
+ add(1,'NAT',f'What is the maximum signed integer representable using {n}-bit two’s complement?',2**(n-1)-1,fr'For {n} bits the sign bit has weight \(-2^{{{n-1}}}\). Maximum positive sets that bit to zero and all lower bits to one: \(2^{{{n-1}}}-1={2**(n-1)-1}\). The negative endpoint has one additional magnitude; do not use the unsigned bound.')
+ add(2,'NAT',f'A {n}-stage pipeline executes 20 instructions without stalls. How many cycles are required?',n+19,fr'The first instruction needs {n} cycles to cross all stages; the remaining 19 each add one cycle under ideal single-issue overlap. \(C=k+N-1={n}+20-1={n+19}\). Stalls would be added separately. This counts cycles, not individual stage operations.')
+ add(3,'NAT',f'A complete binary tree has {2**n-1} nodes. Its root is at level 0. What is its height in edges?',n-1,fr'A complete tree with \(N={2**n-1}\) nodes fills levels 0 through {n-1}. Using \(h=\lfloor\log_2N\rfloor={n-1}\) gives height in edges. Here it is also perfect, so \(N=2^{{h+1}}-1\). Counting levels instead would produce {n}.')
+ add(4,'NAT',f'A connected undirected graph has {n+8} vertices. How many edges does any spanning tree contain?',n+7,fr'A tree is connected and acyclic; removing any tree edge separates one component into two. Thus a spanning tree on \(V={n+8}\) vertices has \(V-1={n+7}\) edges. Extra graph edges are rejected when they create cycles; weights do not affect this count.')
+ add(5,'NAT',f'A nondeterministic finite automaton has {n} states. What is the maximum number of subsets considered in subset construction?',2**n,fr'For each of {n} NFA states, a subset either contains it or does not. Independent binary choices give \(2^{{{n}}}={2**n}\) subsets, including the empty subset. This is the subset-construction upper bound; a particular automaton may have fewer reachable subsets.')
+ add(6,'NAT',f'A basic block computes t = {n}; u = t + {n+2}. After constant propagation and folding, what constant is assigned to u?',2*n+2,fr'No intervening statement changes t, so replace its use by \(t={n}\). Constant folding then evaluates \(u={n}+{n+2}={2*n+2}\). Propagation substitutes the value; folding performs arithmetic. If a possible write changed t, substitution would need further analysis.')
+ add(7,'NAT',f'Two processes arrive at time 0 with CPU bursts {n} and {n+4} ms. FCFS runs the shorter first. What is mean waiting time in ms?',n/2,fr'Both processes are ready at time zero. P1 runs from 0 to {n}, and P2 first runs at {n}. Hence \(W_1=0,\ W_2={n}\) and \(\overline W=\frac{{0+{n}}}2={n/2:g}\ ms\). The second burst affects turnaround but not the time it waits before starting.')
+ add(8,'NAT',f'The relation R(A,B,C) has dependencies A→B and B→C. How many attributes are in the closure of {{A}}?',3,r'Start with \(A^+=\{A\}\). Apply \(A\to B\) to add B, then \(B\to C\) to add C. The fixed-point set is \(A^+=\{A,B,C\}\), containing three attributes. Count distinct attributes, not dependency arrows.')
+ add(9,'NAT',f'An IPv4 subnet uses prefix /{32-n}. How many total addresses does the subnet contain?',2**n,fr'Prefix /{32-n} fixes {32-n} of 32 bits, leaving \(h=32-{32-n}={n}\) freely varying host bits. Thus total addresses \(=2^{{{n}}}={2**n}\). The question asks total addresses, so do not subtract network/broadcast addresses.')
+ add(10,'NAT',f'A product costs ₹{n*100}. Its price increases by 10%. What is the new price in rupees?',n*110,fr'An increase of 10% adds one tenth of the original price. \(P_{{new}}={n*100}(1+0.10)={n*110}\) rupees. The multiplier is 1.10, not 0.10; the latter computes only the increase. Subtracting the original gives an increase of {n*10} rupees.')
 curated=[
 (0,'MCQ','Which condition makes a square matrix invertible?',0,'A square matrix is invertible exactly when its determinant is nonzero.',['det(A) ≠ 0','trace(A) = 0','All entries are positive','A has two equal rows']),
 (0,'MSQ','Which statements always hold?',[0,2],'Differentiability implies continuity. Bayes follows from conditional probability. Continuity alone does not imply differentiability.',['Differentiability implies continuity','Continuity implies differentiability','P(A|B)P(B) = P(B|A)P(A), when defined','Disjoint nonzero-probability events are independent']),
@@ -38,4 +41,4 @@ curated=[
 (10,'MCQ','A value rises by 20% and then falls by 20%. What is the net change?',2,'1.2 × 0.8 = 0.96, so the final value is 4% lower.',['No change','4% increase','4% decrease','20% decrease']),
 (10,'MSQ','Which numerical statements are correct?',[0,2],'A square has four equal sides. A prime greater than 2 is odd. Division by zero is undefined.',['A square has four equal sides','Every odd integer is prime','Every prime greater than 2 is odd','Division by zero equals zero'])]
 for q in curated:add(*q)
-open('/workspace/Gate2027Prepaertion/data/questions.json','w').write(json.dumps(qs,ensure_ascii=False))
+open(Path(__file__).resolve().parent/'questions.json','w').write(json.dumps(qs,ensure_ascii=False))

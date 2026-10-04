@@ -23,7 +23,7 @@ with sync_playwright() as p:
  page.locator('#bookmarklesson').click()
  assert page.locator('[role=tablist]').count()==0
  assert page.locator('.workedexample').count()==2
- assert page.locator('.workedexample li').count()==6
+ assert page.locator('.workedexample li').count()==sum(len(e['steps']) for e in lessons[0]['examples'])
  page.locator('#markread').click()
  state=page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1"))')
  assert '0-propositions' in state['completed']
@@ -78,7 +78,11 @@ with sync_playwright() as p:
   assert page.locator('#lesson-practice').evaluate('(el)=>!!(document.querySelector("#teaching-sequence").compareDocumentPosition(el)&Node.DOCUMENT_POSITION_FOLLOWING)')
   if not page.locator('#practice-details').evaluate('(el)=>el.open'):page.locator('#practice-details > summary').click()
   assert page.locator('.learningcheck').count()==2
-  page.locator('[data-solution="1"]').click();assert l['checks'][1]['explanation'] in page.locator('#lessonfeedback-1').inner_text()
+  page.locator('[data-solution="1"]').click()
+  assert page.locator('#lessonfeedback-1 .checksolution').is_visible()
+  assert 'Reasoning and conclusion' in page.locator('#lessonfeedback-1').inner_text()
+  assert page.locator('.explainedtrap').count()==2
+  assert page.locator('#lesson-method .methodsteps li').count()>=3
  page.set_viewport_size({'width':390,'height':844})
  for path in ['learn','learn/0/0-propositions','learn/4/4-search-sort','revision']:
   page.goto('http://127.0.0.1:3000/#'+path);page.wait_for_selector('#app')
