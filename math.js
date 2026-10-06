@@ -4,7 +4,7 @@ function typesetMath(root=document.getElementById('app')) {
  renderMathInElement(root,{
   delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],
   ignoredTags:['script','noscript','style','textarea','pre','code','option'],
-  ignoredClasses:['katex','usernote'],
+  ignoredClasses:['katex','usernote','sticky-content','sticky-preview'],
   throwOnError:false,strict:'warn',trust:false,output:'htmlAndMathml',maxExpand:1000
  });
 }
@@ -12,9 +12,9 @@ function typesetMath(root=document.getElementById('app')) {
 const mathUpdates=new MutationObserver(mutations=>{
  const roots=new Set();
  for(const m of mutations){
-  if(m.target.nodeType===1&&m.target.closest('.katex,.katex-display'))continue;
+  if(m.target.nodeType===1&&m.target.closest('.katex,.katex-display,.sticky-content,.sticky-preview'))continue;
   for(const n of m.addedNodes){
-   if(n.nodeType!==1||n.closest('.katex,.katex-display')||n.matches('input,textarea,option,pre,code'))continue;
+   if(n.nodeType!==1||n.closest('.katex,.katex-display,.sticky-content,.sticky-preview')||n.matches('input,textarea,option,pre,code'))continue;
    if(n.textContent.includes('\\(')||n.textContent.includes('\\[')||n.textContent.includes('$$'))roots.add(n);
   }
  }

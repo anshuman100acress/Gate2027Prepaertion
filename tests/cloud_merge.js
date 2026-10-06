@@ -13,6 +13,40 @@ assert.deepEqual(new Set(result.progress.completed), new Set(['rank', 'graph', '
 assert.deepEqual(result.progress.bookmarks, ['graph']);
 assert.deepEqual(new Set(result.progress.attempts.map(x => x.eventId)), new Set(['old', 'local', 'remote']));
 assert.equal(remote.progress.notes.matrix, 'original', 'merge must not mutate the server snapshot');
+
+const moduleBase = bundle({ moduleNotes: { 0: 'original', 1: 'remove me' } });
+const moduleLocal = bundle({ moduleNotes: { 0: 'new module explanation', 2: 'local module' } });
+const moduleRemote = bundle({ moduleNotes: { 0: 'original', 1: 'remove me', 3: 'other device module' } });
+assert.deepEqual(rebase(moduleBase, moduleLocal, moduleRemote).progress.moduleNotes, { 0: 'new module explanation', 2: 'local module', 3: 'other device module' }, 'module edits and deletions must merge by module without dropping another device\'s notes');
+assert.deepEqual(rebase(bundle(), bundle({ moduleNotes: { 0: 'local' } }), bundle({ moduleNotes: { 1: 'remote' } })).progress.moduleNotes, { 0: 'local', 1: 'remote' }, 'older progress without module notes must merge new notes from both devices');
+assert.equal(importGuest(bundle({ moduleNotes: { 0: 'account' } }), bundle({ moduleNotes: { 0: 'guest conflict', 1: 'guest module' } })).progress.moduleNotes[0], 'account');
+assert.equal(importGuest(bundle(), bundle({ moduleNotes: { 1: 'guest module' } })).progress.moduleNotes[1], 'guest module');
+
+const richBase = bundle({ notes: { topic: 'Original', deleted: 'Remove' }, noteFormats: { 'notes:topic': { text: 'Original', html: '<b>Original</b>' }, 'notes:deleted': { text: 'Remove', html: '<i>Remove</i>' } } });
+const richLocal = bundle({ notes: { topic: 'Original' }, noteFormats: { 'notes:topic': { text: 'Original', html: '<i>Original</i>' } } });
+const richRemote = bundle({ notes: { topic: 'Remote text', other: 'Other' }, noteFormats: { 'notes:topic': { text: 'Remote text', html: '<h2>Remote text</h2>' }, 'notes:other': { text: 'Other', html: '<b>Other</b>' } } });
+const richMerged = rebase(richBase, richLocal, richRemote).progress;
+assert.equal(richMerged.notes.topic, 'Original', 'a formatting-only edit is an edit of the same note');
+assert.deepEqual(richMerged.noteFormats['notes:topic'], richLocal.progress.noteFormats['notes:topic'], 'text and HTML must resolve the same-note conflict together');
+assert.equal(richMerged.notes.other, 'Other');
+assert.equal(richMerged.noteFormats['notes:other'].html, '<b>Other</b>', 'another device\'s separate note retains formatting');
+assert.equal(richMerged.noteFormats['notes:deleted'], undefined, 'clearing a rich note deletes its formatting');
+const legacyEdit = rebase(richBase, bundle({ notes: { topic: 'Older editor changed the text', deleted: 'Remove' } }), richRemote).progress;
+assert.equal(legacyEdit.notes.topic, 'Older editor changed the text');
+assert.equal(legacyEdit.noteFormats['notes:topic'], undefined, 'a plain-text update must clear incompatible rich formatting');
+assert.deepEqual(rebase(richBase, richBase, richRemote).progress.noteFormats, richRemote.progress.noteFormats, 'unchanged rich notes adopt cloud formatting');
+assert.deepEqual(importGuest(bundle(), richBase).progress.noteFormats, richBase.progress.noteFormats, 'guest imports retain rich text');
+assert.equal(importGuest(bundle({ notes: { topic: 'Original' } }), richBase).progress.noteFormats['notes:topic'], undefined, 'guest formatting must not replace an existing account plain note on conflict');
+assert.deepEqual(importGuest(richLocal, richRemote).progress.noteFormats['notes:topic'], richLocal.progress.noteFormats['notes:topic'], 'import conflicts retain the account text and its matching format together');
+
+const sticky = (content, title = 'Formula') => ({ scope: 'module', moduleId: 0, title, content, color: 'yellow' });
+const stickyBase = bundle({ stickyNotes: { edited: sticky('<b>Original</b>'), deleted: sticky('Remove') } });
+const stickyLocal = bundle({ stickyNotes: { edited: sticky('<b>Updated</b>'), local: sticky('<ul><li>Local</li></ul>') } });
+const stickyRemote = bundle({ stickyNotes: { ...stickyBase.progress.stickyNotes, remote: sticky('<h2>Remote</h2>') } });
+assert.deepEqual(rebase(stickyBase, stickyLocal, stickyRemote).progress.stickyNotes, { edited: sticky('<b>Updated</b>'), local: sticky('<ul><li>Local</li></ul>'), remote: sticky('<h2>Remote</h2>') }, 'different sticky notes in one module must merge, preserving rich text and deletions');
+assert.equal(rebase(stickyBase, stickyBase, bundle({ stickyNotes: {} })).progress.stickyNotes.edited, undefined, 'an unchanged device must adopt a deleted note');
+assert.equal(importGuest(bundle({ stickyNotes: { edited: sticky('Account') } }), bundle({ stickyNotes: { edited: sticky('Guest conflict'), guest: sticky('Guest note') } })).progress.stickyNotes.edited.content, 'Account');
+assert.equal(importGuest(bundle(), bundle({ stickyNotes: { guest: sticky('<i>Guest note</i>') } })).progress.stickyNotes.guest.content, '<i>Guest note</i>');
 assert.deepEqual(rebase(remote, remote, result), result, 'unchanged device must adopt the cloud snapshot');
 assert.equal(rebase(base, local, bundle({ notes: { matrix: 'concurrent edit' } })).progress.notes.matrix, 'new explanation', 'local edit of the same note wins when saved last');
 

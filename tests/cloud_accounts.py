@@ -124,14 +124,24 @@ def sync(page):
     page.wait_for_function('!GatewiseProgress.pending()')
 
 
+def add_sticky(page, title, content):
+    page.locator('[data-add-sticky]').click()
+    note = page.locator('.sticky-card').last
+    note.locator('.sticky-title').fill(title)
+    note.locator('.sticky-content').fill(content)
+    return note.get_attribute('data-sticky-id')
+
+
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH', '/usr/bin/chromium'), headless=True)
     ca, a = context(browser)
     cb, b = context(browser)
     open_app(a)
-    change(a, "state.notes['guest-topic']='Guest only'; state.completed=['0-propositions']")
+    change(a, "state.notes['guest-topic']='Guest only'; state.moduleNotes['0']='Guest module';state.stickyNotes['guest-sticky']={scope:'module',moduleId:0,title:'Guest sticky',content:'<b>Guest formula</b>',color:'yellow'}; state.completed=['0-propositions']")
     signin(a, 'a@example.test')
     assert a.evaluate('state.notes["guest-topic"]') is None, 'Guest data leaked into account without import'
+    assert a.evaluate('state.moduleNotes') == {}, 'Guest module notes leaked into account without import'
+    assert a.evaluate('state.stickyNotes') == {}, 'Guest sticky notes leaked into account without import'
     change(a, "state.notes['matrix']='Rank equals pivot count';state.completed=['0-propositions'];state.bookmarks=['0-propositions'];state.reviewDates['0-propositions']='2026-10-06';state.hours=3;state.attempts.push({eventId:crypto.randomUUID(),qid:'test',correct:true,subject:0,date:today()})")
     sync(a)
     open_app(b)
@@ -139,6 +149,136 @@ with sync_playwright() as p:
     assert b.evaluate('state.notes.matrix') == 'Rank equals pivot count'
     assert b.evaluate('state.completed') == ['0-propositions']
     assert b.evaluate('state.hours') == 3
+
+    # Real note editors autosave, show sync state and update another device's open editor.
+    a.goto(URL + '#learn/0')
+    expect(a.locator('#modulenotes')).to_be_visible()
+    a.locator('#modulenotes').fill('Module formulas from device A')
+    a.wait_for_function('!GatewiseProgress.pending()')
+    expect(a.locator('#modulenotesstatus')).to_have_text('Up to date across devices')
+    assert records[USERS['a@example.test']]['data']['progress']['moduleNotes']['0'] == 'Module formulas from device A'
+    b.goto(URL + '#learn/0')
+    b.locator('[data-note-sync]').click()
+    expect(b.locator('#modulenotes')).to_have_text('Module formulas from device A')
+    b.locator('#modulenotes').focus()
+    a.locator('#modulenotes').fill('Updated formulas from device A')
+    sync(a)
+    sync(b)
+    expect(b.locator('#modulenotes')).to_have_text('Module formulas from device A')
+    expect(b.locator('#modulenotesstatus')).to_contain_text('Updated on another device')
+    b.locator('#app h1').click()
+    expect(b.locator('#modulenotes')).to_have_text('Updated formulas from device A')
+
+    # Independent module notes merge; clearing a note also reaches the other device.
+    b.goto(URL + '#learn/1')
+    b.locator('#modulenotes').fill('Digital logic from device B')
+    sync(b)
+    sync(a)
+    assert a.evaluate('state.moduleNotes[1]') == 'Digital logic from device B'
+    a.locator('#modulenotes').fill('')
+    sync(a)
+    sync(b)
+    assert b.evaluate('state.moduleNotes[0]') is None
+
+    # Topic notes use the same editor and refresh without rebuilding the lesson.
+    a.goto(URL + '#learn/0/0-propositions')
+    a.locator('[data-jump="lesson-notes"]').click()
+    expect(a.locator('#lessonnotes')).to_be_focused()
+    a.locator('#lessonnotes').fill('Contrapositive topic note from A')
+    a.locator('#lessonnotes').press('Control+a')
+    a.locator('.noteseditor [data-format="bold"]').click()
+    sync(a)
+    b.goto(URL + '#learn/0/0-propositions')
+    b.locator('#practice-details > summary').click()
+    b.locator('#lessonanswer-1').fill('7')
+    b.locator('[data-note-sync]').click()
+    expect(b.locator('#lessonnotes')).to_have_text('Contrapositive topic note from A')
+    assert b.locator('#lessonnotes b,#lessonnotes strong').count() == 1, 'Topic-note formatting must sync too'
+    expect(b.locator('#lessonanswer-1')).to_have_value('7')
+
+    # Module notes remain local offline and automatically upload on reconnect.
+    b.goto(URL + '#revision/notes')
+    b.locator('#revisionfilter').select_option('scheduled')
+    a.goto(URL + '#learn/0')
+    ca.set_offline(True)
+    a.locator('#modulenotes').fill('Module note saved offline')
+    expect(a.locator('#modulenotesstatus')).to_contain_text('Offline')
+    ca.set_offline(False)
+    a.wait_for_function('!GatewiseProgress.pending()')
+    sync(b)
+    assert b.evaluate('state.moduleNotes[0]') == 'Module note saved offline'
+    expect(b.locator('#revisionfilter')).to_have_value('scheduled')
+
+    # Sticky-note HTML, title and color autosave through the real account SDK.
+    note_id = add_sticky(a, 'Pivot formulas', 'Rank equals pivot count')
+    note_a = a.locator(f'[data-sticky-id="{note_id}"]')
+    note_a.locator('.sticky-content').press('Control+a')
+    note_a.locator('[data-format="bold"]').click()
+    note_a.locator('[data-note-color="blue"]').click()
+    a.wait_for_function('!GatewiseProgress.pending()')
+    expect(a.locator('[data-sticky-status]')).to_have_text('Up to date across devices')
+    assert '<b>' in records[USERS['a@example.test']]['data']['progress']['stickyNotes'][note_id]['content']
+    b.goto(URL + '#learn/0')
+    b.locator('[data-sticky-sync]').click()
+    note_b = b.locator(f'[data-sticky-id="{note_id}"]')
+    expect(note_b.locator('.sticky-title')).to_have_value('Pivot formulas')
+    expect(note_b).to_have_attribute('data-color', 'blue')
+    assert note_b.locator('.sticky-content b').count() == 1
+    note_b.locator('.sticky-content').focus()
+    note_a.locator('.sticky-title').fill('Updated pivot formulas')
+    sync(a)
+    sync(b)
+    expect(note_b.locator('.sticky-title')).to_have_value('Pivot formulas')
+    expect(note_b.locator('[data-sticky-card-status]')).to_contain_text('Updated on another device')
+    b.locator('#app h1').click()
+    expect(note_b.locator('.sticky-title')).to_have_value('Updated pivot formulas')
+
+    # Two disconnected devices create separate notes for the same module.
+    ca.set_offline(True)
+    cb.set_offline(True)
+    local_id = add_sticky(a, 'Device A note', 'Local formula')
+    remote_id = add_sticky(b, 'Device B note', 'Other device formula')
+    expect(a.locator('[data-sticky-status]')).to_contain_text('Offline')
+    ca.set_offline(False)
+    cb.set_offline(False)
+    sync(a)
+    sync(b)
+    sync(a)
+    assert {note_id, local_id, remote_id}.issubset(a.evaluate('Object.keys(state.stickyNotes)'))
+    assert {note_id, local_id, remote_id}.issubset(b.evaluate('Object.keys(state.stickyNotes)'))
+
+    # Failed cloud saves remain cached through reload and upload on retry.
+    fail_saves = True
+    note_a.locator('.sticky-title').fill('Keep this title until retry')
+    assert not a.evaluate('() => GatewiseCloud.syncNow()')
+    expect(a.locator('[data-sticky-status]')).to_contain_text('Retry sync')
+    a.reload()
+    a.wait_for_function('appReady && !GatewiseProgress.locked && GatewiseCloud.user !== null')
+    expect(note_a.locator('.sticky-title')).to_have_value('Keep this title until retry')
+    fail_saves = False
+    sync(a)
+    sync(b)
+    expect(note_b.locator('.sticky-title')).to_have_value('Keep this title until retry')
+
+    # A focused note is retained for copying after remote deletion, then removed on blur.
+    note_b.locator('.sticky-content').focus()
+    note_a.locator('[data-delete-sticky]').click()
+    note_a.locator('[data-confirm-delete]').click()
+    sync(a)
+    sync(b)
+    expect(note_b.locator('[data-sticky-card-status]')).to_contain_text('Deleted on another device')
+    b.locator('#app h1').click()
+    expect(note_b).to_have_count(0)
+    assert note_id not in records[USERS['a@example.test']]['data']['progress']['stickyNotes']
+
+    a.goto(URL + '#learn/0/0-propositions')
+    lesson_note_id = add_sticky(a, 'Topic sticky', 'Contrapositive reference')
+    sync(a)
+    b.goto(URL + '#learn/0/0-propositions')
+    b.locator('[data-sticky-sync]').click()
+    expect(b.locator(f'[data-sticky-id="{lesson_note_id}"] .sticky-content')).to_have_text('Contrapositive reference')
+    a.goto(URL + '#dashboard')
+    b.goto(URL + '#dashboard')
     # Finished study sessions and journal entries merge across devices like question history.
     change(a, "const now=Date.now();const run=GatewiseTime.create({sessionId:'device-a-focus',mode:'stopwatch',context:{kind:'learning',lesson:'0-matrices-rank',subject:0,label:'Matrices'},goal:'Identify pivots'},now-60000);state.focusSessions.push(GatewiseTime.record(run,now));state.focusReflections['device-a-focus']={recall:'Rank is the pivot count',nextAction:'Redo one rank problem'}")
     sync(a)
@@ -215,6 +355,8 @@ with sync_playwright() as p:
     a.locator('#account').click()
     a.locator('#importguest').click()
     a.wait_for_function('state.notes["guest-topic"] === "Guest only"')
+    assert a.evaluate('state.moduleNotes[0]') == 'Module note saved offline', 'Import must retain the existing account module note'
+    assert a.evaluate('state.stickyNotes["guest-sticky"].content') == '<b>Guest formula</b>'
     a.locator('#closeaccount').click()
     sync(a)
     fail_saves = True
@@ -233,6 +375,8 @@ with sync_playwright() as p:
     assert a.evaluate('state.notes.matrix') is None
     signin(a, 'b@example.test')
     assert a.evaluate('state.notes') == {}
+    assert a.evaluate('state.moduleNotes') == {}, 'Another account must not see module notes'
+    assert a.evaluate('state.stickyNotes') == {}, 'Another account must not see rich sticky notes'
     assert a.evaluate('state.mockResults') == []
     assert a.evaluate('state.focusSessions') == []
     assert a.evaluate('GatewiseStudy.timer') is None

@@ -11,4 +11,8 @@ def T(lesson,slug,topics,title,body,prompt,steps,answer,verification):
  assert len(parsed)>=3,(lesson,slug)
  tutorial={'id':lesson+'-'+slug,'title':title,'topics':topiclist,'body':body.strip(),'example':{'prompt':prompt,'strategy':' → '.join(step['title'] for step in parsed),'steps':parsed,'answer':answer,'verification':verification}}
  lessons[lesson].setdefault('tutorials',[]).append(tutorial)
- for topic in topiclist:registry.setdefault(topic,{'lesson':lesson,'tutorial':tutorial['id']})
+ for topic in topiclist:
+  previous=registry.get(topic)
+  previous_unit=next((t for t in lessons[previous['lesson']]['tutorials'] if t['id']==previous['tutorial']),None) if previous else None
+  if not previous_unit or len(topiclist)<=len(previous_unit['topics']):
+   registry[topic]={'lesson':lesson,'tutorial':tutorial['id']}

@@ -1,15 +1,18 @@
 (function () {
   'use strict';
   const fields = { 'gatewise-v1': 'progress', 'gatewise-mock': 'mock', 'gatewise-paper-run': 'paperRun' };
-  let userId = null, locked = false, cache = null, observed = null;
+  let userId = null, locked = false, cache = null, observed = null, needsPersist = false;
   const read = key => { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } };
   const guest = () => ({ progress: read('gatewise-v1') || {}, mock: read('gatewise-mock'), paperRun: read('gatewise-paper-run') });
   function persist() {
+    // Failed disk writes leave recoverable edits in cache; identical saves must retry.
+    needsPersist = true;
     const disk = read('gatewise-account:' + userId), before = cache.data;
     // Another tab may have saved since this tab last read the cache.
     if (disk?.data && observed) cache.data = GatewiseMerge.rebase(observed, cache.data, disk.data);
     localStorage.setItem('gatewise-account:' + userId, JSON.stringify(cache));
     observed = GatewiseMerge.clone(cache.data);
+    needsPersist = false;
     if (!locked && !GatewiseMerge.equal(before, cache.data)) window.dispatchEvent(new Event('gatewise-cloud-update'));
   }
   window.GatewiseProgress = {
@@ -19,13 +22,14 @@
       if (locked) return;
       if (!userId) { localStorage.setItem(key, value); return; }
       const next = JSON.parse(value), field = fields[key];
-      if (GatewiseMerge.equal(cache.data[field], next)) return;
+      if (GatewiseMerge.equal(cache.data[field], next) && !needsPersist) return;
       cache.data[field] = next; persist(); window.dispatchEvent(new Event('gatewise-dirty'));
     },
     removeItem(key) { if (userId) this.setItem(key, 'null'); else localStorage.removeItem(key); },
     lock() { locked = true; }, unlock() { locked = false; },
     activate(id) {
       userId = id;
+      needsPersist = false;
       cache = id ? read('gatewise-account:' + id) || { data: { progress: {}, mock: null, paperRun: null }, base: { progress: {}, mock: null, paperRun: null } } : null;
       observed = id ? GatewiseMerge.clone(cache.data) : null;
     },

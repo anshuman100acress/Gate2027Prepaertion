@@ -1,0 +1,16 @@
+.noteseditor { scroll-margin-top: 1.5rem; }
+.noteseditor label, .noteseditor p, .noteseditor .textlink, .noteseditor small { font-size: .875rem; }
+.noteseditor h2 { font-size: 1.125rem; margin: 0; }
+.noteseditor .sticky-toolbar { background: #eef3e6; border: 1px solid #c9d4bc; border-radius: 6px 6px 0 0; }
+.noteseditor .topic-note-content { min-height: 12rem; border: 1px solid #c9d4bc; border-top: 0; border-radius: 0 0 6px 6px; background: #fcfdf9; }
+.noteseditor .sticky-link-form { background: #f4f7ed; border: 1px solid #c9d4bc; }
+.noteseditor [hidden] { display: none; }
+.rich-note-preview { white-space: normal; font-size: 1rem; }
+.notesactions { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .75rem 1rem; margin-top: .75rem; }
+.notesactions > div { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1rem; }
+.noteseditor[data-unsaved] [data-note-status] { color: #9b3636; }
+.modulenotecard .usernote { margin-top: 1rem; }
+@media (max-width: 640px) {
+  .notesactions, .notesactions > div { align-items: flex-start; }
+  .noteseditor .topic-note-content { min-height: 10rem; }
+}

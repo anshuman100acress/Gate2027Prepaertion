@@ -10,7 +10,7 @@ assert.equal(build(url, jwt('service_role')).status, 1, 'privileged legacy keys 
 assert.equal(build(url, jwt('anon')).status, 0, 'legacy anon key is supported');
 assert.equal(build(url, 'sb_publishable_test').status, 0, 'publishable key is supported');
 assert.match(await readFile('dist/cloud-config.js', 'utf8'), /sb_publishable_test/);
-for (const file of ['dist/vendor/supabase/supabase.js', 'dist/vendor/katex/katex.min.js', 'dist/data/syllabus.json', 'dist/papers/2018_CS.pdf', 'dist/study-time.js', 'dist/study-tools.js', 'dist/study-tools.css']) await access(file);
+for (const file of ['dist/vendor/supabase/supabase.js', 'dist/vendor/katex/katex.min.js', 'dist/data/syllabus.json', 'dist/papers/2018_CS.pdf', 'dist/study-time.js', 'dist/study-tools.js', 'dist/study-tools.css', 'dist/notes.js', 'dist/notes.css', 'dist/sticky-notes.js', 'dist/sticky-notes.css']) await access(file);
 for (const file of ['dist/.env', 'dist/tests', 'dist/supabase', 'dist/data/build.py', 'dist/node_modules']) await assert.rejects(() => access(file), 'development/private files must stay out of deployment');
 assert.equal(build('', '').status, 0, 'guest deployment is supported');
 assert.match(await readFile('dist/cloud-config.js', 'utf8'), /"url":""/);

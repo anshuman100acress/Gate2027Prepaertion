@@ -38,7 +38,7 @@ with sync_playwright() as p:
  page.locator('#lessonanswer-1').fill('3');page.locator('[data-answer="1"]').click()
  assert '0-propositions' in page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1")).understood')
  page.reload();page.wait_for_selector('.learningcheck')
- assert page.locator('#lessonnotes').input_value()=='I need to distinguish converse and contrapositive.'
+ assert page.locator('#lessonnotes').inner_text()=='I need to distinguish converse and contrapositive.'
  assert page.locator('#practice-details').evaluate('(el)=>el.open')
  page.locator('#lessonanswer-1').fill('7')
  page.locator('#schedulereview').click()
@@ -69,6 +69,7 @@ with sync_playwright() as p:
   page.wait_for_selector('#lessonarticle')
   assert page.locator('[role=tablist]').count()==0
   assert l['title'] in page.locator('.lessonhero').inner_text()
+  assert page.locator('#lesson-sticky-notes [data-add-sticky]').count()==1
   assert len(page.locator('#stagecontent').inner_text())>900,l['id']
   assert page.locator('.workedexample').count()==len(l['tutorials'])+len(l['examples'])
   # Each example immediately follows the section selected by its content metadata.

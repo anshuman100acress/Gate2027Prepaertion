@@ -7,7 +7,7 @@
   let started = false, recovery = false, status = 'Saved on this device', problem = '';
   const emit = name => window.dispatchEvent(new Event(name));
   const bundle = data => ({ progress: data?.progress || {}, mock: data?.mock || null, paperRun: data?.paperRun || null });
-  function setStatus(text, detail = '') { status = text; problem = detail; renderStatus(); }
+  function setStatus(text, detail = '') { status = text; problem = detail; renderStatus(); emit('gatewise-sync-status'); }
   function renderStatus() {
     const button = document.getElementById('account');
     if (button) { button.textContent = session ? 'My account' : 'Sign in'; button.disabled = store.locked; }
@@ -107,7 +107,7 @@
       dialog.innerHTML = `<h2>Study on any device</h2><p>Accounts are not enabled for this deployment yet. You can continue learning and saving progress on this device.</p><div class="actions">${close}</div>`;
     } else if (session && mode !== 'new-password') {
       const guest = store.guest().progress;
-      const count = (guest.completed || []).length, notes = Object.values(guest.notes || {}).filter(Boolean).length;
+      const count = (guest.completed || []).length, notes = [...Object.values(guest.notes || {}), ...Object.values(guest.moduleNotes || {}), ...Object.values(guest.stickyNotes || {})].filter(Boolean).length;
       dialog.innerHTML = `<h2>Your preparation account</h2><p class="accountemail">${escape(session.user.email || '')}</p><p id="accountmessage" role="status">${escape(problem || status)}</p><div class="actions"><button class="btn" type="button" id="syncaccount">Sync now</button><button class="btn secondary" type="button" id="exportprogress">Download my progress</button></div><section class="importguest"><h3>Bring your guest progress with you</h3><p>This browser’s guest workspace has ${count} read lessons and ${notes} notes. Importing combines histories and saved topics. Your existing account notes take priority. Guest progress stays available here.</p><button class="btn secondary" type="button" id="importguest">Import guest progress</button></section><div class="actions"><button class="btn secondary" type="button" id="signout">Sign out</button>${close}</div>`;
     } else {
       const reset = mode === 'reset', signup = mode === 'signup', update = mode === 'new-password';
@@ -160,7 +160,7 @@
       if (unsynced && typeof toast === 'function') toast('Pending changes remain on this device. Sign in here again to sync them.');
     };
   }
-  window.GatewiseCloud = { configured, syncNow, showAccount, get user() { return session?.user || null; } };
+  window.GatewiseCloud = { configured, syncNow, showAccount, get user() { return session?.user || null; }, get status() { return status; }, get problem() { return problem; } };
   GatewiseCloud.ready = initialize();
   window.addEventListener('gatewise-dirty', () => { setStatus(navigator.onLine ? 'Saved on this device · Waiting to sync' : 'Saved on this device · Offline'); schedule(); });
   window.addEventListener('online', () => syncNow());

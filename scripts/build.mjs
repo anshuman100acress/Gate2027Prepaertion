@@ -26,7 +26,7 @@ if (process.argv.includes('--vendor')) {
 } else {
   await rm('dist', { recursive: true, force: true });
   await mkdir('dist');
-  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'syllabus.pdf', 'papers', 'vendor']) await cp(name, `dist/${name}`, { recursive: true });
+  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'syllabus.pdf', 'papers', 'vendor']) await cp(name, `dist/${name}`, { recursive: true });
   await mkdir('dist/data');
   for (const name of ['syllabus.json', 'questions.json', 'papers.json', 'pyqs.json', 'lesson-questions.json', 'topic-coverage.json']) await cp(`data/${name}`, `dist/data/${name}`);
   await build({ ...options, outfile: 'dist/vendor/supabase/supabase.js' });

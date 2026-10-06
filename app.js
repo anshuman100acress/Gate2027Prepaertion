@@ -1,11 +1,11 @@
 const $=s=>document.querySelector(s), app=$('#app');
 let subjects=[],papers=[],bank=[],practice=null,mock=null,timer;
 function normalizeProgress(value={}){
- const defaults={contentVersion:2,understood:[],lessonChecks:{},notes:{},bookmarks:[],reviewDates:{},reading:{},lastLesson:null,name:'',hours:2,completed:[],attempts:[],sessions:[],tasks:[],mockResults:[],paperResults:[],focusSessions:[],focusReflections:{}};
+ const defaults={contentVersion:2,understood:[],lessonChecks:{},notes:{},moduleNotes:{},noteFormats:{},stickyNotes:{},bookmarks:[],reviewDates:{},reading:{},lastLesson:null,name:'',hours:2,completed:[],attempts:[],sessions:[],tasks:[],mockResults:[],paperResults:[],focusSessions:[],focusReflections:{}};
  const migrated=value.contentVersion!==2;
  const result={...defaults,...value};
  for(const key of ['understood','bookmarks','completed','attempts','sessions','tasks','mockResults','paperResults','focusSessions'])if(!Array.isArray(result[key]))result[key]=[];
- for(const key of ['lessonChecks','notes','reviewDates','reading','focusReflections'])if(!result[key]||typeof result[key]!=='object'||Array.isArray(result[key]))result[key]={};
+ for(const key of ['lessonChecks','notes','moduleNotes','noteFormats','stickyNotes','reviewDates','reading','focusReflections'])if(!result[key]||typeof result[key]!=='object'||Array.isArray(result[key]))result[key]={};
  if(migrated){result.legacyCompleted=result.completed;result.completed=[];result.tasks=[];result.contentVersion=2}
  for(const key of ['attempts','mockResults','paperResults','focusSessions']){const occurrences=new Map();result[key]=result[key].map(item=>{if(item.eventId||item.sessionId)return item;const text=JSON.stringify(item);let hash=2166136261;for(let i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619)>>>0;const count=occurrences.get(text)||0;occurrences.set(text,count+1);return {...item,eventId:`legacy-${key}-${hash}-${count}`}})}
  for(const subject of subjects)for(const lesson of subject.lessons){if(!lesson.checks?.some(q=>result.lessonChecks[q.id]))continue;const passed=lesson.checks.every(q=>result.lessonChecks[q.id]?.correct);result.understood=passed?[...new Set([...result.understood,lesson.id])]:result.understood.filter(id=>id!==lesson.id)}
@@ -21,7 +21,7 @@ function loadAccountProgress(){
 }
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today=()=>new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Kolkata'});
-function save(){try{GatewiseProgress.setItem('gatewise-v1',JSON.stringify(state))}catch{toast('Browser storage is full. Your current session is still available.')}$('#sidebarname').textContent=state.name||'Your workspace'}
+function save(){let saved=false;try{if(!GatewiseProgress.locked){GatewiseProgress.setItem('gatewise-v1',JSON.stringify(state));saved=true}}catch{toast('Browser storage is full. Your current session is still available.')}$('#sidebarname').textContent=state.name||'Your workspace';return saved}
 function toast(t){$('#toast').textContent=t;$('#toast').style.display='block';setTimeout(()=>$('#toast').style.display='none',3000)}
 function recordDay(){if(!state.sessions.includes(today()))state.sessions.push(today());save()}
 const totalLessons=()=>subjects.reduce((n,s)=>n+s.lessons.length,0);
