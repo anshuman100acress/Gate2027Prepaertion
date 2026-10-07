@@ -10,15 +10,27 @@ units=[t for l in lessons.values() for t in l['tutorials']]
 tutorials={t['id']:t for t in units}
 coverage=json.loads((ROOT/'data/topic-coverage.json').read_text())
 assert len(tutorials)==len(units)==257
-example_count=sum(len(l['examples'])+len(l['tutorials']) for l in lessons.values())
-assert example_count==401
+depth=[pack for t in tutorials.values() for pack in t.get('depth',[])]
+example_count=sum(len(l['examples'])+len(l['tutorials']) for l in lessons.values())+sum(len(pack['examples']) for pack in depth)
+assert len(depth)==295 and example_count==1286
 for row in coverage:
  target=tutorials[row['tutorial']]
  assert row['targetLesson'] in lessons and row['topic'] in target['topics'],row
  assert row['anchor']=='topic-'+target['id']
+ pack=next(pack for pack in target['depth'] if pack['topic']==row['topic'])
+ assert pack['id']==row['studyAnchor']
+ assert row['exampleTypes']==['fundamental','application','trap']
 for t in tutorials.values():
  assert len(t['body'].split())>=110,t['id']
  assert len(t['example']['steps'])>=3 and t['example']['answer'] and t['example']['verification'],t['id']
+assert len({pack['id'] for pack in depth})==len(depth)
+for pack in depth:
+ assert len(pack['body'].split())>=80,pack['id']
+ assert [e['kind'] for e in pack['examples']]==['fundamental','application','trap'],pack['id']
+ assert len({e['prompt'] for e in pack['examples']})==3,pack['id']
+ for example in pack['examples']:
+  assert len(example['steps'])>=3 and example['answer'] and example['verification'],pack['id']
+  assert all(step['title'] and step['explanation'] for step in example['steps']),pack['id']
 # Check the exact matrices and row-operation arithmetic in the requested elimination example.
 gaussian=tutorials['0-matrices-rank-gaussian']['example']
 def matrix(step):
@@ -46,7 +58,7 @@ for l in lessons.values():
   local=[t for t in reversed(l['tutorials']) if topic in t['topics']]
   if local:assert ref['tutorial']==min(local,key=lambda t:len(t['topics']))['id']
 if '--data-only' in sys.argv:
- print(f'Passed: {len(coverage)} topic mappings, {len(tutorials)} tutorials, {example_count} paired examples, focused topic selection and elimination arithmetic.')
+ print(f'Passed: {len(coverage)} topic mappings, {len(tutorials)} tutorials, {len(depth)} topic explanations with three example types, {example_count} worked examples, focused topic selection and elimination arithmetic.')
  sys.exit(0)
 with sync_playwright() as p:
  browser=p.chromium.launch(headless=True,executable_path=os.environ.get('CHROMIUM_PATH','/usr/bin/chromium'),args=['--no-sandbox'])
@@ -63,16 +75,33 @@ with sync_playwright() as p:
  assert page.locator('.concepttutorial').first.evaluate('(el)=>!!(el.compareDocumentPosition(document.querySelector("#supplementary-sequence"))&Node.DOCUMENT_POSITION_FOLLOWING)')
  page.locator('#lessonnotes').fill('Pivot rows give rank; a contradiction is a nonzero augmented entry with zero coefficients.')
  page.locator('.lessonhero').get_by_role('link',name='Gaussian elimination',exact=True).click()
- page.wait_for_function('Math.abs(document.querySelector("#topic-0-matrices-rank-gaussian").getBoundingClientRect().top)<100')
- assert page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1")).reading["0-matrices-rank"].anchor')=='topic-0-matrices-rank-gaussian'
+ gaussian_anchor=lessons['0-matrices-rank']['topicCoverage']['Gaussian elimination']['studyAnchor']
+ page.wait_for_function('(id)=>Math.abs(document.getElementById(id).getBoundingClientRect().top)<100',arg=gaussian_anchor)
+ assert page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1")).reading["0-matrices-rank"].anchor')==gaussian_anchor
+ pack_element=page.locator('#'+gaussian_anchor).locator('..')
+ assert page.evaluate('''() => {
+  const anchors=[...document.querySelectorAll('[data-reading-anchor]')];
+  return !anchors.some(parent=>anchors.some(child=>parent!==child && parent.contains(child)));
+ }'''), 'A topic explanation must not overlap its example reading regions'
+ assert pack_element.locator('.workedexample').count()==3
+ for kind in ['fundamental','application','trap']:
+  assert pack_element.locator('[data-example-kind="'+kind+'"]').count()==1
+ for label,kind in [('Basic walkthrough →','fundamental'),('Exam-style application →','application')]:
+  pack_element.get_by_role('button',name=label,exact=True).click()
+  example_anchor='worked-example-'+gaussian_anchor+'-'+kind
+  page.wait_for_function('(id)=>Math.abs(document.getElementById(id).getBoundingClientRect().top)<100',arg=example_anchor)
+  assert page.locator('#'+example_anchor+' .answercheck').count()==1
+ pack_element.get_by_role('button',name='Trap or edge case →',exact=True).click()
+ trap_anchor='worked-example-'+gaussian_anchor+'-trap'
+ page.wait_for_function('(id)=>Math.abs(document.getElementById(id).getBoundingClientRect().top)<100',arg=trap_anchor)
  assert page.locator('#worked-example-tutorial-0-matrices-rank-gaussian .mtable').count()==3
  page.reload();page.wait_for_selector('#resumereading');page.locator('#resumereading').click()
- page.wait_for_function('Math.abs(document.querySelector("#topic-0-matrices-rank-gaussian").getBoundingClientRect().top)<100')
+ page.wait_for_function('(id)=>Math.abs(document.getElementById(id).getBoundingClientRect().top)<100',arg=trap_anchor)
  assert 'Pivot rows' in page.locator('#lessonnotes').inner_text()
  # Repeated topic links resolve to the most specific authored walkthrough.
  page.goto('http://127.0.0.1:3000/#learn/9/9-tcp-web');page.wait_for_selector('.lessonhero .topicchips')
  page.locator('.lessonhero .topicchips a').filter(has_text='DNS').click()
- dns_anchor=lessons['9-tcp-web']['topicCoverage']['DNS']['anchor']
+ dns_anchor=lessons['9-tcp-web']['topicCoverage']['DNS']['studyAnchor']
  page.wait_for_selector('#'+dns_anchor)
  page.wait_for_function('(id)=>Math.abs(document.getElementById(id).getBoundingClientRect().top)<100',arg=dns_anchor)
  # Direct links work on first load, with the renderer already active.

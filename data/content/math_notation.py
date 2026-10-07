@@ -44,7 +44,7 @@ def typeset(text):
 def walk(obj):
  if isinstance(obj,str):return typeset(obj)
  if isinstance(obj,list):return [walk(x) for x in obj]
- if isinstance(obj,dict):return {k:v if k in ['id','code','equation','latex','afterSection','type'] else walk(v) for k,v in obj.items()}
+ if isinstance(obj,dict):return {k:v if k in ['id','topic','topics','kind','code','equation','latex','afterSection','type'] else walk(v) for k,v in obj.items()}
  return obj
 for s in subjects:
  for l in s['lessons']:

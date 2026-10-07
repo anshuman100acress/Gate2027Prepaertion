@@ -31,7 +31,9 @@ with sync_playwright() as p:
  page.wait_for_selector('#lessonfeedback-0 .katex')
  assert page.locator('#lessonfeedback-0 .checksolution').is_visible()
  page.locator('#lessonfeedback-0 [data-returnexamples]').click()
- page.wait_for_function('Math.abs(document.querySelector("#worked-example-0").getBoundingClientRect().top)<100')
+ first_example=page.locator('.workedexample').first.get_attribute('id')
+ page.wait_for_function('(id)=>Math.abs(document.getElementById(id).getBoundingClientRect().top)<100',arg=first_example)
+ assert page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1")).reading["0-propositions"].anchor')==first_example
  # Original practice explanations and full mock review render inserted math too.
  page.goto('http://127.0.0.1:3000/#practice/0');page.wait_for_selector('#sourcefilter')
  page.select_option('#sourcefilter','original');page.select_option('#typefilter','NAT')

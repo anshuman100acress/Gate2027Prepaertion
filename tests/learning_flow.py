@@ -4,6 +4,8 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 lessons=[l for s in json.loads((ROOT/'data/syllabus.json').read_text()) for l in s['lessons']]
+def example_count(lesson):
+ return len(lesson['examples'])+sum(1+sum(len(p['examples']) for p in t.get('depth',[])) for t in lesson['tutorials'])
 with sync_playwright() as p:
  browser=p.chromium.launch(headless=True,executable_path=os.environ.get('CHROMIUM_PATH','/usr/bin/chromium'),args=['--no-sandbox'])
  page=browser.new_page(viewport={'width':1440,'height':1000})
@@ -22,7 +24,7 @@ with sync_playwright() as p:
  page.locator('#lessonnotes').fill('I need to distinguish converse and contrapositive.')
  page.locator('#bookmarklesson').click()
  assert page.locator('[role=tablist]').count()==0
- assert page.locator('.workedexample').count()==len(lessons[0]['tutorials'])+len(lessons[0]['examples'])
+ assert page.locator('.workedexample').count()==example_count(lessons[0])
  assert page.locator('#supplementary-sequence .workedexample li').count()==sum(len(e['steps']) for e in lessons[0]['examples'])
  page.locator('#markread').click()
  state=page.evaluate('JSON.parse(localStorage.getItem("gatewise-v1"))')
@@ -71,7 +73,12 @@ with sync_playwright() as p:
   assert l['title'] in page.locator('.lessonhero').inner_text()
   assert page.locator('#lesson-sticky-notes [data-add-sticky]').count()==1
   assert len(page.locator('#stagecontent').inner_text())>900,l['id']
-  assert page.locator('.workedexample').count()==len(l['tutorials'])+len(l['examples'])
+  assert page.locator('.workedexample').count()==example_count(l)
+  for tutorial in l['tutorials']:
+   for pack in tutorial.get('depth',[]):
+    element=page.locator('#'+pack['id']).locator('..')
+    assert element.locator('.workedexample').count()==3,pack['id']
+    assert element.locator('.topic-example-nav button').count()==3,pack['id']
   # Each example immediately follows the section selected by its content metadata.
   for i,e in enumerate(l['examples']):
    predecessor=page.locator(f'#worked-example-{i}').evaluate('(el)=>{let p=el.previousElementSibling;while(p && !p.classList.contains("teachingunit"))p=p.previousElementSibling;return p?.id;}')

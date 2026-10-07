@@ -22,7 +22,7 @@ with sync_playwright() as p:
         page.locator('#modulenotes').fill(subject['name'] + '\nMy module formulas')
         expect(page.locator('#modulenotesstatus')).to_contain_text('Saved on this device')
     page.reload()
-    expect(page.locator('#modulenotes')).to_have_text(SUBJECTS[-1]['name'] + '\nMy module formulas')
+    expect(page.locator('#modulenotes')).to_have_text(SUBJECTS[-1]['name'] + '\nMy module formulas', use_inner_text=True)
     assert len(page.evaluate('state.moduleNotes')) == len(SUBJECTS)
 
     literal = '</textarea><img src=x onerror="window.noteInjection=true"> \\(x\\)'
