@@ -8,6 +8,7 @@ function learn(sid,lid,anchor){
  const s=subjects.find(s=>s.id===Number(sid));if(!s){location.hash='learn';return}
  if(!lid){subjectMap(s);return}
  const l=s.lessons.find(l=>l.id===lid);if(!l){subjectMap(s);return}
+ if(!GatewiseCourse.canRead(l)){activeLesson=null;lockedLesson(s,l);return}
  activeLesson={s,l};const previous=state.reading[l.id]||{};
  const legacyAnchor={examples:'worked-example-0',checks:'lesson-practice',revision:'lesson-revision'};
  state.reading[l.id]={...previous,stage:'lesson',anchor:previous.anchor||legacyAnchor[previous.stage]||null};
@@ -110,4 +111,10 @@ function recordTopicCheck(q,ok){
 function linkPyqTopics(){
  const mapping={'pyq-2018-CS-1':['0-recurrences'],'pyq-2018-CS-3':['3-linear-structures'],'pyq-2018-GA-1':['10-verbal-reasoning'],'pyq-2018-GA-2':['10-verbal-reasoning'],'pyq-2018-GA-3':['10-quantitative'],'pyq-2018-GA-5':['10-quantitative'],'pyq-2018-GA-6':['10-quantitative'],'pyq-2018-GA-8':['10-quantitative'],'pyq-2018-GA-10':['0-binomial-poisson']};
  for(const q of bank)if(mapping[q.id])q.topics=mapping[q.id];
+}
+
+function courseLockMarkup(){return `<section class="course-lock"><span class="pill">FULL COURSE</span><h2>Continue with a course pass</h2><p>Try a complete preview lesson in each subject. Your pass includes the full explanations, worked examples and practice.</p>${GatewiseCourse.access.error?`<p class="course-error">${esc(GatewiseCourse.access.error)}</p>`:''}<div class="actions"><a class="btn" href="#pricing">View course access →</a><a class="btn secondary" href="#learn">Explore preview lessons</a></div></section>`}
+function lockedLesson(s,l){
+ app.innerHTML=title(s.name,l.title,'This topic is included in the complete course.')+`<a class="textlink" href="#learn/${s.id}">← Subject roadmap</a>`+courseLockMarkup()+GatewiseStickyNotes.board('lesson',l.id,s.id)+GatewiseNotes.editor('notes',l.id,{id:'lessonnotes',label:'Your notes for this topic',description:'Your personal notes remain available with preview access.',placeholder:'Ideas, formulas and questions to revisit…'});
+ GatewiseNotes.bind();GatewiseStickyNotes.bind();
 }

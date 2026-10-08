@@ -160,7 +160,16 @@
       if (unsynced && typeof toast === 'function') toast('Pending changes remain on this device. Sign in here again to sync them.');
     };
   }
-  window.GatewiseCloud = { configured, syncNow, showAccount, get user() { return session?.user || null; }, get status() { return status; }, get problem() { return problem; } };
+  async function getAccessToken() {
+    await GatewiseCloud.ready;
+    if (!client || !session || store.locked) return null;
+    const accountId = session.user.id;
+    const { data, error } = await client.auth.getSession();
+    if (error) throw new Error('Your account session could not refresh. Sign in again to retry.');
+    if (store.locked || session?.user.id !== accountId || data.session?.user.id !== accountId) return null;
+    return data.session.access_token || null;
+  }
+  window.GatewiseCloud = { configured, syncNow, showAccount, getAccessToken, get user() { return session?.user || null; }, get status() { return status; }, get problem() { return problem; } };
   GatewiseCloud.ready = initialize();
   window.addEventListener('gatewise-dirty', () => { setStatus(navigator.onLine ? 'Saved on this device · Waiting to sync' : 'Saved on this device · Offline'); schedule(); });
   window.addEventListener('online', () => syncNow());

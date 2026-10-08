@@ -1,6 +1,6 @@
 # Accounts and progress on Vercel
 
-Recommended deployment: **Vercel hosts the app; Supabase provides email/password accounts and a private Postgres progress record per user.** GitHub remains the source repository. Firebase is another workable option, but Supabase fits this small static app without adding a separate application server. You do not need to move the lessons or PDFs out of Vercel.
+Recommended deployment: **Vercel hosts the app; Supabase provides email/password accounts and a private Postgres progress record per user.** GitHub remains the source repository. The default open deployment serves lessons and PDFs from Vercel. For paid course access, [COURSE_SETUP.md](COURSE_SETUP.md) explains the additional migration, private lesson storage, owner role and Vercel payment functions; PDFs remain freely available.
 
 This repository contains the integration, not a provisioned Supabase project. Until you configure both public environment variables, the app keeps working in local guest mode. Cloud accounts and cross-device progress require the steps below.
 

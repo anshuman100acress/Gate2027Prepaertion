@@ -1,6 +1,6 @@
 # Pricing and full-course access proposal
 
-This is a proposed commercial plan. Payments, content restrictions and an owner account are not enabled by this content update.
+This is the commercial plan for the optional course-access implementation. The repository now includes protected builds, Supabase course permissions, an owner-assignment command, a pricing page and verified Razorpay checkout/webhook handlers. The default mode remains open. No production payment credentials or owner identity are configured in source; use [COURSE_SETUP.md](COURSE_SETUP.md) to activate and verify them.
 
 ## Offer and price to test
 
@@ -88,4 +88,4 @@ Do not include full paid lesson JSON, solutions or private source in the Vercel 
 6. Verify access on free, paid, expired and owner accounts, including direct HTTP requests; confirm owner accounts cannot read other users' personal notes.
 7. Launch to a small group, monitor feedback and correct content issues before widening paid access.
 
-No payment account, production price or owner identity has been configured by this plan.
+The implementation prepares the ₹499 introductory price for a 12-month pass. It can be changed with the server price setting before activation; ₹999 remains a proposed later price experiment. Course management and manual entitlement changes use trusted server/database operations; no browser admin editor or learner-data browsing tool is included. No payment account or owner identity has been configured by this update.

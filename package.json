@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "start": "python -m http.server 3000",
-    "check": "node --check app.js && node --check learning.js && node --check notes.js && node --check sticky-notes.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js && node --check study-time.js && node --check study-tools.js",
+    "check": "node --check app.js && node --check learning.js && node --check course.js && node --check api/checkout.js && node --check api/payment-webhook.js && node --check server/course-server.cjs && node --check notes.js && node --check sticky-notes.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js && node --check study-time.js && node --check study-tools.js",
     "build": "node scripts/build.mjs",
     "vendor:cloud": "node scripts/build.mjs --vendor",
     "test:cloud": "node tests/cloud_merge.js && node tests/progress_store.js && node tests/cloud_rls.mjs && node tests/cloud_build.mjs",
-    "test:study": "node tests/study_time.js"
+    "test:study": "node tests/study_time.js",
+    "test:course": "node tests/course_access.mjs && node tests/course_payments.cjs && node tests/course_build.mjs",
+    "course:publish": "node scripts/publish-course.mjs",
+    "course:owner": "node scripts/set-course-owner.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2"
