@@ -86,3 +86,7 @@ Guest progress saves in this browser. Supabase accounts sync private progress ac
 The complete learning-flow, math-rendering, topic-tutorial and simulated paid-account browser tests require the private full-content fixtures. The public release uses `tests/course_release_ui.py` for preview and locked-page verification. Browser scripts require Playwright and Chromium for development, not for running the app.
 
 Content is original instructional material organized against the supplied syllabus. It is not an official GATE course or a substitute for all reference-book exercises. See [SYLLABUS_COVERAGE.md](SYLLABUS_COVERAGE.md) for the topic-to-lesson map.
+
+## Mobile app and installation
+
+Phones have a dedicated home screen, compact learning paths, bottom navigation and study controls. The protected production build is installable as a PWA and reopens offline with free previews and saved personal work. See [MOBILE_PWA.md](MOBILE_PWA.md) for installation, caching boundaries and mobile browser checks.

@@ -2,6 +2,7 @@ import { cp, mkdir, rm, writeFile, readFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
+import { buildPwa } from './build-pwa.mjs';
 import { publicCloudSettings, publicCourseSettings, readCourseCatalog, protectedCatalog } from './course-catalog.mjs';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -42,13 +43,14 @@ export async function buildSite({ outdir = 'dist', env = process.env, catalogRoo
   const data = course.mode === 'protected' ? protectedCatalog(catalog) : catalog;
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
-  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'pyq-practice.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'course.js', 'course.css', 'course-offer.js', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'premium-tools.js', 'premium-tools.css', 'question-levels.js', 'syllabus.pdf', 'papers', 'vendor']) await cp(resolve(projectRoot, name), resolve(output, name), { recursive: true });
+  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'pyq-practice.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'course.js', 'course.css', 'course-offer.js', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'premium-tools.js', 'premium-tools.css', 'question-levels.js', 'mobile.js', 'mobile.css', 'manifest.webmanifest', 'icons', 'syllabus.pdf', 'papers', 'vendor']) await cp(resolve(projectRoot, name), resolve(output, name), { recursive: true });
   await mkdir(resolve(output, 'data'));
   for (const name of ['syllabus', 'questions', 'pyqs', 'lesson-questions', 'topic-coverage']) await writeFile(resolve(output, 'data', `${name}.json`), JSON.stringify(data[name]) + '\n');
   await cp(resolve(catalogRoot, 'data/papers.json'), resolve(output, 'data/papers.json'));
   await build({ ...options, outfile: resolve(output, 'vendor/supabase/supabase.js') });
   await writeFile(resolve(output, 'cloud-config.js'), `window.GATEWISE_CLOUD = ${JSON.stringify(cloud)};\n`);
   await writeFile(resolve(output, 'course-config.js'), `window.GATEWISE_COURSE = ${JSON.stringify(course)};\n`);
+  if (course.mode === 'protected') await buildPwa(output, { cloud, course }, projectRoot);
   return { output, cloud, course };
 }
 
