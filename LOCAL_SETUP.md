@@ -1,4 +1,4 @@
-# Test Gatewise on your computer
+# Test GateClimb on your computer
 
 Clone the GitHub repository to get the frontend, three free lessons, ten sample questions and 24 past-year PDFs. Paid content is stored in Supabase and is not part of this public checkout.
 

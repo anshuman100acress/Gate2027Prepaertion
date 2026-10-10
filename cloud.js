@@ -145,7 +145,7 @@
     const exporting = document.getElementById('exportprogress');
     if (exporting) exporting.onclick = () => {
       const blob = new Blob([JSON.stringify(store.snapshot().data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'gatewise-progress.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+      const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'gateclimb-progress.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     };
     const signout = document.getElementById('signout');
     if (signout) signout.onclick = async () => {
