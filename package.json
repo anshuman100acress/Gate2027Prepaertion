@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "python -m http.server 3000",
-    "check": "node --check app.js && node --check learning.js && node --check course.js && node --check course-offer.js && node --check pyq-practice.js && node --check api/checkout.js && node --check api/payment-webhook.js && node --check server/course-server.cjs && node --check notes.js && node --check sticky-notes.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js && node --check study-time.js && node --check study-tools.js && node --check premium-tools.js && node --check question-levels.js",
+    "check": "node --check app.js && node --check learning.js && node --check course.js && node --check course-offer.js && node --check pyq-practice.js && node --check api/checkout.js && node --check api/payment-webhook.js && node --check server/course-server.cjs && node --check notes.js && node --check sticky-notes.js && node --check cloud.js && node --check progress-store.js && node --check progress-merge.js && node --check study-time.js && node --check study-tools.js && node --check premium-tools.js && node --check question-levels.js && node --check mobile.js && node --check scripts/build-pwa.mjs && node --check tests/pwa.mjs",
     "build": "node scripts/build.mjs",
     "vendor:cloud": "node scripts/build.mjs --vendor",
     "test:cloud": "node tests/cloud_merge.js && node tests/progress_store.js && node tests/cloud_rls.mjs && node tests/cloud_build.mjs",
@@ -15,7 +15,8 @@
     "course:publish": "node scripts/publish-course.mjs",
     "course:owner": "node scripts/set-course-owner.mjs",
     "test:release": "node tests/course_release.mjs",
-    "course:previews": "node scripts/export-course-preview.mjs"
+    "course:previews": "node scripts/export-course-preview.mjs",
+    "test:pwa": "node tests/pwa.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2"

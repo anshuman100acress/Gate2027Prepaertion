@@ -67,6 +67,7 @@
   }
   async function refresh() {
     if (!protectedMode || !base || window.GatewiseProgress?.locked) return !protectedMode;
+    if (!navigator.onLine || window.GATEWISE_OFFLINE_BOOT === true) { drop('offline', 'Reconnect to load your paid course. Free previews and your saved notes are available on this device.'); return false; }
     const token = ++generation, accountId = identity();
     controller?.abort(); controller = new AbortController(); const signal = controller.signal;
     access = { ...access, status: 'loading', error: '', accountId }; emit('loading');
@@ -164,6 +165,7 @@
   }
   async function checkout() {
     if (checkoutFlight || !protectedMode || !config.checkoutEnabled) return;
+    if (!navigator.onLine || window.GATEWISE_OFFLINE_BOOT === true) { paymentMessage('Connect to the internet to purchase course access.'); return; }
     if (!identity()) { GatewiseCloud.showAccount(); return; }
     if (access.hasAccess) { location.hash = 'learn'; return; }
     checkoutFlight = true; const accountId = identity(); const button = document.querySelector('[data-course-checkout]'); if (button) button.disabled = true;

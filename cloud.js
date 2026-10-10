@@ -22,7 +22,7 @@
   async function syncNow() {
     if (!client || !session) return false;
     if (flight) return flight.promise;
-    if (!navigator.onLine) { setStatus('Saved on this device · Offline', 'Reconnect to sync your latest changes.'); return false; }
+    if (!navigator.onLine || window.GATEWISE_OFFLINE_BOOT === true) { setStatus('Saved on this device · Offline', 'Reconnect to sync your latest changes.'); return false; }
     const token = generation, userId = session.user.id;
     const job = { promise: null };
     flight = job;
