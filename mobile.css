@@ -23,7 +23,7 @@
  body>aside,.main>header{display:none}.main{margin:0;min-height:100dvh}
  #mobile-header{display:block;position:sticky;top:0;z-index:12;background:rgba(246,248,242,.97);padding-top:env(safe-area-inset-top);border-bottom:1px solid #e1e8db;backdrop-filter:blur(18px)}
  .mobile-topbar{height:var(--mobile-top-height);padding:0 16px;display:flex;align-items:center;gap:10px}
- .mobile-logo{display:grid;place-items:center;width:41px;height:41px;background:var(--green);border-radius:14px;overflow:hidden;flex-shrink:0}.mobile-logo img{display:block;width:100%;height:100%;object-fit:cover}
+ .mobile-logo{width:41px;height:41px;background:var(--green);color:#fff;border-radius:14px;text-align:center;line-height:39px;font-size:32px;font-weight:700;letter-spacing:-3px;padding-right:4px;flex-shrink:0}.mobile-logo span{color:#d7edaf}
  .mobile-title{flex:1;min-width:0}.mobile-title span{font-size:10px;letter-spacing:.5px;font-weight:700;color:#6f816f;display:block;margin-bottom:4px}.mobile-title strong{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;letter-spacing:-.3px}
  .mobile-avatar{width:42px;height:42px;border-radius:50%;background:#e4ecd9;border:1px solid #d3dfc5;color:#285c46;font-weight:700;padding:0;flex-shrink:0}.mobile-icon-button:active,.mobile-avatar:active{background:#dbe6cc}.mobile-icon-button.timerrunning{background:#e0edce}
  #mobile-connection{background:#e9eddf;color:#405b43;font-size:12px;text-align:center;padding:9px 12px;line-height:1.5}

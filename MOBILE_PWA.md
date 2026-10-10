@@ -24,4 +24,4 @@ Run `npm run check`, `npm run test:pwa` and `npm run test:release`. Serve the pr
 
 ## Brand and app identity
 
-The app is named GateClimb and uses a climbing mark across the desktop sidebar, phone header, browser favicon, installed app icons and checkout. The manifest ID and all existing account, course, device-storage and worker-cache identifiers are retained so a branding update preserves saved work and installations on the same origin.
+The app is named GateClimb and uses the original “g.” mark across the desktop sidebar, phone header, browser favicon, installed app icons and checkout. The manifest ID and all existing account, course, device-storage and worker-cache identifiers are retained so a branding update preserves saved work and installations on the same origin.

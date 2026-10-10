@@ -24,7 +24,7 @@
   let sheetHistory = false, returningFromSheet = false, destination = null;
   const header = document.createElement('div');
   header.id = 'mobile-header';
-  header.innerHTML = `<div class="mobile-topbar"><button id="mobile-back" class="mobile-icon-button" type="button" aria-label="Back to learning library" hidden>${icon('back')}</button><a class="mobile-logo" href="#dashboard" aria-label="GateClimb home"><img src="icons/icon-192.png" width="41" height="41" alt=""></a><div class="mobile-title"><span>GateClimb</span><strong id="mobile-page-title">Today</strong></div><button class="mobile-icon-button" id="mobile-timer" type="button" aria-label="Open study timer" disabled>${icon('timer')}</button><button id="mobile-account" class="mobile-avatar" type="button" aria-label="Sign in to your account">Y</button></div><div id="mobile-connection" role="status" hidden>Offline · Free previews and saved notes</div>`;
+  header.innerHTML = `<div class="mobile-topbar"><button id="mobile-back" class="mobile-icon-button" type="button" aria-label="Back to learning library" hidden>${icon('back')}</button><a class="mobile-logo" href="#dashboard" aria-label="GateClimb home">g<span>.</span></a><div class="mobile-title"><span>GateClimb</span><strong id="mobile-page-title">Today</strong></div><button class="mobile-icon-button" id="mobile-timer" type="button" aria-label="Open study timer" disabled>${icon('timer')}</button><button id="mobile-account" class="mobile-avatar" type="button" aria-label="Sign in to your account">Y</button></div><div id="mobile-connection" role="status" hidden>Offline · Free previews and saved notes</div>`;
   document.querySelector('.main').prepend(header);
   const nav = document.createElement('nav');
   nav.id = 'mobile-nav';
