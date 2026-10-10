@@ -1,4 +1,4 @@
-# Gatewise — GATE CS 2027
+# GateClimb — GATE CS 2027
 
 This public repository contains the protected frontend, 3 complete preview lessons, 10 sample questions and 24 past-year PDFs. The full course and paid answers are stored in Supabase and load only for an entitled learner or the owner. New premium authoring files are kept in a separate private workspace.
 

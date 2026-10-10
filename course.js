@@ -179,7 +179,7 @@
       if (!/^order_[A-Za-z0-9]+$/.test(order.orderId || '') || !/^rzp_(test|live)_[A-Za-z0-9]+$/.test(order.keyId || '') || order.amount !== config.priceMinor || order.currency !== 'INR' || order.durationMonths !== config.durationMonths) throw new Error('The course offer has changed or could not be verified. Refresh this page before purchasing.');
       await razorpay();
       if (identity() !== accountId || GatewiseProgress.locked) return;
-      const payment = new window.Razorpay({ key: order.keyId, order_id: order.orderId, amount: order.amount, currency: order.currency, name: 'Gatewise', description: order.courseName || 'GATE CS preparation', prefill: { email: GatewiseCloud.user?.email || '' },
+      const payment = new window.Razorpay({ key: order.keyId, order_id: order.orderId, amount: order.amount, currency: order.currency, name: 'GateClimb', image: new URL('icons/icon-192.png', location.href).href, description: order.courseName || 'GATE CS preparation', prefill: { email: GatewiseCloud.user?.email || '' },
         handler: () => { if (identity() === accountId) waitForPayment(accountId); },
         modal: { ondismiss: () => paymentMessage('Checkout closed. You can continue with your free lessons or try again.') } });
       payment.on?.('payment.failed', () => paymentMessage('Payment did not complete. Your course access has not changed; you can try again.'));

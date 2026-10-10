@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Gatewise — GATE 2027 preparation",
-  "short_name": "Gatewise",
+  "name": "GateClimb — GATE 2027 preparation",
+  "short_name": "GateClimb",
   "description": "Your GATE CS study space: lessons, practice, revision and a daily focus timer.",
   "lang": "en-IN",
   "start_url": "/#dashboard",
