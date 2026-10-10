@@ -1,15 +1,17 @@
 'use strict';
 const crypto = require('node:crypto');
 const { createClient } = require('@supabase/supabase-js');
+const offer = require('../course-offer.js');
 class HttpError extends Error { constructor(status, message) { super(message); this.status = status; } }
 const fail = (status, message) => { throw new HttpError(status, message); };
-function settings(env = process.env, checkout = false) {
+function settings(env = process.env, checkout = false, now = Date.now()) {
   const mode = (env.GATEWISE_COURSE_MODE || 'open').trim();
   if (checkout && mode !== 'protected') fail(503, 'Purchasing is not enabled on this deployment.');
   const courseId = (env.GATEWISE_COURSE_ID || 'gate-cs-2027').trim();
-  const raw = (env.GATEWISE_COURSE_PRICE_MINOR || '49900').trim();
-  const amount = Number(raw);
-  if (!/^[a-z0-9][a-z0-9_-]{0,79}$/.test(courseId) || !/^\d+$/.test(raw) || !Number.isSafeInteger(amount) || amount < 1 || amount > 100000000) fail(503, 'The course offer is not configured.');
+  let price;
+  try { price = offer.quote(offer.fromEnv(env), now); } catch { fail(503, 'The course offer is not configured.'); }
+  const amount = price.priceMinor;
+  if (!/^[a-z0-9][a-z0-9_-]{0,79}$/.test(courseId)) fail(503, 'The course offer is not configured.');
   const url = (env.GATEWISE_SUPABASE_URL || '').trim();
   const serviceKey = (env.GATEWISE_SUPABASE_SERVICE_ROLE_KEY || '').trim();
   let privileged = /^sb_secret_[A-Za-z0-9_-]+$/.test(serviceKey);
@@ -18,7 +20,7 @@ function settings(env = process.env, checkout = false) {
   const keySecret = (env.GATEWISE_RAZORPAY_KEY_SECRET || '').trim();
   const webhookSecret = (env.GATEWISE_RAZORPAY_WEBHOOK_SECRET || '').trim();
   if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/.test(url) || !privileged || !/^rzp_(test|live)_[A-Za-z0-9]+$/.test(keyId) || !keySecret || !webhookSecret) fail(503, 'Purchasing is not configured yet. Free previews and your notes remain available.');
-  return { courseId, amount, currency: 'INR', durationMonths: 12, url, serviceKey, keyId, keySecret, webhookSecret };
+  return { courseId, amount, ...price, currency: 'INR', durationMonths: 12, url, serviceKey, keyId, keySecret, webhookSecret };
 }
 function dependencies(config, supplied = {}) {
   const supabase = supplied.supabase || createClient(config.url, config.serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
@@ -57,7 +59,7 @@ function checkoutHandler(supplied = {}) {
   return async (req, res) => {
     if (!method(req, res)) return;
     try {
-      const config = settings(supplied.env || process.env, true);
+      const config = settings(supplied.env || process.env, true, (supplied.now || Date.now)());
       const { supabase, provider } = dependencies(config, supplied);
       const authorization = req.headers?.authorization || '';
       const match = /^Bearer (\S{1,8192})$/.exec(authorization);

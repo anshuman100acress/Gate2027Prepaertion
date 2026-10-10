@@ -32,14 +32,17 @@ function outputPath(value) {
 }
 
 export async function buildSite({ outdir = 'dist', env = process.env, catalogRoot = projectRoot } = {}) {
-  const cloud = publicCloudSettings(env);
-  const course = publicCourseSettings(env, cloud);
-  const output = outputPath(outdir);
   const catalog = await readCourseCatalog(catalogRoot);
+  const cloud = publicCloudSettings(env);
+  const course = publicCourseSettings(catalog.publicOnly && !env.GATEWISE_COURSE_MODE ? { ...env, GATEWISE_COURSE_MODE: 'protected' } : env, cloud);
+  if (catalog.publicOnly && course.mode !== 'protected') throw new Error('This public release contains only previews. Use protected mode to load paid content from Supabase.');
+  const output = outputPath(outdir);
+  course.questionCount = catalog.info?.questionCount ?? catalog.questions.length + catalog.pyqs.length + catalog['lesson-questions'].length;
+  course.pyqCount = catalog.info?.pyqCount ?? catalog.pyqs.length;
   const data = course.mode === 'protected' ? protectedCatalog(catalog) : catalog;
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
-  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'course.js', 'course.css', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'syllabus.pdf', 'papers', 'vendor']) await cp(resolve(projectRoot, name), resolve(output, name), { recursive: true });
+  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'pyq-practice.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'course.js', 'course.css', 'course-offer.js', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'premium-tools.js', 'premium-tools.css', 'syllabus.pdf', 'papers', 'vendor']) await cp(resolve(projectRoot, name), resolve(output, name), { recursive: true });
   await mkdir(resolve(output, 'data'));
   for (const name of ['syllabus', 'questions', 'pyqs', 'lesson-questions', 'topic-coverage']) await writeFile(resolve(output, 'data', `${name}.json`), JSON.stringify(data[name]) + '\n');
   await cp(resolve(catalogRoot, 'data/papers.json'), resolve(output, 'data/papers.json'));

@@ -1,6 +1,6 @@
 # Activate pricing, protected lessons and the master account
 
-The course-access code is optional. With no course setting, the app remains open and existing accounts, cloud notes and local study tools keep working. A protected deployment serves preview lessons from Vercel and retrieves full content from Supabase after checking access. Checkout uses Razorpay and grants access only after a verified payment webhook.
+The public repository contains a preview-only catalog and builds in protected mode. It serves previews from Vercel and retrieves full content from Supabase after checking access. Checkout uses Razorpay and grants access only after a verified payment webhook. Full course authoring and publishing use a separate private workspace.
 
 This repository does not contain production payment credentials or an assigned master account. Applying SQL alone creates permissions; uploading the course and setting the deployment variables completes the connection.
 
@@ -12,7 +12,7 @@ The migration allows public preview reads, checks full-content access against th
 
 ## 2. Upload the course content
 
-On your own machine, use Node 22 or later and run `npm ci` in the repository. Set these environment variables privately:
+Use the **private full-content authoring workspace**, not a clone of the public preview repository. With Node 22 or later, run `npm ci` there. Set these environment variables privately:
 
 | Variable | Value |
 | --- | --- |
@@ -26,7 +26,17 @@ Run:
 npm run course:publish
 ```
 
-This uploads the complete 72-lesson syllabus and question resources. The first lesson of each of the 11 subjects is a full free preview. Uploading again updates the course's stored content and preview flags.
+This uploads the complete 72-lesson syllabus and 3 question resources. Only **Propositional logic**, **C memory and pointers**, and **Quantitative aptitude** are full free previews. A protected frontend contains exactly 10 sample questions, comprising six preview checks, three originals and one PYQ MCQ. The remaining 104 PYQ MCQs are in the protected `pyqs` resource, with source/page references and worked solutions. Uploading again updates stored content and preview flags; the expected result is **72 lessons, 3 previews and 3 resources**.
+
+Premium Studio adds 323 lesson-specific topic guides with three guided exercises each, 33 new scored exam-clinic questions, 44 recall cards, targeted timed drills, mistake review and subject performance. Guided exercises use the original worked examples with solutions hidden until opened and a separate self-assessment. External course links are free at their source. Premium additions to preview lessons are stored on restricted lesson rows and restored only after paid/owner authorization, so anonymous preview API reads cannot retrieve them. No additional migration is required.
+
+After changing content or the free tier, publish the complete catalog from the private workspace and export public previews:
+
+```sh
+npm run course:previews -- --outdir /separate/release/folder
+```
+
+Copy the exported `data/*.json` files into the public release and redeploy its frontend. Do not commit private authoring modules or full paid JSON. The `catalog-info.json` marker retains full-course counts and makes builds reject restricted data or open mode. `course:publish` refuses preview-only input before any database write, preventing a public checkout from replacing the paid bank with samples. Existing deployed static files change only after a frontend deployment. Use `GATEWISE_COURSE_MODE=protected` in Vercel. Leave payment secrets unset while Razorpay approval is pending; purchases remain disabled and the owner still has full access.
 
 Alternatively, put your private values in a local, uncommitted `.env` file and use Node's environment-file support:
 
@@ -66,12 +76,14 @@ Keep **Framework: Other**, **Build: `npm run build`**, **Output: `dist`**, and G
 | `GATEWISE_SUPABASE_PUBLISHABLE_KEY` | Existing publishable or legacy anon key; public by design |
 | `GATEWISE_COURSE_MODE` | `protected` |
 | `GATEWISE_COURSE_ID` | `gate-cs-2027` |
-| `GATEWISE_COURSE_PRICE_MINOR` | `49900` for ₹499, or another chosen positive amount in paise |
+| `GATEWISE_COURSE_PRICE_MINOR` | Regular price: `49900` for ₹499 (default) |
+| `GATEWISE_COURSE_OFFER_PRICE_MINOR` | Offer price: `29900` for ₹299 (default) |
+| `GATEWISE_COURSE_OFFER_ENDS_AT` | `2026-10-31T18:30:00.000Z` (default): midnight after 31 October in India |
 | `GATEWISE_SUPABASE_SERVICE_ROLE_KEY` | Private server key used by payment functions |
 
-Redeploy after adding or changing variables. Protected builds contain the complete outline, 11 full preview lessons and selected preview practice; full lessons and solutions are omitted from public deployment files. Supabase serves the restricted rows only to a paid learner with a valid course entitlement or an owner. PDFs and the learner's own notes remain available.
+Redeploy after adding or changing variables. Protected builds contain the complete outline, 3 full preview lessons and selected preview practice; full lessons and solutions are omitted from public deployment files. Supabase serves the restricted rows only to a paid learner with a valid course entitlement or an owner. PDFs and the learner's own notes remain available.
 
-The pass uses INR and lasts 12 calendar months from confirmed payment. Choose one price before launch and keep the displayed offer consistent with the server setting. Each order stores its amount and duration, so a later price change does not reinterpret an earlier payment.
+The pass uses INR and lasts 12 calendar months from confirmed payment. The ₹299 offer ends after **31 October 2026, 11:59 PM IST** and automatically returns to ₹499 without a redeploy. `course-offer.js` is shared by the build, browser and checkout; the server clock determines the charged amount. The deadline never resets per visitor. Keep the same offer variables in the frontend build and server runtime. Each order stores its amount and duration, so a later price change does not reinterpret an earlier payment.
 
 Without payment configuration, the pricing page explains that purchasing is unavailable and leaves previews usable. Full-content access can already be tested with the owner account.
 
@@ -116,6 +128,6 @@ npm run test:course
 npm run build
 ```
 
-With the source app served on port 3000, `python3 tests/course_accounts.py` checks protected learner behaviour against simulated Supabase responses. The SQL test executes the real migrations in embedded Postgres. Payment tests use local provider/auth doubles; they do not confirm live credentials or webhook delivery.
+`npm run test:release` checks the exported catalog and protected build. Serve `dist` locally and run `TEST_SITE_URL=http://127.0.0.1:3001/ python3 tests/course_release_ui.py` for read-only free-access and mobile checks. In the private authoring workspace, `python3 tests/course_accounts.py` checks paid learner behaviour against simulated Supabase responses. The SQL test executes the real migrations in embedded Postgres. Payment tests use local provider/auth doubles; they do not confirm live credentials or webhook delivery.
 
-To return the deployment to open mode, set `GATEWISE_COURSE_MODE=open` and redeploy. This deliberately publishes the full current static course again. It does not delete accounts, notes, course entitlements or payment history. Do not use open mode for material that must remain restricted.
+Rollback a frontend release by selecting a previous protected Vercel deployment. The public preview checkout deliberately rejects open-mode builds. Open mode is available only in the private full-content workspace and would publish that workspace's full static course. It does not delete accounts, notes, entitlements or payment history.

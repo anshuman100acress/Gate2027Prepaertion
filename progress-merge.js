@@ -9,8 +9,8 @@
     return keys.length === Object.keys(b).length && keys.every(key => Object.hasOwn(b, key) && equal(a[key], b[key]));
   }
   const sets = new Set(['completed', 'understood', 'bookmarks', 'tasks', 'sessions', 'legacyCompleted']);
-  const histories = new Set(['attempts', 'mockResults', 'paperResults', 'focusSessions']);
-  const maps = new Set(['notes', 'moduleNotes', 'noteFormats', 'stickyNotes', 'reading', 'reviewDates', 'lessonChecks', 'focusReflections']);
+  const histories = new Set(['attempts', 'mockResults', 'paperResults', 'focusSessions', 'drillResults']);
+  const maps = new Set(['notes', 'moduleNotes', 'noteFormats', 'stickyNotes', 'reading', 'reviewDates', 'lessonChecks', 'focusReflections', 'cardReviews', 'topicPractice']);
   function mergeSet(base = [], local = [], remote = []) {
     const removed = new Set(base.filter(x => !local.includes(x)));
     return [...new Set([...remote.filter(x => !removed.has(x)), ...local.filter(x => !base.includes(x))])];
@@ -38,6 +38,7 @@
       if (sets.has(key)) result[key] = mergeSet(base[key], local[key], remote[key]);
       else if (histories.has(key)) result[key] = mergeHistory(base[key], local[key], remote[key]);
       else if (maps.has(key)) result[key] = mergeMap(base[key], local[key], remote[key]);
+      else if (key === 'drillRun') result[key] = mergeRun(base[key], local[key], remote[key]);
       else if (Object.hasOwn(local, key)) result[key] = clone(local[key]); else delete result[key];
     }
     // A rich note's text and formatting describe one edit, including formatting-only edits.
@@ -58,7 +59,7 @@
     }
     return result;
   }
-  function sessionId(run) { return run?.sessionId || run?.end; }
+  function sessionId(run) { return run?.sessionId || run?.id || run?.end; }
   function mergeRun(base, local, remote) {
     if (equal(base, local)) return clone(remote ?? null);
     if (base && !local) return clone(remote && sessionId(remote) !== sessionId(base) ? remote : null);

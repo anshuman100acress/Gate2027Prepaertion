@@ -1,10 +1,19 @@
 (function () {
   'use strict';
   const supplied = window.GATEWISE_COURSE || {};
+  const offerRules = {
+    regularPriceMinor: supplied.regularPriceMinor || supplied.priceMinor || GatewiseOffer.DEFAULT_REGULAR_PRICE_MINOR,
+    offerPriceMinor: supplied.offerPriceMinor || GatewiseOffer.DEFAULT_OFFER_PRICE_MINOR,
+    offerEndsAt: supplied.offerEndsAt || GatewiseOffer.DEFAULT_OFFER_ENDS_AT
+  };
+  const quote = () => GatewiseOffer.quote(offerRules);
   const config = Object.freeze({
     mode: supplied.mode === 'protected' ? 'protected' : 'open',
     courseId: typeof supplied.courseId === 'string' && supplied.courseId ? supplied.courseId : 'gate-cs-2027',
-    priceMinor: Number.isSafeInteger(supplied.priceMinor) && supplied.priceMinor > 0 ? supplied.priceMinor : 49900,
+    ...offerRules,
+    get priceMinor() { return quote().priceMinor; },
+    questionCount: supplied.questionCount,
+    pyqCount: supplied.pyqCount,
     currency: 'INR', durationMonths: 12, checkoutEnabled: supplied.checkoutEnabled === true
   });
   const protectedMode = config.mode === 'protected';
@@ -86,6 +95,9 @@
       if (!current(token, accountId)) return false;
       if (!Array.isArray(lessons) || !Array.isArray(resources)) throw new Error('The full course is not ready to load. Please try again.');
       const byId = new Map(lessons.filter(row => row && typeof row.lesson_id === 'string' && row.payload && !Array.isArray(row.payload)).map(row => [row.lesson_id, row.payload]));
+      for (const row of lessons) for (const supplement of row.payload?.premiumPreviewLessons || []) {
+        if (byId.has(supplement.id)) byId.set(supplement.id, { ...byId.get(supplement.id), ...supplement });
+      }
       const full = new Map(resources.filter(row => row && Array.isArray(row.payload)).map(row => [row.resource_id, row.payload]));
       if (!['questions', 'pyqs', 'lesson-questions'].every(id => full.has(id))) throw new Error('Your course access is active, but some material could not load. Please retry.');
       const merged = publicData();
@@ -108,17 +120,23 @@
   function canRead(lesson) { return !protectedMode || lesson?.locked !== true; }
   function canMock() { return !protectedMode || (access.hasAccess && resourcesReady); }
   function price() { return new Intl.NumberFormat('en-IN', { style: 'currency', currency: config.currency, maximumFractionDigits: config.priceMinor % 100 ? 2 : 0 }).format(config.priceMinor / 100); }
+  function offerMarkup() {
+    if (!quote().offerActive) return '';
+    const deadline = new Date(Date.parse(config.offerEndsAt) - 1).toLocaleString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Kolkata' });
+    const regular = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(config.regularPriceMinor / 100);
+    return `<p class="course-offer"><s>${escape(regular)}</s> <b>Limited-time offer</b><br>Ends ${escape(deadline)} IST. Then ${escape(regular)}.</p>`;
+  }
   function accessMarkup() {
     if (!protectedMode) return '<b>Open course access</b><p>All lessons and practice are available on this deployment. Keep learning at your own pace.</p>';
     if (access.status === 'owner') return '<b>Owner access</b><p>Your account can open the complete course.</p>';
     if (access.status === 'paid') return `<b>Your course pass is active</b><p>Full access until ${escape(new Date(access.validUntil).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' }))}.</p>`;
     if (access.status === 'loading') return '<b>Checking your course access…</b><p>Your free previews and personal notes remain available.</p>';
     if (access.error) return `<b>Let’s try that again</b><p>${escape(access.error)}</p>`;
-    return '<b>Start with the free previews</b><p>One complete lesson in each subject, preview practice, past-year papers and your own notes are available.</p>';
+    return '<b>Start with the free previews</b><p>Three complete preview lessons, 10 sample questions, public past-year papers and your own notes are available.</p>';
   }
   function pricing() {
     const target = document.getElementById('app');
-    target.innerHTML = `<div class="headingrow"><div><div class="eyebrow">YOUR COURSE, YOUR PACE</div><h1>Make room for your next chapter.</h1><p>Try a lesson from every subject, then choose full access when you are ready.</p></div></div><section class="panel course-status" id="course-status" role="status">${accessMarkup()}${protectedMode ? '<button class="textlink" type="button" data-course-refresh>Check access again →</button>' : ''}</section><div class="course-plans"><section class="panel course-plan"><span class="pill">FREE PREVIEW</span><h2>A good place to begin</h2><div class="course-price">₹0</div><p>Explore the teaching style and build your study rhythm.</p><ul><li>A complete preview lesson in every subject</li><li>Preview practice and verified past-year questions</li><li>Past-year paper PDFs and study tools</li><li>Your rich notes, sticky notes and revision workspace</li></ul><a class="btn secondary" href="#learn">Explore free lessons →</a></section><section class="panel course-plan course-paid"><span class="pill">GATE CS & IT · 2027</span><h2>The complete preparation course</h2><div class="course-price">${escape(price())}<small>for ${config.durationMonths} months</small></div><p>One payment. A full year to learn, practice and revisit.</p><ul><li>Every lesson across the complete syllabus</li><li>Detailed explanations and worked examples</li><li>The full original practice bank and timed mocks</li><li>Your progress and notes across devices when signed in</li></ul>${!protectedMode ? '<a class="btn" href="#learn">Open the complete course →</a><p class="muted">Access is open here; no purchase is needed.</p>' : access.hasAccess ? '<a class="btn" href="#learn">Continue learning →</a>' : `<button class="btn" type="button" data-course-checkout ${!config.checkoutEnabled || access.status === 'loading' || access.status === 'error' ? 'disabled' : ''}>${config.checkoutEnabled ? identity() ? 'Get full course access →' : 'Sign in to get full access →' : 'Purchases coming soon'}</button><p class="muted">${config.checkoutEnabled ? 'Access starts after your payment is verified. This is a one-time course pass.' : 'Checkout is not available yet. Your free previews and notes are ready to use.'}</p>`}</section></div><section class="panel course-faq"><h2>Keep your preparation moving</h2><p>Your notes, study tools and public papers stay available whether you use previews or a full course pass. Sign in to keep your personal workspace synced across devices.</p>${!identity() ? '<button class="textlink" type="button" data-course-signin>Sign in or create an account →</button>' : ''}<p id="course-payment-message" role="status" aria-live="polite"></p></section>`;
+    target.innerHTML = `<div class="headingrow"><div><div class="eyebrow">YOUR COURSE, YOUR PACE</div><h1>Make room for your next chapter.</h1><p>Try 3 complete lessons and 10 sample questions, then choose full access when you are ready.</p></div></div><section class="panel course-status" id="course-status" role="status">${accessMarkup()}${protectedMode ? '<button class="textlink" type="button" data-course-refresh>Check access again →</button>' : ''}</section><div class="course-plans"><section class="panel course-plan"><span class="pill">FREE PREVIEW</span><h2>A good place to begin</h2><div class="course-price">₹0</div><p>Explore the teaching style and build your study rhythm.</p><ul><li>3 complete lessons: logic, C memory and quantitative aptitude</li><li>10 sample questions: one PYQ MCQ, three originals and six lesson checks</li><li>Past-year paper PDFs and study tools</li><li>Your rich notes, sticky notes and revision workspace</li></ul><a class="btn secondary" href="#learn">Explore free lessons →</a></section><section class="panel course-plan course-paid"><span class="pill">GATE CS & IT · 2027</span><h2>The complete preparation course</h2>${offerMarkup()}<div class="course-price">${escape(price())}<small>for ${config.durationMonths} months</small></div><p>One payment. A full year to learn, practice and revisit.</p><ul><li>All 72 lessons across 11 subjects</li><li>323 topic guides with explanation and guided practice</li><li>${config.questionCount ? config.questionCount + ' scored questions' : 'Complete scored question bank'}, including ${config.pyqCount || data.papers.reduce((n, p) => n + (p.pyqCount || 0), 0)} PYQ MCQs with worked solutions</li><li>Full mocks, focused timed drills and mistake review</li><li>44 spaced-recall cards and subject performance insights</li><li>Your progress and notes across devices when signed in</li></ul>${!protectedMode ? '<a class="btn" href="#learn">Open the complete course →</a><p class="muted">Access is open here; no purchase is needed.</p>' : access.hasAccess ? '<a class="btn" href="#learn">Continue learning →</a>' : `<button class="btn" type="button" data-course-checkout ${!config.checkoutEnabled || access.status === 'loading' || access.status === 'error' ? 'disabled' : ''}>${config.checkoutEnabled ? identity() ? 'Get full course access →' : 'Sign in to get full access →' : 'Purchases coming soon'}</button><p class="muted">${config.checkoutEnabled ? 'Access starts after your payment is verified. This is a one-time course pass.' : 'Checkout is not available yet. Your free previews and notes are ready to use.'}</p>`}</section></div><section class="panel course-faq"><h2>Keep your preparation moving</h2><p>Your notes, study tools and public papers stay available whether you use previews or a full course pass. Sign in to keep your personal workspace synced across devices.</p>${!identity() ? '<button class="textlink" type="button" data-course-signin>Sign in or create an account →</button>' : ''}<p id="course-payment-message" role="status" aria-live="polite"></p></section>`;
     target.querySelectorAll('[data-course-refresh]').forEach(button => button.onclick = () => refresh());
     target.querySelectorAll('[data-course-signin]').forEach(button => button.onclick = () => GatewiseCloud.showAccount());
     const buy = target.querySelector('[data-course-checkout]'); if (buy) buy.onclick = checkout;
@@ -173,4 +191,10 @@
   window.addEventListener('online', () => { if (protectedMode && base) refresh(); });
   setInterval(() => { if (protectedMode && base && !document.hidden && !checkoutFlight && !GatewiseProgress.locked) refresh(); }, 60000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden && protectedMode && base && !checkoutFlight) refresh(); });
+  let displayedPrice = config.priceMinor;
+  setInterval(() => {
+    if (displayedPrice === config.priceMinor) return;
+    displayedPrice = config.priceMinor;
+    if (location.hash === '#pricing' && !checkoutFlight) pricing();
+  }, 1000);
 })();

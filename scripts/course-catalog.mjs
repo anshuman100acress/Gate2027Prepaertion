@@ -1,21 +1,28 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import offer from '../course-offer.js';
 
 export const DEFAULT_COURSE_ID = 'gate-cs-2027';
 export const DEFAULT_COURSE_TITLE = 'GATE CS 2027';
 export const DEFAULT_PRICE_MINOR = 49900;
 export const DURATION_MONTHS = 12;
+export const FREE_PREVIEW_IDS = ['0-propositions', '3-c-memory', '10-quantitative'];
+export const FREE_PRACTICE_LIMIT = 10;
+export const FREE_PYQ_ID = 'pyq-2026_CS1-GA-3';
+const PREMIUM_LESSON_FIELDS = ['studyCards', 'examClinic', 'premiumTopics'];
 
-export function courseSettings(env = process.env) {
+function previewLesson(lesson) {
+  const preview = structuredClone(lesson);
+  for (const key of PREMIUM_LESSON_FIELDS) delete preview[key];
+  return preview;
+}
+
+export function courseSettings(env = process.env, now = Date.now()) {
   const mode = (env.GATEWISE_COURSE_MODE || 'open').trim();
   if (!['open', 'protected'].includes(mode)) throw new Error('GATEWISE_COURSE_MODE must be open or protected.');
   const courseId = (env.GATEWISE_COURSE_ID || DEFAULT_COURSE_ID).trim();
   if (!/^[a-z0-9][a-z0-9_-]{0,79}$/.test(courseId)) throw new Error('GATEWISE_COURSE_ID must use 1–80 lowercase letters, digits, underscores or hyphens.');
-  const rawPrice = (env.GATEWISE_COURSE_PRICE_MINOR || String(DEFAULT_PRICE_MINOR)).trim();
-  if (!/^\d+$/.test(rawPrice)) throw new Error('GATEWISE_COURSE_PRICE_MINOR must be a positive integer in paise.');
-  const priceMinor = Number(rawPrice);
-  if (!Number.isSafeInteger(priceMinor) || priceMinor < 1 || priceMinor > 100000000) throw new Error('GATEWISE_COURSE_PRICE_MINOR must be between 1 and 100000000 paise.');
-  return { mode, courseId, priceMinor, currency: 'INR', durationMonths: DURATION_MONTHS };
+  return { mode, courseId, ...offer.quote(offer.fromEnv(env), now), currency: 'INR', durationMonths: DURATION_MONTHS };
 }
 
 export function publicCloudSettings(env = process.env) {
@@ -61,8 +68,42 @@ const list = (value, name) => {
 
 export async function readCourseCatalog(root) {
   const names = ['syllabus', 'questions', 'pyqs', 'lesson-questions', 'topic-coverage'];
-  const values = await Promise.all(names.map(name => readFile(resolve(root, 'data', `${name}.json`), 'utf8').then(JSON.parse)));
-  return validateCourseCatalog(Object.fromEntries(names.map((name, i) => [name, values[i]])));
+  const [values, info] = await Promise.all([
+    Promise.all(names.map(name => readFile(resolve(root, 'data', `${name}.json`), 'utf8').then(JSON.parse))),
+    readFile(resolve(root, 'data/catalog-info.json'), 'utf8').then(JSON.parse).catch(error => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    })
+  ]);
+  const catalog = validateCourseCatalog(Object.fromEntries(names.map((name, i) => [name, values[i]])));
+  if (info !== null) {
+    validatePublicCatalog(catalog, info);
+    catalog.publicOnly = true;
+    catalog.info = info;
+  }
+  return catalog;
+}
+
+export function validatePublicCatalog(catalog, info) {
+  if (info?.kind !== 'protected-preview' || info.courseId !== DEFAULT_COURSE_ID
+      || !Number.isSafeInteger(info.questionCount) || info.questionCount < FREE_PRACTICE_LIMIT
+      || !Number.isSafeInteger(info.pyqCount) || info.pyqCount < 1
+      || info.pyqCount > info.questionCount
+      || info.lessonCount !== catalog.syllabus.flatMap(s => s.lessons).length) {
+    throw new Error('The public preview catalog metadata is invalid.');
+  }
+  const expected = protectedCatalog(catalog);
+  if (catalog.syllabus.some(s => s.lessons.some(l => l.premiumPreviewLessons !== undefined))) {
+    throw new Error('The public release contains restricted preview supplements.');
+  }
+  for (const name of ['syllabus', 'questions', 'pyqs', 'lesson-questions', 'topic-coverage']) {
+    if (JSON.stringify(catalog[name]) !== JSON.stringify(expected[name])) {
+      throw new Error(`The public release contains restricted ${name} content. Export fresh previews from the private authoring workspace.`);
+    }
+  }
+  if (catalog.questions.length + catalog.pyqs.length + catalog['lesson-questions'].length !== FREE_PRACTICE_LIMIT) {
+    throw new Error('The public release must contain exactly 10 sample questions.');
+  }
 }
 
 export function validateCourseCatalog(catalog) {
@@ -73,7 +114,7 @@ export function validateCourseCatalog(catalog) {
     if (!Number.isInteger(subject.id) || subjectIds.has(subject.id) || typeof subject.name !== 'string') throw new Error('Course catalog subject IDs and names are invalid.');
     subjectIds.add(subject.id);
     const lessons = list(subject.lessons, 'lessons');
-    if (!lessons.length) throw new Error('Each subject must contain a preview lesson.');
+    if (!lessons.length) throw new Error('Each subject must contain lessons.');
     for (const lesson of lessons) {
       if (typeof lesson.id !== 'string' || !lesson.id || ids.has(lesson.id) || typeof lesson.title !== 'string') throw new Error('Course catalog lesson IDs and titles are invalid.');
       ids.add(lesson.id);
@@ -81,7 +122,10 @@ export function validateCourseCatalog(catalog) {
       list(lesson.examples, 'lesson examples');
       list(lesson.tutorials || [], 'lesson tutorials');
     }
-    previewIds.add(lessons[0].id);
+  }
+  for (const id of FREE_PREVIEW_IDS) {
+    if (!ids.has(id)) throw new Error('The course is missing a configured free preview.');
+    previewIds.add(id);
   }
   for (const resource of ['questions', 'pyqs', 'lesson-questions']) {
     const rows = list(catalog[resource], resource), seen = new Set();
@@ -117,23 +161,23 @@ export function protectedCatalog(catalog) {
   const syllabus = catalog.syllabus.map(subject => ({
     id: subject.id, name: subject.name, icon: subject.icon, description: subject.description,
     lessons: subject.lessons.map(lesson => {
-      if (previewIds.has(lesson.id)) return { ...structuredClone(lesson), isPreview: true };
+      if (previewIds.has(lesson.id)) {
+        return { ...previewLesson(lesson), isPreview: true };
+      }
       return {
         id: lesson.id, title: lesson.title, topics: [...lesson.topics], intuition: shortIntuition(lesson.intuition),
-        minutes: lesson.minutes, workedExampleCount: workedExampleCount(lesson), locked: true, isPreview: false,
+        minutes: lesson.minutes, workedExampleCount: Number.isSafeInteger(lesson.workedExampleCount) ? lesson.workedExampleCount : workedExampleCount(lesson), locked: true, isPreview: false,
         sections: [], examples: [], tutorials: [], checks: [], revision: [], pitfalls: [], method: '',
         topicCoverage: Object.fromEntries(Object.entries(lesson.topicCoverage || {}).map(([topic, ref]) => [topic, topicReference(ref)]))
       };
     })
   }));
-  const counts = new Map();
-  const questions = catalog.questions.filter(question => {
-    const count = counts.get(question.subject) || 0;
-    counts.set(question.subject, count + 1);
-    return count < 2;
-  });
-  const pyqs = catalog.pyqs.filter(question => question.verified === true);
   const lessonQuestions = catalog['lesson-questions'].filter(question => previewIds.has(question.lesson));
+  const pyqs = catalog.pyqs.filter(q => q.id === FREE_PYQ_ID);
+  if (pyqs.length !== 1) throw new Error('The configured free PYQ sample is missing.');
+  const sampleSubjects = [0, 3, 10, 1, 2, 4, 5, 6, 7, 8, 9];
+  const questions = sampleSubjects.map(subject => catalog.questions.find(q => q.subject === subject && !q.premium))
+    .filter(Boolean).slice(0, Math.max(0, FREE_PRACTICE_LIMIT - lessonQuestions.length - pyqs.length));
   const topicCoverage = catalog['topic-coverage'].map(row => ({
     ...topicReference(row), ...(typeof row.topic === 'string' ? { topic: row.topic } : {}),
     ...(Array.isArray(row.exampleTypes) ? { exampleTypes: row.exampleTypes.filter(kind => ['fundamental', 'application', 'trap'].includes(kind)) } : {})
@@ -142,11 +186,25 @@ export function protectedCatalog(catalog) {
 }
 
 export function courseRows(catalog, courseId) {
-  return {
-    lessons: catalog.syllabus.flatMap(subject => subject.lessons.map(lesson => ({
+  if (catalog.publicOnly) throw new Error('A preview-only checkout cannot publish the full course. Use the private authoring workspace; the paid content already lives in Supabase.');
+  // Preview rows are readable through RLS even without a pass. Keep their paid
+  // additions on a restricted row in the same subject; paid hydration restores
+  // them by lesson ID. This also keeps all resources as their existing arrays.
+  const lessons = catalog.syllabus.flatMap(subject => {
+    const supplements = subject.lessons.filter(l => catalog.previewIds.has(l.id)).map(l => ({
+      id: l.id, ...Object.fromEntries(PREMIUM_LESSON_FIELDS.filter(key => l[key] !== undefined).map(key => [key, structuredClone(l[key])]))
+    }));
+    const restricted = subject.lessons.find(l => !catalog.previewIds.has(l.id));
+    if (supplements.length && !restricted) throw new Error('Premium preview additions require a restricted lesson in the same subject.');
+    return subject.lessons.map(lesson => ({
       course_id: courseId, lesson_id: lesson.id, subject_id: subject.id,
-      payload: lesson, is_preview: catalog.previewIds.has(lesson.id)
-    }))),
+      payload: catalog.previewIds.has(lesson.id) ? previewLesson(lesson) : {
+        ...lesson, ...(lesson.id === restricted?.id && supplements.length ? { premiumPreviewLessons: supplements } : {})
+      }, is_preview: catalog.previewIds.has(lesson.id)
+    }));
+  });
+  return {
+    lessons,
     resources: ['questions', 'pyqs', 'lesson-questions'].map(resourceId => ({ course_id: courseId, resource_id: resourceId, payload: catalog[resourceId] }))
   };
 }
