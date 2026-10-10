@@ -42,7 +42,7 @@ export async function buildSite({ outdir = 'dist', env = process.env, catalogRoo
   const data = course.mode === 'protected' ? protectedCatalog(catalog) : catalog;
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
-  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'pyq-practice.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'course.js', 'course.css', 'course-offer.js', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'premium-tools.js', 'premium-tools.css', 'syllabus.pdf', 'papers', 'vendor']) await cp(resolve(projectRoot, name), resolve(output, name), { recursive: true });
+  for (const name of ['index.html', 'style.css', 'app.js', 'pastpapers.js', 'pyq-practice.js', 'learning.js', 'labs.js', 'math.js', 'progress-merge.js', 'progress-store.js', 'cloud.js', 'cloud.css', 'course.js', 'course.css', 'course-offer.js', 'notes.js', 'notes.css', 'sticky-notes.js', 'sticky-notes.css', 'study-time.js', 'study-tools.js', 'study-tools.css', 'premium-tools.js', 'premium-tools.css', 'question-levels.js', 'syllabus.pdf', 'papers', 'vendor']) await cp(resolve(projectRoot, name), resolve(output, name), { recursive: true });
   await mkdir(resolve(output, 'data'));
   for (const name of ['syllabus', 'questions', 'pyqs', 'lesson-questions', 'topic-coverage']) await writeFile(resolve(output, 'data', `${name}.json`), JSON.stringify(data[name]) + '\n');
   await cp(resolve(catalogRoot, 'data/papers.json'), resolve(output, 'data/papers.json'));

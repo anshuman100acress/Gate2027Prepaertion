@@ -13,7 +13,7 @@ with sync_playwright() as p:
     expect(page.locator('.course-price').last).to_contain_text('₹299')
     expect(page.locator('.course-offer')).to_contain_text('31 October 2026')
     expect(page.locator('.course-offer')).to_contain_text('11:59 pm')
-    expect(page.locator('.course-paid')).to_contain_text('414 scored questions')
+    expect(page.locator('.course-paid')).to_contain_text('486 scored questions')
     assert page.evaluate('GatewiseCourse.protected')
     assert page.evaluate('bank.length') == 10
     assert page.evaluate('subjects.flatMap(s=>s.lessons).filter(l=>!l.locked).length') == 3
@@ -24,6 +24,7 @@ with sync_playwright() as p:
     page.locator('#pyq-all').click()
     page.wait_for_selector('#check')
     expect(page.locator('.pyq-source')).to_contain_text('GATE 2026')
+    expect(page.locator('.complexity-badge')).to_contain_text('Level 2')
     page.locator('input[value="2"]').check()
     page.locator('#check').click()
     expect(page.locator('#feedback')).to_contain_text('63 games')
