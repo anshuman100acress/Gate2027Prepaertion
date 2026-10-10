@@ -22,7 +22,7 @@ assert.equal((await scalar("select public.course_access('gate-cs-2027')")).hasAc
 await identity(users[0]);await db.query('select public.save_study_progress(0,$1::jsonb)',[JSON.stringify({progress:{notes:{secret:'private A'},role:'owner'}})]);
 assert.equal(await scalar("select public.has_course_access('gate-cs-2027')"),false,'progress role cannot grant access');
 for(const q of ["insert into account_roles values('"+users[0]+"','owner')","update account_roles set role='owner'","insert into course_entitlements(user_id,course_id,valid_from,valid_until) values('"+users[0]+"','gate-cs-2027',now(),now()+interval '1 year')","update payment_orders set status='paid'","select public.assign_course_owner('"+users[0]+"')"]){await assert.rejects(()=>db.exec(q),e=>e.code==='42501')}
-const create=async(id,user=users[0],provider='order_'+id.replaceAll('-',''))=>{await identity(null,'service_role');await db.query('insert into payment_orders(id,user_id,course_id,amount,currency,provider_order_id) values($1,$2,$3,49900,$4,$5)',[id,user,'gate-cs-2027','INR',provider]);return provider};
+const create=async(id,user=users[0],provider='order_'+id.replaceAll('-',''),amount=49900)=>{await identity(null,'service_role');await db.query('insert into payment_orders(id,user_id,course_id,amount,currency,provider_order_id) values($1,$2,$3,$4,$5,$6)',[id,user,'gate-cs-2027',amount,'INR',provider]);return provider};
 const order=await create('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa');
 const apply=async(event,orderId=order,pay='pay_ABC',kind='captured',amount=49900,currency='INR',hash='a'.repeat(64))=>scalar('select public.apply_course_payment($1,$2,$3,$4,$5,$6,$7)',[event,hash,orderId,pay,amount,currency,kind]);
 await assert.rejects(()=>apply('wrongAmount',order,'pay_ABC','captured',1));
@@ -43,6 +43,10 @@ const reversed=await create('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb');await apply(
 const third=await create('cccccccc-cccc-4ccc-8ccc-cccccccccccc');await assert.rejects(()=>apply('reusedPayment',third,'pay_ABC'));
 await apply('thirdCapture',third,'pay_XYZ');await db.query("update course_entitlements set valid_from=now()-interval '2 years',valid_until=now()-interval '1 day' where source_order=$1",['cccccccc-cccc-4ccc-8ccc-cccccccccccc']);
 await identity(users[0]);assert.equal(await scalar("select has_course_access('gate-cs-2027')"),false,'expired pass denied');
+const discounted=await create('dddddddd-dddd-4ddd-8ddd-dddddddddddd',users[1],'order_DISCOUNT',29900);
+await assert.rejects(()=>apply('discountWrongAmount',discounted,'pay_SALE','captured',49900));
+assert.equal((await apply('discountCapture',discounted,'pay_SALE','captured',29900)).hasAccess,true);
+await identity(users[1]);assert.equal(await scalar('select count(*)::int from course_resources'),1,'Only confirmed discounted payment unlocks the bank');
 await identity(null,'service_role');await scalar('select assign_course_owner($1)',[users[2]]);
 await identity(users[2]);assert.equal(await scalar('select count(*)::int from course_lessons'),3);assert.equal(await scalar('select count(*)::int from study_progress'),0,'owner must not see another learner notes');
 assert.equal((await scalar("select course_access('other-course')")).role,'owner');

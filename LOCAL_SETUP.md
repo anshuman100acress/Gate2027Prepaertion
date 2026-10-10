@@ -1,10 +1,10 @@
 # Test Gatewise on your computer
 
-Clone the GitHub repository or extract the supplied ZIP to get the complete app, including 24 past-year PDFs.
+Clone the GitHub repository to get the frontend, three free lessons, ten sample questions and 24 past-year PDFs. Paid content is stored in Supabase and is not part of this public checkout.
 
 ## Windows
 
-1. Download `Gatewise-local.zip`, right-click it, and choose **Extract All**.
+1. Clone the repository or download its ZIP from GitHub and choose **Extract All**.
 2. Install Python 3 from https://www.python.org/downloads/ if needed. Enable **Add Python to PATH** in the installer.
 3. Open the extracted `Gate2027Prepaertion` folder. In File Explorer's address bar, type `powershell` and press Enter.
 4. Run:
@@ -35,13 +35,13 @@ Your browser should open http://127.0.0.1:3000/.
 - **Python command not found:** install Python and reopen your terminal.
 - **PDF does not appear inside the page:** use the app's “Open PDF in a new tab” link.
 
-No Node.js, npm install, account, API key, database, or paid service is required. The optional Google Fonts request can fail without preventing the app from working. App content and PDFs are included locally.
+No Node.js, npm install, account or API key is required to browse the free previews and PDFs. The optional Google Fonts request can fail without preventing the app from working. For sign-in and entitled paid content, use the deployed website or build this checkout with the public Supabase settings in [COURSE_SETUP.md](COURSE_SETUP.md). New premium authoring files and answers stay in the private authoring workspace.
 
 Progress stays in your browser's localStorage. The cloud browser's progress does not transfer automatically. Use the same browser and address to retain local progress; changing the port or using private browsing creates a different storage context.
 
 ## GitHub clone
 
-The existing remote is https://github.com/anshuman100acress/Gate2027Prepaertion. Clone the complete application:
+The existing remote is https://github.com/anshuman100acress/Gate2027Prepaertion. Clone the public preview frontend:
 
 ```bash
 git clone https://github.com/anshuman100acress/Gate2027Prepaertion.git

@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict');
 const crypto=require('node:crypto');
 const {checkoutHandler,webhookHandler}=require('../server/course-server.cjs');
-const env={GATEWISE_COURSE_MODE:'protected',GATEWISE_SUPABASE_URL:'https://gatewise-test.supabase.co',GATEWISE_SUPABASE_SERVICE_ROLE_KEY:'sb_secret_serverOnly',GATEWISE_RAZORPAY_KEY_ID:'rzp_test_PUBLIC',GATEWISE_RAZORPAY_KEY_SECRET:'privateProviderSecret',GATEWISE_RAZORPAY_WEBHOOK_SECRET:'privateWebhookSecret'};
+const env={GATEWISE_COURSE_MODE:'protected',GATEWISE_COURSE_OFFER_ENDS_AT:'2000-01-01T00:00:00Z',GATEWISE_SUPABASE_URL:'https://gatewise-test.supabase.co',GATEWISE_SUPABASE_SERVICE_ROLE_KEY:'sb_secret_serverOnly',GATEWISE_RAZORPAY_KEY_ID:'rzp_test_PUBLIC',GATEWISE_RAZORPAY_KEY_SECRET:'privateProviderSecret',GATEWISE_RAZORPAY_WEBHOOK_SECRET:'privateWebhookSecret'};
 const uid='11111111-1111-4111-8111-111111111111';
 const rows={courses:[{id:'gate-cs-2027',title:'GATE CS 2027',enabled:true}],account_roles:[],course_entitlements:[],payment_orders:[]};
 let rpcCalls=[],providerCalls=[];
@@ -39,5 +39,17 @@ async function invoke(fn,req={}){const headers={};let text;const res={setHeader:
  Object.defineProperty(native,'body',{get(){throw new Error('Do not invoke the platform JSON parser')}});
  const nativeHeaders={};let nativeResponse;const nativeRes={setHeader:(k,v)=>nativeHeaders[k]=v,end:s=>nativeResponse=s};
  await webhook(native,nativeRes);assert.equal(nativeRes.statusCode,200);assert.equal(JSON.parse(nativeResponse).received,true);
+ // The request body cannot select the offer price or extend its deadline.
+ const deadline='2026-10-31T18:30:00.000Z', cutoff=Date.parse(deadline);
+ const saleEnv={...env,GATEWISE_COURSE_OFFER_ENDS_AT:deadline};
+ for(const [now,amount] of [[cutoff-1,29900],[cutoff,49900],[cutoff+86400000,49900]]){
+  const fn=checkoutHandler({env:saleEnv,supabase,provider,now:()=>now,randomUUID:crypto.randomUUID});
+  const result=await invoke(fn,{headers:{authorization:'Bearer validToken'},body:{amount:29900,offerEndsAt:'2099-01-01'}});
+  assert.equal(result.status,200);assert.equal(result.body.amount,amount);assert.equal(providerCalls.at(-1).amount,amount);assert.equal(rows.payment_orders.at(-1).amount,amount);
+ }
+ // A discounted order may be captured after expiry; bind its stored amount.
+ const discounted=JSON.parse(bytes);discounted.payload.payment.entity.amount=29900;
+ assert.equal((await invoke(webhookHandler({env:saleEnv,supabase,provider}),signed(Buffer.from(JSON.stringify(discounted))))).status,200);
+ assert.equal(rpcCalls.at(-1).args.p_amount,29900);
  console.log('Payment handler checks passed: verified auth, server price/order binding, owner/paid protection, raw signatures, refunds, duplicates, key isolation and disabled setup.');
 })().catch(e=>{console.error(e);process.exitCode=1});

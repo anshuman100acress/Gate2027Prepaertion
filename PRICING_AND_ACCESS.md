@@ -1,19 +1,19 @@
-# Pricing and full-course access proposal
+# Pricing and full-course access
 
-This is the commercial plan for the optional course-access implementation. The repository now includes protected builds, Supabase course permissions, an owner-assignment command, a pricing page and verified Razorpay checkout/webhook handlers. The default mode remains open. No production payment credentials or owner identity are configured in source; use [COURSE_SETUP.md](COURSE_SETUP.md) to activate and verify them.
+The repository includes protected builds, Supabase course permissions, an owner-assignment command, a pricing page and verified Razorpay checkout/webhook handlers. This public release contains only previews and builds in protected mode. Full paid content and new authoring sources stay in Supabase and a private workspace. Production payment credentials and owner assignment stay on the server; see [COURSE_SETUP.md](COURSE_SETUP.md).
 
-## Offer and price to test
+## Current offer and price
 
 Sell a GATE 2027 course pass with a clear access period. Start with a useful free preview so students can judge the explanations and worked solutions before paying. A one-time course purchase fits an exam preparation goal and is simpler to explain than an ongoing subscription.
 
-| Access | Proposed offering | Price to test |
+| Access | Offering | Price |
 | --- | --- | --- |
-| Free preview | Complete syllabus outline, selected full lessons from each subject, preview practice, and the learner's own notes/progress | Free |
-| Early course pass | Full course, worked examples, practice, revision tools, private cloud notes and content updates; 12 months from purchase | ₹499 once, while gathering early learner feedback |
-| Reviewed course pass | The same complete course after subject review and launch validation; 12 months from purchase | ₹999 once as a starting price experiment |
+| Free preview | Complete syllabus outline, 3 full preview lessons and 10 sample questions (one PYQ MCQ, three originals, six checks), and the learner's own notes/progress | Free |
+| Early course pass | 72 lessons, 323 topic guides, 414 scored questions including 105 PYQ MCQs, full mocks, timed drills, recall cards, mistake review, private cloud notes and content updates; 12 months from purchase | ₹299 once through 31 October 2026, 11:59 PM IST |
+| Regular course pass | The same complete course; 12 months from purchase | ₹499 once from 1 November 2026, 12:00 AM IST |
 | Owner account | All course content and course-management permissions without payment or expiry | Free, assigned privately |
 
-These are proposed test prices. Pick one active price at launch and make access duration, included material and any introductory pricing clear before checkout. Existing purchases should retain their promised terms if the price later changes. Do not charge separately for protecting or exporting a learner's existing personal notes.
+The discount has one fixed deadline shared by the frontend and server checkout. At `2026-10-31T18:30:00.000Z`, new orders use ₹499. It does not reset per visitor. Existing purchases should retain their promised terms if the price later changes. Do not charge separately for protecting or exporting a learner's existing personal notes.
 
 Measure preview-to-purchase conversion, completed study sessions, refunds and learner feedback. Review the price against payment fees, hosting costs and support time. Ask early learners whether the examples helped them solve a new problem independently; example quantity alone is insufficient evidence of course quality.
 
@@ -88,4 +88,4 @@ Do not include full paid lesson JSON, solutions or private source in the Vercel 
 6. Verify access on free, paid, expired and owner accounts, including direct HTTP requests; confirm owner accounts cannot read other users' personal notes.
 7. Launch to a small group, monitor feedback and correct content issues before widening paid access.
 
-The implementation prepares the ₹499 introductory price for a 12-month pass. It can be changed with the server price setting before activation; ₹999 remains a proposed later price experiment. Course management and manual entitlement changes use trusted server/database operations; no browser admin editor or learner-data browsing tool is included. No payment account or owner identity has been configured by this update.
+The implementation uses the ₹299 limited-time offer for a 12-month pass, automatically restoring ₹499 after the deadline. The protected PYQ resource contains all 105 curated MCQs; only one sample is shipped publicly, so browser flags cannot retrieve the other 104. Course management and manual entitlement changes use trusted server/database operations; no browser admin editor or learner-data browsing tool is included. No payment account or owner identity has been configured by this update.
