@@ -9,7 +9,7 @@ Sell a GATE 2027 course pass with a clear access period. Start with a useful fre
 | Access | Offering | Price |
 | --- | --- | --- |
 | Free preview | Complete syllabus outline, 3 full preview lessons and 10 sample questions (one PYQ MCQ, three originals, six checks), and the learner's own notes/progress | Free |
-| Early course pass | 72 lessons, 323 topic guides, 414 scored questions including 105 PYQ MCQs, full mocks, timed drills, recall cards, mistake review, private cloud notes and content updates; 12 months from purchase | ₹299 once through 31 October 2026, 11:59 PM IST |
+| Early course pass | 72 lessons, 323 topic guides, 486 scored questions including 105 PYQ MCQs, full mocks, timed drills, recall cards, mistake review, private cloud notes and content updates; 12 months from purchase | ₹299 once through 31 October 2026, 11:59 PM IST |
 | Regular course pass | The same complete course; 12 months from purchase | ₹499 once from 1 November 2026, 12:00 AM IST |
 | Owner account | All course content and course-management permissions without payment or expiry | Free, assigned privately |
 

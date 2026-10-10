@@ -15,19 +15,31 @@ assert.equal(guides.length, 323);
 assert.equal(new Set(guides.map(g => g.id)).size, guides.length);
 assert.equal(lessons.flatMap(l => l.studyCards || []).length, 44);
 assert.equal(lessons.filter(l => l.examClinic).length, 11);
-assert.equal(catalog.questions.length + catalog.pyqs.length + catalog['lesson-questions'].length, 414);
+assert.equal(catalog.questions.length + catalog.pyqs.length + catalog['lesson-questions'].length, 486);
 for (const lesson of lessons) {
   assert.deepEqual(lesson.premiumTopics.map(g => g.topic), lesson.topics, lesson.id);
   for (const g of lesson.premiumTopics) {
     const target = lessons.find(l => l.id === g.targetLesson);
     assert(target.tutorials.some(t => (t.depth || []).some(p => p.id === g.studyAnchor)), g.id);
     assert(g.explanation.length > 100 && g.approach.length >= 3, g.id);
-    assert.deepEqual(g.exercises.map(e => e.kind), ['fundamental', 'application', 'trap']);
+    assert.deepEqual(g.exercises.map(e => e.kind), ['fundamental', 'bridge', 'application', 'trap', 'synthesis']);
+    assert.equal(g.workedExamples.length, 5);
+    assert.equal(new Set(g.workedExamples.map(e=>e.prompt)).size, 5);
+    assert.deepEqual(g.exercises.map(e=>e.complexity), [1,2,3,4,5]);
+    assert.deepEqual(g.workedExamples.map(e=>e.complexity), [1,2,3,4,5]);
+    assert(g.formulas.length && g.formulas.every(f=>f.latex && f.meaning));
+    assert(g.tricks.length >= 3 && g.commonMistakes.length >= 2);
+    assert(catalog.questions.some(q=>q.id===g.challengeId));
     assert(g.sources.length && g.sources.every(s => new URL(s.url).protocol === 'https:'));
     for (const e of g.exercises) assert(e.prompt && e.answer && e.verification && e.steps.length >= 3, g.id);
   }
 }
-const clinics = catalog.questions.filter(q => q.premium);
+const challenges = catalog.questions.filter(q=>q.pool==='mastery');
+assert.equal(challenges.length, 72);
+assert.equal(new Set(challenges.map(q=>q.lesson)).size, lessons.length);
+for(const q of [...catalog.questions,...catalog.pyqs,...catalog['lesson-questions']]){assert(Number.isInteger(q.complexity) && q.complexity>=1 && q.complexity<=5, q.id);assert(q.complexityLabel,q.id);}
+for(const q of challenges){assert.equal(q.options.length,4);assert(q.steps.length>=3 && q.verification && q.explanation.length>100);}
+const clinics = catalog.questions.filter(q => q.premium && q.pool !== 'mastery');
 assert.equal(clinics.length, 33);
 assert.equal(new Set(clinics.map(q => q.subject)).size, 11);
 for (const q of clinics) {
@@ -70,4 +82,4 @@ const draft = { id: 'drill-one', end: 1000, ids: ['one', 'two'], answers: {} };
 const mergedDraft = rebase(bundle({ drillRun: draft }), bundle({ drillRun: { ...draft, answers: { one: 19 } } }), bundle({ drillRun: { ...draft, answers: { two: 0 } } })).progress.drillRun;
 assert.deepEqual(mergedDraft.answers, { one: 19, two: 0 });
 assert.equal(rebase(bundle({ drillRun: draft }), bundle({ drillRun: { ...draft, answers: { one: 19 } } }), bundle({ drillRun: null })).progress.drillRun, null, 'A completed drill must not be revived by stale answers');
-console.log('Premium content checks passed: every topic, 969 guided exercises, 33 scored questions with numerical checks, 44 cards, preview hydration and cross-device progress merge.');
+console.log('Premium content checks passed: every topic, 1,615 worked cases and guided tasks with five levels, 72 GATE transfer challenges, 33 clinic questions with numerical checks, 44 cards, preview hydration and cross-device progress merge.');

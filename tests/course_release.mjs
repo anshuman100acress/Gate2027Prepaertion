@@ -21,7 +21,7 @@ try {
   }
   const catalog = await readCourseCatalog(source);
   assert.equal(catalog.publicOnly, true);
-  assert.equal(catalog.info.questionCount, 414);
+  assert.equal(catalog.info.questionCount, 486);
   assert.equal(catalog.info.pyqCount, 105);
   assert.equal(catalog.syllabus.flatMap(s => s.lessons).filter(l => !l.locked).length, 3);
   assert.equal(catalog.pyqs.length, 1);
@@ -36,7 +36,7 @@ try {
   const built = await buildSite({ catalogRoot: source, outdir: output, env });
   assert.equal(built.course.mode, 'protected', 'A public release must default to protected mode');
   assert.equal(built.course.checkoutEnabled, true);
-  assert.equal(built.course.questionCount, 414);
+  assert.equal(built.course.questionCount, 486);
   assert.equal(built.course.pyqCount, 105);
   assert.equal(JSON.parse(await readFile(join(output, 'data/pyqs.json'), 'utf8')).length, 1);
   await assert.rejects(() => buildSite({ catalogRoot: source, outdir: output, env: { ...env, GATEWISE_COURSE_MODE: 'open' } }), /only previews/);
